@@ -1,0 +1,62 @@
+:root {
+  /* Design System: Obsidian & Champagne */
+  
+  /* Shared / Brand */
+  --primary-gold: #76592C;
+  --primary-gold-light: #8C6D3E;
+  --primary-gold-dim: #E7C08A;
+  --accent-gold: #D4AF37;
+  
+  /* Mode-specific initialization (Light default) */
+  --deep-base: #1A1C1A;
+  --soft-background: #FAF9F6; /* Champagne */
+  --surface-container: #EFEEEB;
+  --surface-container-high: #E9E8E5;
+  --surface-container-low: #F4F3F1;
+  --text-primary: #1A1C1A;
+  --text-secondary: #4D4635;
+  --white: #FFFFFF;
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(250, 249, 246, 0.7);
+  --glass-border: rgba(118, 89, 44, 0.1);
+  --glass-blur: blur(20px);
+  --glass-shadow: 0 8px 60px 0 rgba(26, 28, 26, 0.05);
+
+  /* Typography */
+  --font-headings: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Studio Spacing */
+  --section-padding: clamp(80px, 12vw, 160px) 0;
+  --container-width: 1540px;
+  --overlap-offset: -8vw;
+  --border-radius: 0px; /* Sharp edges for luxury */
+  
+  --transition-studio: cubic-bezier(0.2, 0, 0.2, 1);
+  --transition-slow: all 0.8s var(--transition-studio);
+}
+
+/* Dark Mode Overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --deep-base: #0A0A0B; /* Obsidian */
+    --soft-background: #0A0A0B;
+    --surface-container: #121214;
+    --surface-container-high: #1C1B1B;
+    --surface-container-low: #0E0E0E;
+    --text-primary: #F2F1EE;
+    --text-secondary: #D0C5AF;
+    --white: #1A1C1A;
+    
+    --glass-bg: rgba(10, 10, 11, 0.75);
+    --glass-border: rgba(212, 175, 55, 0.1);
+    --glass-shadow: 0 8px 60px 0 rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* RTL Support Base */
+[dir="rtl"] {
+  --font-headings: 'Cairo', sans-serif;
+  --font-body: 'Cairo', sans-serif;
+}

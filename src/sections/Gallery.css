@@ -1,0 +1,210 @@
+.gallery-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--soft-background);
+}
+
+.gallery-filters {
+    display: flex;
+    justify-content: flex-start;
+    gap: 40px;
+    margin-bottom: 80px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 20px;
+}
+
+.filter-btn {
+    background: transparent;
+    border: none;
+    padding: 10px 0;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: var(--transition-slow);
+    color: var(--text-secondary);
+    position: relative;
+    opacity: 0.6;
+}
+
+.filter-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-gold);
+    transition: var(--transition-slow);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    opacity: 1;
+    color: var(--primary-gold);
+}
+
+.filter-btn.active::after {
+    width: 100%;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 250px;
+    gap: 30px;
+    width: 100%;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition-slow);
+}
+
+.gallery-item.large {
+    grid-row: span 2;
+    grid-column: span 6;
+}
+
+.gallery-item.medium {
+    grid-row: span 2;
+    grid-column: span 3;
+}
+
+.gallery-item.small {
+    grid-row: span 1;
+    grid-column: span 3;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    filter: grayscale(30%) contrast(110%);
+    transition: transform 2s var(--transition-studio);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+    filter: grayscale(0%) contrast(100%);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--glass-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: var(--transition-slow);
+    backdrop-filter: var(--glass-blur);
+    padding: 40px;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.overlay-icon {
+    font-size: 1.5rem;
+    color: var(--primary-gold);
+    transform: translateY(20px);
+    transition: var(--transition-slow);
+}
+
+.gallery-item:hover .overlay-icon {
+    transform: translateY(0);
+}
+
+/* Lightbox Studio Polish */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--deep-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 40px;
+    animation: fadeInLightbox 0.8s var(--transition-studio);
+}
+
+@keyframes fadeInLightbox {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 1400px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 0;
+    box-shadow: var(--glass-shadow);
+}
+
+.close-btn {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background: transparent;
+    border: 1px solid var(--primary-gold);
+    color: var(--primary-gold);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition-slow);
+}
+
+.close-btn:hover {
+    background-color: var(--primary-gold);
+    color: #FFFFFF;
+    transform: rotate(90deg);
+}
+
+@media (max-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 250px;
+    }
+    
+    .gallery-item.large,
+    .gallery-item.medium,
+    .gallery-item.small {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}

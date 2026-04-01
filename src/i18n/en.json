@@ -1,0 +1,167 @@
+{
+    "nav": {
+        "home": "Home",
+        "services": "Services",
+        "about": "About Us",
+        "testimonials": "Testimonials",
+        "gallery": "Gallery",
+        "booking": "Book Now",
+        "contact": "Contact"
+    },
+    "hero": {
+        "title": "Experience Wellness. Explore the World.",
+        "subtitle": "Luxury spa treatments and unforgettable travel experiences under one trusted brand.",
+        "spa_cta": "Book a Treatment",
+        "travel_cta": "Plan Your Journey"
+    },
+    "services": {
+        "title": "Our Services",
+        "subtitle": "Expert treatments and bespoke travel since 2003.",
+        "cta": "Explore More",
+        "spa": {
+            "category": "SPA Programs",
+            "massage": {
+                "title": "Massage Therapy",
+                "desc": "Medical and Relaxing massages by qualified experts."
+            },
+            "body": {
+                "title": "Hot Stones Massage",
+                "desc": "Deep tissue relaxation using heated volcanic stones."
+            },
+            "bath": {
+                "title": "Egyptian Hammam",
+                "desc": "Traditional cleansing rituals for total body renewal."
+            },
+            "packages": {
+                "title": "VIP Wellness",
+                "desc": "Personalized elite programs in five-star tranquility."
+            }
+        },
+        "travel": {
+            "category": "Travel Services",
+            "domestic": {
+                "title": "Domestic Tours",
+                "desc": "Discover the hidden gems and beauty of your own region."
+            },
+            "international": {
+                "title": "International Packages",
+                "desc": "Global adventures across the world's most iconic cities."
+            },
+            "corporate": {
+                "title": "Corporate Travel Management",
+                "desc": "Seamless and professional business travel solutions."
+            },
+            "custom": {
+                "title": "Customized Itineraries",
+                "desc": "Personalized travel plans tailored to your specific desires."
+            }
+        }
+    },
+    "about": {
+        "title": "Experience Excellence",
+        "subtitle": "About Friends Group",
+        "story_heading": "A Legacy of Trust Since 2003",
+        "story_content": "Friends Group Spa & Beauty offers an unparalleled experience for both mind and body. Partnering with five-star hotels and employing highly qualified teams, we set international standards in luxury and rejuvenation. Your safety is our priority, backed by comprehensive insurance for total peace of mind.",
+        "management": {
+            "title": "Professional Management",
+            "desc": "Expert-led operations since 2003 ensuring excellence."
+        },
+        "quality": {
+            "title": "Global Standards",
+            "desc": "Highly qualified teams meeting international benchmarks."
+        },
+        "excellence": {
+            "title": "Five-Star Partners",
+            "desc": "Exclusively delivering luxury via top-tier hotels."
+        },
+        "reliability": {
+            "title": "Elite Reliability",
+            "desc": "Secured by a comprehensive million-pound insurance policy."
+        }
+    },
+    "testimonials": {
+        "title": "What Our Clients Say",
+        "subtitle": "Directly from our Google Business Profile reviews.",
+        "items": [
+            {
+                "name": "Mohamed Tamir Abdel Rehem",
+                "role": "Local Guide",
+                "text": "Very professional team. Great hospitality. Responsible price. Nice experience worth trying."
+            },
+            {
+                "name": "J.",
+                "role": "Google Reviewer",
+                "text": "Clean environment and very professional staff. Everyone has a high sense of hospitality and excellence."
+            },
+            {
+                "name": "Mathieu007 EGY",
+                "role": "Luxury Traveler",
+                "text": "One of the best massages I’ve ever had! The environment is clean, peaceful, and beautifully decorated. A hidden gem worth discovering!"
+            },
+            {
+                "name": "Hana Tamir",
+                "role": "Verified Guest",
+                "text": "The experience was really nice. The Paradise Spa treatment was very relaxing and calming. The staff were very friendly and professional."
+            }
+        ]
+    },
+    "gallery": {
+        "title": "Our Gallery",
+        "subtitle": "A visual journey through our world of luxury and adventure.",
+        "filters": {
+            "all": "All",
+            "spa": "SPA",
+            "travel": "Travel"
+        }
+    },
+    "booking": {
+        "title": "Book Your Experience",
+        "subtitle": "Ready to begin your journey or relaxation session? Let us handle the details.",
+        "form": {
+            "name": "Full Name",
+            "phone": "Phone Number",
+            "email": "Email Address",
+            "service": "Service Type",
+            "location": "Preferred Location",
+            "date": "Preferred Date",
+            "select_service": "Select a service",
+            "select_location": "Select a location",
+            "submit": "Submit Inquiry",
+            "whatsapp": "Chat on WhatsApp"
+        },
+        "status": {
+            "success": "Inquiry sent successfully! We will contact you shortly.",
+            "error": "Something went wrong. Please try again.",
+            "valid_email": "Please enter a valid email.",
+            "valid_phone": "Please enter a valid phone number."
+        },
+        "benefits": {
+            "title": "Why Book With Us?",
+            "list": [
+                "✨ Since 2003: 20+ Years Excellence",
+                "🛡️ Million-Pound Insurance Coverage",
+                "⭐ Five-Star Hotel Partnerships",
+                "📍 Global Quality Standards"
+            ]
+        }
+    },
+    "contact": {
+        "title": "Connect With Us",
+        "subtitle": "Visit our official Google Business profile or reach out directly.",
+        "info": {
+            "address_label": "Our Head Office",
+            "address_val": "Hurghada, Red Sea Governorate, Egypt",
+            "phone_label": "Official Hotline",
+            "phone_val": "+20 123 456 7890",
+            "email_label": "Email Address",
+            "email_val": "info@friendsgrp.com",
+            "hours_label": "Working Hours",
+            "hours_val": "Daily: 9:00 AM - 10:00 PM"
+        },
+        "social": {
+            "follow": "Follow Our Journey",
+            "google_review": "Review us on Google",
+            "google_profile": "Business Profile"
+        }
+    }
+}
