@@ -1,9 +1,17 @@
 .booking-section {
     padding: var(--spacing-xl) 0;
     background-color: var(--deep-base);
-    color: var(--text-primary);
+    color: #F2F1EE; /* Explicit light text for dark background */
     position: relative;
     overflow: hidden;
+}
+
+.booking-section .section-title {
+    color: #F2F1EE;
+}
+
+.booking-section .section-subtitle {
+    color: #D0C5AF;
 }
 
 .booking-grid {
@@ -60,6 +68,13 @@
     appearance: none;
 }
 
+.form-group input::placeholder,
+.form-group select::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
 .form-group select {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2376592C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
@@ -112,7 +127,7 @@
 
 .info-card {
     padding: 50px;
-    background: rgba(var(--primary-gold-rgb), 0.05);
+    background: var(--surface-container);
     border-left: 4px solid var(--primary-gold);
 }
 
@@ -125,7 +140,7 @@
     font-family: var(--font-display);
     font-size: 3rem;
     margin-bottom: 40px;
-    color: var(--text-primary);
+    color: var(--primary-gold-dark);
     line-height: 1.1;
 }
 
@@ -135,7 +150,8 @@
     display: flex;
     align-items: center;
     gap: 25px;
-    color: var(--text-secondary);
+    color: #F2F1EE;
+    font-weight: 500;
     transition: var(--transition-slow);
 }
 
