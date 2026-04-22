@@ -3,21 +3,23 @@ import { useLanguage } from '../hooks/useLanguage';
 import { motion } from 'framer-motion';
 import { fadeIn } from '../styles/animations';
 import './Services.css';
+import serviceSpa from '../assets/images/service_spa.png';
+import serviceTravel from '../assets/images/service_travel.png';
 
 const Services = () => {
     const { t } = useLanguage();
 
     const spaServices = [
-        { id: 'massage', img: './images/service_spa.png' },
-        { id: 'body', img: 'https://images.unsplash.com/photo-1570172619380-adb31f74b30c?auto=format&fit=crop&q=80&w=800' },
+        { id: 'massage', img: serviceSpa },
+        { id: 'body', img: 'https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&q=80&w=2070' }, // Hot Stones
         { id: 'bath', img: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=800' },
-        { id: 'sauna', img: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800' },
-        { id: 'gym', img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800' },
+        { id: 'sauna', img: 'https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&q=80&w=2070' },
+        { id: 'gym', img: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&q=80&w=2070' },
         { id: 'packages', img: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc2069?auto=format&fit=crop&q=80&w=800' }
     ];
 
     const travelServices = [
-        { id: 'domestic', img: './images/service_travel.png' },
+        { id: 'domestic', img: serviceTravel },
         { id: 'international', img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800' },
         { id: 'corporate', img: 'https://images.unsplash.com/photo-1436450412740-6b988f486c6b?auto=format&fit=crop&q=80&w=800' },
         { id: 'custom', img: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=800' }

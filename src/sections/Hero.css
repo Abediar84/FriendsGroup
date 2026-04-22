@@ -67,11 +67,11 @@
 }
 
 .travel-pane .pane-image {
-    background-image: url('./images/travel_hero.png');
+    background-image: url('../assets/images/travel_hero.png');
 }
 
 .spa-pane .pane-image {
-    background-image: url('./images/spa_hero.png');
+    background-image: url('../assets/images/spa_hero.png');
 }
 
 /* Texture Overlay from Stitch: Silk/Water feel */

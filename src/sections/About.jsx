@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { fadeIn } from '../styles/animations';
 import { Building2, Star, Trophy, Shield } from 'lucide-react';
 import './About.css';
+import aboutOffice from '../assets/images/about_office.png';
 
 const About = () => {
     const { t } = useLanguage();
@@ -66,7 +67,7 @@ const About = () => {
                 >
                     <div className="image-wrapper">
                         <img
-                            src="./images/about_office.png"
+                            src={aboutOffice}
                             alt="Corporate Office Luxury"
                         />
                         <div className="experience-badge">
