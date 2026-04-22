@@ -44,7 +44,7 @@ const Hero = () => {
                     transition={{ duration: 1.2, ease: [0.2, 0, 0.2, 1], delay: 0.5 }}
                     viewport={{ once: true }}
                 >
-                    <span className="hero-pretitle">20 Years of Excellence</span>
+                    <span className="hero-pretitle">{t('hero.since_2003')}</span>
                     <h1 className="hero-title">{t('hero.title')}</h1>
                     <p className="hero-subtitle">{t('hero.subtitle')}</p>
                     <div className="hero-btns">

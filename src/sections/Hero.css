@@ -67,11 +67,11 @@
 }
 
 .travel-pane .pane-image {
-    background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=2070');
+    background-image: url('./images/travel_hero.png');
 }
 
 .spa-pane .pane-image {
-    background-image: url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=2070');
+    background-image: url('./images/spa_hero.png');
 }
 
 /* Texture Overlay from Stitch: Silk/Water feel */
@@ -225,24 +225,42 @@
 
 @media (max-width: 768px) {
     .hero-split {
-        opacity: 0.5; /* Fade background for readability */
+        display: flex;
+        flex-direction: column;
     }
     
-    .travel-pane, .spa-pane {
-        width: 100%;
+    .hero-pane {
+        position: relative;
+        height: 50%;
+        width: 100% !important;
+        top: 0 !important;
         left: 0 !important;
         right: 0 !important;
         mask-image: none !important;
+        -webkit-mask-image: none !important;
+    }
+
+    .travel-pane {
+        order: 1;
+    }
+
+    .spa-pane {
+        order: 2;
     }
 
     .hero-title {
-        font-size: 4rem;
+        font-size: clamp(3rem, 12vw, 4.5rem);
+        line-height: 1;
     }
 
     .hero-btns {
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
         width: 100%;
-        padding: 0 60px;
+        padding: 0 20px;
+    }
+
+    .btn {
+        width: 100%;
     }
 }

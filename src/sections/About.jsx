@@ -66,7 +66,7 @@ const About = () => {
                 >
                     <div className="image-wrapper">
                         <img
-                            src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2070"
+                            src="./images/about_office.png"
                             alt="Corporate Office Luxury"
                         />
                         <div className="experience-badge">

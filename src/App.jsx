@@ -10,6 +10,7 @@ import Testimonials from './sections/Testimonials';
 import Booking from './sections/Booking';
 import Contact from './sections/Contact';
 import CustomCursor from './components/CustomCursor';
+import WhatsAppFloat from './components/WhatsAppFloat';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 import './styles/global.css';
 
@@ -21,6 +22,7 @@ function App() {
         <div className="app-wrapper">
             <CustomCursor />
             <div className="noise-overlay"></div>
+            <WhatsAppFloat />
             <Navbar />
             <main>
                 <Hero />

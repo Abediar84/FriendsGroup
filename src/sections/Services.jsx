@@ -8,14 +8,14 @@ const Services = () => {
     const { t } = useLanguage();
 
     const spaServices = [
-        { id: 'massage', img: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=800' },
+        { id: 'massage', img: './images/service_spa.png' },
         { id: 'body', img: 'https://images.unsplash.com/photo-1570172619380-adb31f74b30c?auto=format&fit=crop&q=80&w=800' },
         { id: 'bath', img: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=800' },
         { id: 'packages', img: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc2069?auto=format&fit=crop&q=80&w=800' }
     ];
 
     const travelServices = [
-        { id: 'domestic', img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800' },
+        { id: 'domestic', img: './images/service_travel.png' },
         { id: 'international', img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800' },
         { id: 'corporate', img: 'https://images.unsplash.com/photo-1436450412740-6b988f486c6b?auto=format&fit=crop&q=80&w=800' },
         { id: 'custom', img: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=800' }

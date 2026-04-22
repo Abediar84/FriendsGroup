@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { motion } from 'framer-motion';
 import { fadeIn } from '../styles/animations';
-import { MapPin, Phone, Mail, Clock, Facebook, Linkedin, Instagram, Twitter } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from 'lucide-react';
 import './Contact.css';
 
 const Contact = () => {
@@ -22,10 +22,16 @@ const Contact = () => {
     ];
 
     const socialLinks = [
-        { icon: <Facebook className="w-5 h-5" />, url: '#' },
-        { icon: <Linkedin className="w-5 h-5" />, url: '#' },
-        { icon: <Instagram className="w-5 h-5" />, url: '#' },
-        { icon: <Twitter className="w-5 h-5" />, url: '#' }
+        {
+            icon: <Facebook className="w-5 h-5" />,
+            url: 'https://www.facebook.com/Friendsgrp.AzurOneEleven',
+            label: 'Facebook'
+        },
+        {
+            icon: <Instagram className="w-5 h-5" />,
+            url: 'https://www.instagram.com/Friendsgrp.AzurOneEleven',
+            label: 'Instagram'
+        },
     ];
 
     return (
@@ -92,8 +98,21 @@ const Contact = () => {
                             <span>{t('contact.social.follow')}</span>
                             <div className="social-icons">
                                 {socialLinks.map((link, idx) => (
-                                    <a key={idx} href={link.url} className="social-icon">{link.icon}</a>
+                                    <a key={idx} href={link.url} className="social-icon"
+                                       target="_blank" rel="noopener noreferrer"
+                                       aria-label={link.label}>
+                                        {link.icon}
+                                    </a>
                                 ))}
+                                <a
+                                    href="https://wa.me/201207776033"
+                                    className="social-icon whatsapp-icon"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="WhatsApp"
+                                >
+                                    📲
+                                </a>
                             </div>
                             <div className="google-actions">
                                 <a

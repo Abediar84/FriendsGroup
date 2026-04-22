@@ -59,7 +59,7 @@ const Booking = () => {
             `*Phone:* ${formData.phone}%0A` +
             `*Email:* ${formData.email}`;
 
-        const whatsappUrl = `https://wa.me/201234567890?text=${message}`; // Replace with actual business number
+        const whatsappUrl = `https://wa.me/201207776033?text=${message}`;
         window.open(whatsappUrl, '_blank');
     };
 
@@ -156,9 +156,9 @@ const Booking = () => {
                                         <div className="form-group">
                                             <select name="location" value={formData.location} onChange={handleChange}>
                                                 <option value="" disabled>{t('booking.form.select_location')}</option>
-                                                <option value="Cairo">Cairo</option>
-                                                <option value="Hurghada">Hurghada</option>
-                                                <option value="Sharm">Sharm El Sheikh</option>
+                                                <option value="New Alamein">New Alamein — Azur One Eleven Hotel</option>
+                                                <option value="Hurghada">Hurghada — Giftun Azur Resort</option>
+                                                <option value="Other">Other / Custom Location</option>
                                             </select>
                                         </div>
                                     </div>

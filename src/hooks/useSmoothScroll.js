@@ -3,6 +3,11 @@ import Lenis from 'lenis';
 
 export const useSmoothScroll = () => {
     useEffect(() => {
+        // Disable Lenis on mobile — native scroll is better on touch devices
+        // and Lenis can conflict with iOS Safari's address bar collapse
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        if (isMobile) return;
+
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

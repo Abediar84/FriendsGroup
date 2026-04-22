@@ -12,7 +12,8 @@
         "title": "Experience Wellness. Explore the World.",
         "subtitle": "Luxury spa treatments and unforgettable travel experiences under one trusted brand.",
         "spa_cta": "Book a Treatment",
-        "travel_cta": "Plan Your Journey"
+        "travel_cta": "Plan Your Journey",
+        "since_2003": "20 Years of Excellence"
     },
     "services": {
         "title": "Our Services",
@@ -147,19 +148,22 @@
     },
     "contact": {
         "title": "Connect With Us",
-        "subtitle": "Visit our official Google Business profile or reach out directly.",
+        "subtitle": "Visit our locations or reach us directly via phone, email, or WhatsApp.",
         "info": {
-            "address_label": "Our Head Office",
-            "address_val": "Hurghada, Red Sea Governorate, Egypt",
+            "address_label": "Our Location",
+            "address_val": "Azur One Eleven Hotel, New Alamein City, North Coast, Egypt",
             "phone_label": "Official Hotline",
-            "phone_val": "+20 123 456 7890",
+            "phone_val": "012 0777 60 33",
             "email_label": "Email Address",
-            "email_val": "info@friendsgrp.com",
+            "email_val": "Info@friendsgrp.com",
             "hours_label": "Working Hours",
             "hours_val": "Daily: 9:00 AM - 10:00 PM"
         },
         "social": {
             "follow": "Follow Our Journey",
+            "facebook": "Facebook",
+            "instagram": "Instagram",
+            "whatsapp": "WhatsApp",
             "google_review": "Review us on Google",
             "google_profile": "Business Profile"
         }
