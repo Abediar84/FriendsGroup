@@ -11,6 +11,8 @@ const Services = () => {
         { id: 'massage', img: './images/service_spa.png' },
         { id: 'body', img: 'https://images.unsplash.com/photo-1570172619380-adb31f74b30c?auto=format&fit=crop&q=80&w=800' },
         { id: 'bath', img: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=800' },
+        { id: 'sauna', img: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800' },
+        { id: 'gym', img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800' },
         { id: 'packages', img: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc2069?auto=format&fit=crop&q=80&w=800' }
     ];
 

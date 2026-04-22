@@ -28,9 +28,9 @@
   --font-body: 'Inter', sans-serif;
 
   /* Studio Spacing */
-  --section-padding: clamp(80px, 12vw, 160px) 0;
+  --section-padding: clamp(120px, 15vw, 240px) 0;
   --container-width: 1540px;
-  --overlap-offset: -8vw;
+  --overlap-offset: -10vw;
   --border-radius: 0px; /* Sharp edges for luxury */
   
   --transition-studio: cubic-bezier(0.2, 0, 0.2, 1);

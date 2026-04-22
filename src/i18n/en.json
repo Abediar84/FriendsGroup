@@ -36,6 +36,14 @@
             "packages": {
                 "title": "VIP Wellness",
                 "desc": "Personalized elite programs in five-star tranquility."
+            },
+            "sauna": {
+                "title": "Sauna & Steam",
+                "desc": "Detoxify and rejuvenate in our premium temperature-controlled suites."
+            },
+            "gym": {
+                "title": "Fitness Center",
+                "desc": "State-of-the-art equipment for your strength and wellness goals."
             }
         },
         "travel": {
