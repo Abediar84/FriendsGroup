@@ -41,8 +41,7 @@
     text-transform: uppercase;
     letter-spacing: 3px;
     margin-bottom: 15px;
-    color: var(--primary-gold);
-    opacity: 0.8;
+    color: var(--primary-gold-dark);
 }
 
 .form-group input,
