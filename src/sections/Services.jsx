@@ -5,6 +5,7 @@ import { fadeIn } from '../styles/animations';
 import './Services.css';
 import serviceSpa from '../assets/images/service_spa.png';
 import serviceTravel from '../assets/images/service_travel.png';
+import serviceVip from '../assets/images/programs/vip_wellness.png';
 
 const Services = () => {
     const { t } = useLanguage();
@@ -15,7 +16,7 @@ const Services = () => {
         { id: 'bath', img: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=800' },
         { id: 'sauna', img: 'https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&q=80&w=2070' },
         { id: 'gym', img: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&q=80&w=2070' },
-        { id: 'packages', img: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc2069?auto=format&fit=crop&q=80&w=800' }
+        { id: 'packages', img: serviceVip }
     ];
 
     const travelServices = [

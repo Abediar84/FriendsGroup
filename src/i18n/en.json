@@ -135,6 +135,7 @@
             "date": "Preferred Date",
             "select_service": "Select a service",
             "select_location": "Select a location",
+            "message": "Additional Notes or Special Requests",
             "submit": "Submit Inquiry",
             "whatsapp": "Chat on WhatsApp"
         },

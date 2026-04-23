@@ -51,7 +51,8 @@
 
 .about-text {
     font-size: 1.1rem;
-    color: var(--text-secondary);
+    color: var(--text-primary);
+    opacity: 0.8;
     margin-bottom: 60px;
     line-height: 1.8;
 }
@@ -92,7 +93,8 @@
 
 .pillar-info p {
     font-size: 0.9rem;
-    color: var(--text-secondary);
+    color: var(--text-primary);
+    opacity: 0.75;
     line-height: 1.5;
 }
 
