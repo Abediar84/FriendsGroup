@@ -268,4 +268,8 @@
     .btn {
         width: 100%;
     }
+
+    .scroll-indicator {
+        display: none; /* Prevent overlap with vertical buttons on mobile */
+    }
 }
