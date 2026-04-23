@@ -3,7 +3,7 @@ import { useLanguage } from '../hooks/useLanguage';
 import { motion } from 'framer-motion';
 import './Navbar.css';
 
-import logo from '../assets/logo.svg';
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
     const { t, language, setLanguage } = useLanguage();
