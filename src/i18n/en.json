@@ -47,7 +47,8 @@
             }
         },
         "travel": {
-            "category": "Travel Services",
+            "category": "Hotel Bookings",
+            "intro": "We partner exclusively with handpicked five-star hotels across Egypt's Red Sea and Mediterranean coasts. Select your preferred destination and we will handle every detail of your stay.",
             "domestic": {
                 "title": "Domestic Tours",
                 "desc": "Discover the hidden gems and beauty of your own region."
@@ -64,6 +65,9 @@
                 "title": "Customized Itineraries",
                 "desc": "Personalized travel plans tailored to your specific desires."
             }
+        },
+        "hotels": {
+            "intro": "We partner exclusively with handpicked five-star hotels across Egypt's Red Sea and Mediterranean coasts. Select your preferred destination and we will handle every detail of your stay."
         }
     },
     "about": {

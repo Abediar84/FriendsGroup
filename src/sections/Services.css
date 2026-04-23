@@ -199,4 +199,281 @@
     .service-info {
         padding: 40px 30px;
     }
-}
+}
+
+/* ══════════════════════════════════════════
+   TABS
+══════════════════════════════════════════ */
+.services-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 80px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    padding: 20px 50px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition-slow);
+}
+
+.tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-gold);
+    transition: width 0.4s ease;
+}
+
+.tab-btn.active {
+    color: var(--primary-gold);
+}
+
+.tab-btn.active::after {
+    width: 100%;
+}
+
+.tab-btn:hover {
+    color: var(--text-primary);
+}
+
+/* ══════════════════════════════════════════
+   TREATMENT LIST (under spa cards)
+══════════════════════════════════════════ */
+.service-treatments {
+    list-style: none;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.service-treatments li {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.5;
+}
+
+.service-treatments li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--primary-gold);
+    font-size: 0.75rem;
+}
+
+/* ══════════════════════════════════════════
+   HOTELS GRID
+══════════════════════════════════════════ */
+.hotels-intro {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 60px;
+    max-width: 700px;
+    line-height: 1.7;
+    border-left: 2px solid var(--primary-gold);
+    padding-left: 25px;
+}
+
+[dir="rtl"] .hotels-intro {
+    border-left: none;
+    border-right: 2px solid var(--primary-gold);
+    padding-left: 0;
+    padding-right: 25px;
+}
+
+.hotels-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+/* First hotel spans 2 columns for editorial hierarchy */
+.hotels-grid .hotel-card:first-child {
+    grid-column: span 2;
+}
+
+.hotel-card {
+    background: var(--glass-bg);
+    overflow: hidden;
+    transition: var(--transition-slow);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.hotel-card:hover {
+    transform: translateY(-15px);
+}
+
+.hotel-card.coming-soon {
+    opacity: 0.75;
+}
+
+.hotel-card.coming-soon::after {
+    content: 'Coming Soon';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--deep-base);
+    color: var(--primary-gold);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    z-index: 10;
+}
+
+.hotel-img-wrapper {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+}
+
+/* First hotel gets a taller image */
+.hotels-grid .hotel-card:first-child .hotel-img-wrapper {
+    height: 380px;
+}
+
+.hotel-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.9) saturate(1.1);
+    transition: transform 1.5s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.hotel-card:hover .hotel-img {
+    transform: scale(1.07);
+}
+
+.hotel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 50%, var(--glass-bg) 100%);
+}
+
+.hotel-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: var(--primary-gold);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    z-index: 5;
+}
+
+.hotel-info {
+    padding: 35px 40px 40px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.hotel-stars {
+    display: flex;
+    gap: 4px;
+    color: var(--primary-gold);
+}
+
+.hotel-name {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin: 0;
+}
+
+.hotel-location {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--primary-gold);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.hotel-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    flex-grow: 1;
+    margin-top: 5px;
+}
+
+.hotel-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.feature-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    border: 1px solid var(--glass-border);
+    padding: 6px 14px;
+}
+
+.btn-notify {
+    color: var(--text-secondary) !important;
+}
+
+.btn-notify::after {
+    background-color: var(--text-secondary) !important;
+}
+
+@media (max-width: 1200px) {
+    .hotels-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .hotels-grid .hotel-card:first-child {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .hotels-grid {
+        grid-template-columns: 1fr;
+    }
+    .hotels-grid .hotel-card:first-child {
+        grid-column: span 1;
+    }
+    .tab-btn {
+        padding: 16px 25px;
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+    }
+    .hotel-info {
+        padding: 25px 30px 30px;
+    }
+}
+
