@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useLanguage } from '../hooks/useLanguage';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -24,8 +24,8 @@ import hammamImg from '../assets/spa/egyptian_hammam.png';
 import vipImg from '../assets/spa/vip_wellness.png';
 
 const SpaMenu = () => {
-  const { t, i18n } = useTranslation();
-  const isRTL = i18n.language === 'ar';
+  const { t, language, setLanguage } = useLanguage();
+  const isRTL = language === 'ar';
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -33,8 +33,7 @@ const SpaMenu = () => {
   }, [isRTL]);
 
   const toggleLanguage = () => {
-    const newLang = i18n.language === 'en' ? 'ar' : 'en';
-    i18n.changeLanguage(newLang);
+    setLanguage(language === 'en' ? 'ar' : 'en');
   };
 
   const programs = [
@@ -78,7 +77,7 @@ const SpaMenu = () => {
           
           <div className="nav-actions">
             <button onClick={toggleLanguage} className="lang-toggle-btn">
-              {i18n.language === 'en' ? 'العربية' : 'English'}
+              {language === 'en' ? 'العربية' : 'English'}
             </button>
             <Link to="/" className="visit-site-btn">
               {t('nav.home')} <ArrowRight size={16} />
@@ -153,7 +152,7 @@ const SpaMenu = () => {
               <div className="card-content">
                 <h3>{t(`spa_menu.programs.${program.key}.name`)}</h3>
                 <ul className="program-items">
-                  {t(`spa_menu.programs.${program.key}.items`, { returnObjects: true }).map((item, i) => (
+                  {(t(`spa_menu.programs.${program.key}.items`) || []).map((item, i) => (
                     <li key={i}>
                       <span className="dot" />
                       {item}
