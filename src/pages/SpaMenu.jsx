@@ -15,7 +15,11 @@ import {
   Facebook,
   Globe
 } from 'lucide-react';
+import CustomCursor from '../components/CustomCursor';
+import WhatsAppFloat from '../components/WhatsAppFloat';
 import './SpaMenu.css';
+
+import logo from '../assets/logo.png';
 
 // Import images
 import redSeaImg from '../assets/spa/red_sea_spa.png';
@@ -67,12 +71,15 @@ const SpaMenu = () => {
 
   return (
     <div className={`spa-menu-page ${isRTL ? 'rtl' : 'ltr'}`}>
+      <div className="noise-overlay" />
+      <CustomCursor />
+      <WhatsAppFloat />
+      
       {/* Navigation */}
       <nav className="menu-nav">
         <div className="menu-nav-content">
-          <Link to="/" className="menu-logo">
-            <span className="logo-text">FRIENDS GROUP</span>
-            <span className="logo-sub">SPA & BEAUTY</span>
+          <Link to="/" className="menu-logo-brand">
+            <img src={logo} alt="Friends Group" className="brand-logo-img" />
           </Link>
           
           <div className="nav-actions">
@@ -87,13 +94,20 @@ const SpaMenu = () => {
       </nav>
 
       {/* Hero Section */}
-      <header className="menu-hero">
-        <motion.div 
-          className="hero-overlay"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5 }}
-        />
+      <header className="menu-hero cinematic">
+        <div className="hero-split">
+          <div className="hero-pane">
+            <motion.div 
+              className="pane-image"
+              initial={{ scale: 1.1 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 3 }}
+            />
+            <div className="pane-overlay" />
+          </div>
+          <div className="hero-texture-overlay" />
+        </div>
+
         <div className="hero-content">
           <motion.span 
             className="hero-eyebrow"
@@ -118,13 +132,12 @@ const SpaMenu = () => {
             {t('spa_menu.subtitle')}
           </motion.p>
         </div>
-        <motion.div 
-          className="scroll-indicator"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-        >
-          <div className="mouse" />
-        </motion.div>
+        
+        <div className="scroll-indicator">
+          <div className="mouse">
+            <div className="wheel"></div>
+          </div>
+        </div>
       </header>
 
       {/* Programs Section */}
