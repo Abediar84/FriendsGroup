@@ -5,10 +5,14 @@ import './styles/global.css'
 
 import { LanguageProvider } from './hooks/useLanguage.jsx'
 
+import { BrowserRouter } from 'react-router-dom'
+
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <LanguageProvider>
-            <App />
-        </LanguageProvider>
+        <BrowserRouter basename="/FriendsGroup">
+            <LanguageProvider>
+                <App />
+            </LanguageProvider>
+        </BrowserRouter>
     </React.StrictMode>,
 )

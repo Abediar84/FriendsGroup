@@ -180,5 +180,13 @@
             "google_review": "Review us on Google",
             "google_profile": "Business Profile"
         }
+    },
+    "offers": {
+        "eyebrow": "SUMMER 2026 EXCLUSIVES",
+        "title": "Limited Time Promotions",
+        "kids_policy": "Family Policy",
+        "extras": "Available Upgrades",
+        "book_now": "Secure This Offer",
+        "disclaimer": "* All prices are per night. Limited availability for Summer 2026."
     }
 }

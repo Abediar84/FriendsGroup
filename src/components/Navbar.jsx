@@ -43,7 +43,7 @@ const Navbar = () => {
                     <ul className="nav-links">
                         {['home', 'services', 'about', 'testimonials', 'contact'].map((item) => (
                             <li key={item}>
-                                <a href={`#${item}`} className="nav-link-item" onClick={closeMenu}>{t(`nav.${item}`)}</a>
+                                <a href={`/FriendsGroup/#${item}`} className="nav-link-item" onClick={closeMenu}>{t(`nav.${item}`)}</a>
                             </li>
                         ))}
                     </ul>

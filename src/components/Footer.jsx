@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { motion } from 'framer-motion';
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, ExternalLink } from 'lucide-react';
@@ -17,15 +18,16 @@ const Footer = () => {
 
     const footerLinks = {
         company: [
-            { name: t('nav.home'), url: '#home' },
-            { name: t('nav.about'), url: '#about' },
-            { name: t('nav.booking'), url: '#booking' },
-            { name: t('nav.contact'), url: '#contact' },
+            { name: t('nav.home'), url: '/' },
+            { name: t('nav.about'), url: '/#about' },
+            { name: t('nav.booking'), url: '/#booking' },
+            { name: t('nav.contact'), url: '/#contact' },
         ],
         services: [
-            { name: t('services.spa.category'), url: '#services' },
-            { name: t('services.travel.category'), url: '#services' },
-            { name: t('nav.gallery'), url: '#gallery' },
+            { name: t('services.spa.category'), url: '/#services' },
+            { name: t('services.travel.category'), url: '/#services' },
+            { name: t('nav.gallery'), url: '/#gallery' },
+            { name: "Special Promotions", url: '/promotions', isRoute: true },
         ],
     };
 
@@ -86,7 +88,11 @@ const Footer = () => {
                             <ul className="footer-list">
                                 {footerLinks.services.map((link, i) => (
                                     <li key={i}>
-                                        <a href={link.url}>{link.name}</a>
+                                        {link.isRoute ? (
+                                            <Link to={link.url}>{link.name}</Link>
+                                        ) : (
+                                            <a href={link.url}>{link.name}</a>
+                                        )}
                                     </li>
                                 ))}
                             </ul>
