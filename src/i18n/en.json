@@ -21,29 +21,21 @@
         "cta": "Explore More",
         "spa": {
             "category": "SPA Programs",
-            "massage": {
-                "title": "Massage Therapy",
-                "desc": "Medical and Relaxing massages by qualified experts."
+            "red_sea": {
+                "title": "Red Sea Program",
+                "desc": "Charcoal scrub & Mud mask treatment."
             },
-            "body": {
-                "title": "Hot Stones Massage",
-                "desc": "Deep tissue relaxation using heated volcanic stones."
+            "paradise": {
+                "title": "Paradise Experience",
+                "desc": "Rose & Chocolate mask relaxation."
             },
-            "bath": {
+            "hammam": {
                 "title": "Egyptian Hammam",
-                "desc": "Traditional cleansing rituals for total body renewal."
+                "desc": "Traditional rituals for body renewal."
             },
-            "packages": {
-                "title": "VIP Wellness",
-                "desc": "Personalized elite programs in five-star tranquility."
-            },
-            "sauna": {
-                "title": "Sauna & Steam",
-                "desc": "Detoxify and rejuvenate in our premium temperature-controlled suites."
-            },
-            "gym": {
-                "title": "Fitness Center",
-                "desc": "State-of-the-art equipment for your strength and wellness goals."
+            "vip": {
+                "title": "Friends VIP Wellness",
+                "desc": "Elite detox & organic wrap program."
             }
         },
         "travel": {
@@ -188,5 +180,43 @@
         "extras": "Available Upgrades",
         "book_now": "Secure This Offer",
         "disclaimer": "* All prices are per night. Limited availability for Summer 2026."
+    },
+    "spa_menu": {
+        "title": "Digital Spa Menu",
+        "subtitle": "Discover our signature treatments and therapeutic massages.",
+        "programs_title": "SPA Programs",
+        "massages_title": "Massage Therapy",
+        "programs": {
+            "red_sea": {
+                "name": "Red Sea",
+                "items": ["Charcoal scrub", "Mud mask", "Steam bath", "Sauna", "50 mins massage"]
+            },
+            "paradise": {
+                "name": "Paradise",
+                "items": ["Rose scrub", "Chocolate or rose mask", "Steam bath", "Sauna", "+ 50 mins massage"]
+            },
+            "hammam": {
+                "name": "Egyptian Hammam",
+                "items": ["Egyptian scrub", "Coconut mask", "Peeling", "Steam bath", "Sauna", "50 mins massage"]
+            },
+            "vip": {
+                "name": "Friends VIP Program",
+                "items": [
+                    "Full body sea salt scrub with natural oils",
+                    "Natural organic wrap with a detox drainage massage",
+                    "Natural facial scrub",
+                    "Rose scrub",
+                    "Clay mask",
+                    "Steam bath",
+                    "Sauna"
+                ]
+            }
+        },
+        "massages": {
+            "medical": "Medical",
+            "sporty": "Sporty",
+            "relaxing": "Relaxing",
+            "hot_stone": "Hot Stone"
+        }
     }
 }

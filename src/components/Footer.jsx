@@ -26,7 +26,7 @@ const Footer = () => {
         services: [
             { name: t('services.spa.category'), url: '/#services' },
             { name: t('services.travel.category'), url: '/#services' },
-            { name: t('nav.gallery'), url: '/#gallery' },
+            { name: t('spa_menu.title'), url: '/menu', isRoute: true },
             { name: "Special Promotions", url: '/promotions', isRoute: true },
         ],
     };

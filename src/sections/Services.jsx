@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { fadeIn } from '../styles/animations';
-import { MapPin, Star, Wifi, Waves } from 'lucide-react';
+import { MapPin, Star, Wifi, Waves, ArrowRight } from 'lucide-react';
 import './Services.css';
 
 // Spa Assets
 import serviceSpa from '../assets/images/service_spa.png';
-import serviceVip from '../assets/images/programs/vip_wellness.png';
+import redSeaImg from '../assets/spa/red_sea_spa.png';
+import paradiseImg from '../assets/spa/paradise_spa.png';
+import hammamImg from '../assets/spa/egyptian_hammam.png';
+import vipImg from '../assets/spa/vip_wellness.png';
 
 // Hotel Assets (local for 3, Unsplash fallback for 2)
 import hotelGiftun from '../assets/images/hotels/giftun_azur.png';
@@ -21,34 +25,24 @@ const Services = () => {
     // ─── SPA PROGRAMS ──────────────────────────────────────────────
     const spaServices = [
         {
-            id: 'massage',
-            img: serviceSpa,
-            treatments: ['Swedish Relaxation', 'Deep Tissue', 'Hot Candle Wax', 'Aromatherapy', 'Four Hands']
+            id: 'red_sea',
+            img: redSeaImg,
+            treatments: ['Charcoal scrub', 'Mud mask', 'Steam bath', 'Sauna', '50 mins massage']
         },
         {
-            id: 'body',
-            img: 'https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&q=80&w=2070',
-            treatments: ['Volcanic Hot Stones', 'Deep Muscle Relief', 'Detox Ritual']
+            id: 'paradise',
+            img: paradiseImg,
+            treatments: ['Rose scrub', 'Chocolate mask', 'Steam bath', 'Sauna', 'Massage']
         },
         {
-            id: 'bath',
-            img: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=800',
-            treatments: ['Traditional Hammam Scrub', 'Clay Mask', 'Milk & Honey Soak']
+            id: 'hammam',
+            img: hammamImg,
+            treatments: ['Egyptian scrub', 'Coconut mask', 'Peeling', 'Steam bath', 'Sauna']
         },
         {
-            id: 'sauna',
-            img: 'https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&q=80&w=2070',
-            treatments: ['Dry Finnish Sauna', 'Steam Room', 'Cold Plunge']
-        },
-        {
-            id: 'gym',
-            img: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&q=80&w=2070',
-            treatments: ['Cardio Zone', 'Free Weights', 'Personal Training']
-        },
-        {
-            id: 'packages',
-            img: serviceVip,
-            treatments: ['Full Day Retreat', 'Couples VIP', 'Executive Wellness']
+            id: 'vip',
+            img: vipImg,
+            treatments: ['Full body sea salt', 'Organic wrap', 'Facial scrub', 'Detox massage']
         }
     ];
 
@@ -186,6 +180,18 @@ const Services = () => {
                                 </motion.div>
                             ))}
                         </div>
+                        
+                        <motion.div 
+                            className="services-footer-cta"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            viewport={{ once: true }}
+                        >
+                            <Link to="/menu" className="btn-digital-menu">
+                                {t('spa_menu.title')} <ArrowRight size={18} />
+                            </Link>
+                        </motion.div>
                     </div>
                 )}
 

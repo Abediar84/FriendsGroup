@@ -329,7 +329,7 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    background: var(--deep-base);
+    border-color: var(--primary-gold);
     color: var(--primary-gold);
     font-size: 0.7rem;
     font-weight: 700;
@@ -475,5 +475,40 @@
     .hotel-info {
         padding: 25px 30px 30px;
     }
+}
+
+.services-footer-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    padding: 0 20px;
+}
+
+.btn-digital-menu {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 1.4rem 4rem;
+    background: var(--primary-gold);
+    color: var(--white);
+    text-decoration: none;
+    font-family: var(--font-headings);
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    transition: var(--transition-slow);
+    border: 1px solid transparent;
+}
+
+.btn-digital-menu:hover {
+    background: transparent;
+    color: var(--primary-gold);
+    border-color: var(--primary-gold);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+[dir="rtl"] .btn-digital-menu svg {
+    transform: rotate(180deg);
 }
 
