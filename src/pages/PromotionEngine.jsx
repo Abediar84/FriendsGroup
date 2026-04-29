@@ -90,10 +90,19 @@ const getDaysBetween = (start, end) => {
 // ─── COMPONENTS ───────────────────────────────────────────────────────────────
 
 const InquiryPanel = ({ offer, partnerName, setPartnerName, onSend, onClose }) => {
+    const getFirstAvailableType = () => {
+        const priceSet = offer.prices || (offer.periods && offer.periods[0]);
+        if (!priceSet) return 'd';
+        if (priceSet.s > 0) return 's';
+        if (priceSet.d > 0) return 'd';
+        if (priceSet.t > 0) return 't';
+        return 'd';
+    };
+
     const [roomRows, setRoomRows] = useState([
         { 
             id: Date.now(), 
-            type: 'd', 
+            type: getFirstAvailableType(), 
             adults: 2, 
             children: 0,
             checkIn: offer.period.split(" to ")[0] || new Date().toISOString().split('T')[0],
@@ -140,7 +149,7 @@ const InquiryPanel = ({ offer, partnerName, setPartnerName, onSend, onClose }) =
         const lastRoom = roomRows[roomRows.length - 1];
         setRoomRows([...roomRows, { 
             id: Date.now(), 
-            type: 'd', 
+            type: getFirstAvailableType(), 
             adults: 2, 
             children: 0,
             checkIn: lastRoom?.checkIn || offer.period.split(" to ")[0],
@@ -220,9 +229,18 @@ const InquiryPanel = ({ offer, partnerName, setPartnerName, onSend, onClose }) =
                                             onChange={e => updateRoomRow(room.id, 'type', e.target.value)}
                                             className="row-select-v2"
                                         >
-                                            <option value="s">Single</option>
-                                            <option value="d">Double</option>
-                                            <option value="t">Triple</option>
+                                            {/* Show only available room types based on prices */}
+                                            {(() => {
+                                                const priceSet = offer.prices || (offer.periods && offer.periods[0]);
+                                                if (!priceSet) return <option value="d">Double</option>;
+                                                
+                                                return [
+                                                    { key: 's', label: 'Single' },
+                                                    { key: 'd', label: 'Double' },
+                                                    { key: 't', label: 'Triple' }
+                                                ].filter(item => priceSet[item.key] > 0)
+                                                 .map(item => <option key={item.key} value={item.key}>{item.label}</option>);
+                                            })()}
                                         </select>
                                     </div>
 
@@ -660,7 +678,7 @@ ${roomLines.join("\n\n")}
         <div className="container bar-inner">
             <Link to="/" className="visit-site-link">
                 <ArrowLeft size={16} />
-                <span>Visit Our Site</span>
+                <span className="nav-text">Visit Our Site</span>
             </Link>
 
             <div className="engine-logo-box">
@@ -673,7 +691,7 @@ ${roomLines.join("\n\n")}
                     onClick={handleAdminToggle}
                 >
                     {view === "admin" ? <Eye size={18} /> : <Settings size={18} />}
-                    <span>{view === "admin" ? "Exit Admin" : "Operator Panel"}</span>
+                    <span className="nav-text">{view === "admin" ? "Exit Admin" : "Operator Panel"}</span>
                 </button>
             </div>
         </div>
