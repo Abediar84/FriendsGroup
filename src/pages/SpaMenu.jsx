@@ -13,7 +13,9 @@ import {
   Clock,
   Instagram,
   Facebook,
-  Globe
+  Globe,
+  Gem,
+  Thermometer
 } from 'lucide-react';
 import CustomCursor from '../components/CustomCursor';
 import WhatsAppFloat from '../components/WhatsAppFloat';
@@ -41,33 +43,14 @@ const SpaMenu = () => {
   };
 
   const programs = [
-    {
-      id: 'red_sea',
-      icon: <Waves className="program-icon" />,
-      image: redSeaImg,
-      key: 'red_sea'
-    },
-    {
-      id: 'paradise',
-      icon: <Sparkles className="program-icon" />,
-      image: paradiseImg,
-      key: 'paradise'
-    },
-    {
-      id: 'hammam',
-      icon: <Flame className="program-icon" />,
-      image: hammamImg,
-      key: 'hammam'
-    },
-    {
-      id: 'vip',
-      icon: <Crown className="program-icon" />,
-      image: vipImg,
-      key: 'vip'
-    }
+    { id: 'red_sea', icon: <Waves className="program-icon" />, image: redSeaImg, key: 'red_sea' },
+    { id: 'paradise', icon: <Sparkles className="program-icon" />, image: paradiseImg, key: 'paradise' },
+    { id: 'hammam', icon: <Flame className="program-icon" />, image: hammamImg, key: 'hammam' },
+    { id: 'vip', icon: <Gem className="program-icon" />, image: vipImg, key: 'vip' }
   ];
 
   const massages = ['medical', 'sporty', 'relaxing', 'hot_stone'];
+  const saunaPackages = ['full', 'half', 'single'];
 
   return (
     <div className={`spa-menu-page ${isRTL ? 'rtl' : 'ltr'}`}>
@@ -186,7 +169,7 @@ const SpaMenu = () => {
             <div className="text-side">
               <h2>{t('spa_menu.massages_title')}</h2>
               <p className="massages-intro">
-                Our expert therapists use specialized techniques to restore balance to your body and mind.
+                {language === 'en' ? 'Our expert therapists use specialized techniques to restore balance to your body and mind.' : 'يستخدم معالجونا الخبراء تقنيات متخصصة لاستعادة التوازن لجسمك وعقلك.'}
               </p>
               
               <div className="massage-list">
@@ -204,13 +187,6 @@ const SpaMenu = () => {
                   </motion.div>
                 ))}
               </div>
-
-              <div className="booking-cta-box">
-                <p>Ready for relaxation?</p>
-                <a href={`https://wa.me/201207776033`} target="_blank" rel="noopener noreferrer" className="cta-btn">
-                  {t('booking.form.whatsapp')}
-                </a>
-              </div>
             </div>
             
             <div className="image-side">
@@ -225,6 +201,36 @@ const SpaMenu = () => {
                 <div className="frame-border" />
               </motion.div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Sauna & Steam Section */}
+      <section className="sauna-section">
+        <div className="container">
+          <div className="sauna-grid">
+            <div className="sauna-info">
+              <div className="sauna-icon-box">
+                <Thermometer size={48} strokeWidth={1} />
+              </div>
+              <h2>{t('spa_menu.sauna.title')}</h2>
+              <p>{language === 'en' ? 'Detoxify and relax with our premium heat treatments.' : 'تخلص من السموم واسترخِ مع علاجات الحرارة الممتازة لدينا.'}</p>
+            </div>
+            <div className="sauna-packages">
+              {saunaPackages.map((pkg, idx) => (
+                <div key={pkg} className="sauna-pkg-card">
+                  <div className="pkg-dot" />
+                  <span className="pkg-name">{t(`spa_menu.sauna.${pkg}`)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="booking-cta-box-horizontal">
+            <h3>{language === 'en' ? 'Ready for your rejuvenation?' : 'هل أنت مستعد لتجديد شبابك؟'}</h3>
+            <a href={`https://wa.me/201207776033`} target="_blank" rel="noopener noreferrer" className="cta-btn">
+              {t('booking.form.whatsapp')}
+            </a>
           </div>
         </div>
       </section>

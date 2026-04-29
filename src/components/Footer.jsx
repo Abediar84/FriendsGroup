@@ -11,9 +11,9 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     const socialLinks = [
-        { icon: <Facebook strokeWidth={1.5} />, url: '#', label: 'Facebook' },
-        { icon: <Instagram strokeWidth={1.5} />, url: '#', label: 'Instagram' },
-        { icon: <Twitter strokeWidth={1.5} />, url: '#', label: 'Twitter' },
+        { icon: <Facebook strokeWidth={1.5} />, url: 'https://facebook.com/Friendsgrp.AzurOneEleven', label: 'Facebook' },
+        { icon: <Instagram strokeWidth={1.5} />, url: 'https://instagram.com/Friendsgrp.AzurOneEleven', label: 'Instagram' },
+        { icon: <Twitter strokeWidth={1.5} />, url: 'https://twitter.com', label: 'Twitter' },
     ];
 
     const footerLinks = {
@@ -130,6 +130,7 @@ const Footer = () => {
                         &copy; {currentYear} Friends Group. Everywhere Luxury Since 2003.
                     </p>
                     <div className="footer-legal">
+                        <Link to="/roadmap">Roadmap</Link>
                         <a href="#">Privacy Policy</a>
                         <a href="#">Terms of Service</a>
                     </div>

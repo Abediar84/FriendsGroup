@@ -176,13 +176,19 @@
 }
 
 @media (max-width: 640px) {
-    .form-row,
-    .form-actions {
+    .form-row {
         grid-template-columns: 1fr;
         gap: 30px;
     }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 20px;
+    }
     
+    .btn-submit,
     .btn-whatsapp {
         width: 100%;
+        min-height: 54px; /* Thumb-friendly target */
     }
 }

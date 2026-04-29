@@ -4,6 +4,7 @@ import './CustomCursor.css';
 
 const CustomCursor = () => {
     const [isHovering, setIsHovering] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
     const cursorX = useMotionValue(-100);
     const cursorY = useMotionValue(-100);
 
@@ -12,6 +13,12 @@ const CustomCursor = () => {
     const cursorYSpring = useSpring(cursorY, springConfig);
 
     useEffect(() => {
+        // Only enable on devices with a fine pointer (mouse)
+        const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+        if (!hasFinePointer) return;
+
+        setIsVisible(true);
+        
         const moveCursor = (e) => {
             cursorX.set(e.clientX);
             cursorY.set(e.clientY);
@@ -33,6 +40,8 @@ const CustomCursor = () => {
             window.removeEventListener('mouseover', handleHover);
         };
     }, [cursorX, cursorY]);
+
+    if (!isVisible) return null;
 
     return (
         <>

@@ -13,10 +13,11 @@ import paradiseImg from '../assets/spa/paradise_spa.png';
 import hammamImg from '../assets/spa/egyptian_hammam.png';
 import vipImg from '../assets/spa/vip_wellness.png';
 
-// Hotel Assets (local for 3, Unsplash fallback for 2)
 import hotelGiftun from '../assets/images/hotels/giftun_azur.png';
 import hotelMarriott from '../assets/images/hotels/marriott_hurghada.png';
 import hotelSkyView from '../assets/images/hotels/sky_view_hurghada.png';
+const hotelLemon = '/offers/lemonsoul.png';
+const hotelAzal = 'https://images.unsplash.com/photo-1544124499-58912cbddaad?auto=format&fit=crop&q=80&w=1200'; // High-end North Coast feel
 
 const Services = () => {
     const { t } = useLanguage();
@@ -24,79 +25,63 @@ const Services = () => {
 
     // ─── SPA PROGRAMS ──────────────────────────────────────────────
     const spaServices = [
-        {
-            id: 'red_sea',
-            img: redSeaImg,
-            treatments: ['Charcoal scrub', 'Mud mask', 'Steam bath', 'Sauna', '50 mins massage']
-        },
-        {
-            id: 'paradise',
-            img: paradiseImg,
-            treatments: ['Rose scrub', 'Chocolate mask', 'Steam bath', 'Sauna', 'Massage']
-        },
-        {
-            id: 'hammam',
-            img: hammamImg,
-            treatments: ['Egyptian scrub', 'Coconut mask', 'Peeling', 'Steam bath', 'Sauna']
-        },
-        {
-            id: 'vip',
-            img: vipImg,
-            treatments: ['Full body sea salt', 'Organic wrap', 'Facial scrub', 'Detox massage']
-        }
+        { id: 'red_sea', img: redSeaImg },
+        { id: 'paradise', img: paradiseImg },
+        { id: 'hammam', img: hammamImg },
+        { id: 'vip', img: vipImg }
     ];
 
     // ─── HOTEL PARTNERS ────────────────────────────────────────────
     const hotels = [
         {
             id: 'giftun',
-            name: 'Giftun Azur Resort',
+            name: 'Giftun Azur Hurghada',
             location: 'Hurghada, Red Sea',
             img: hotelGiftun,
             stars: 4,
             badge: 'Partner Hotel',
-            features: ['Beachfront', 'Pool', 'Spa Access'],
-            desc: 'A premier Red Sea beachfront resort with pristine private beach, turquoise waters, and a relaxed luxury atmosphere.',
+            features: ['Private Beach', 'Coral Reefs', 'All-Inclusive'],
+            desc: 'A legendary Hurghada landmark offering authentic Red Sea hospitality with pristine sandy beaches and turquoise waters.',
         },
         {
             id: 'marriott',
-            name: 'Marriott Beach Resort',
+            name: 'Marriott Hurghada',
             location: 'Hurghada, Red Sea',
             img: hotelMarriott,
             stars: 5,
-            badge: '5-Star',
-            features: ['Private Beach', 'Fine Dining', 'Infinity Pool'],
-            desc: 'World-class five-star hospitality on the shores of the Red Sea with exceptional dining and premium amenities.',
+            badge: 'International Luxury',
+            features: ['Private Island', 'Sea View Rooms', 'Elite Service'],
+            desc: 'Exceptional five-star luxury featuring a private island, world-class dining, and unparalleled service in the heart of Hurghada.',
         },
         {
             id: 'skyview',
-            name: 'Sky View Hotel',
+            name: 'Sky View Hurghada',
             location: 'Hurghada, Red Sea',
             img: hotelSkyView,
             stars: 4,
-            badge: 'City Views',
-            features: ['Rooftop Pool', 'Sea Views', 'Modern Design'],
-            desc: 'A contemporary hotel featuring stunning panoramic views of Hurghada and the Red Sea from its rooftop infinity pool.',
+            badge: 'Modern Comfort',
+            features: ['Rooftop Pool', 'City Center', 'Panoramic Views'],
+            desc: 'Modern sophistication meeting Red Sea charm. Enjoy panoramic views from the rooftop and premium city-center convenience.',
         },
         {
             id: 'lemon',
-            name: 'Lemon & Soul',
-            location: 'Makadi Bay, Hurghada',
-            img: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&q=80&w=1200',
+            name: 'Lemon & Soul Hurghada',
+            location: 'Hurghada, Red Sea',
+            img: hotelLemon,
             stars: 4,
-            badge: 'Boutique',
-            features: ['Tropical Gardens', 'Makadi Bay', 'Vibrant Atmosphere'],
-            desc: 'A vibrant and stylish boutique resort nestled in Makadi Bay, with lush tropical gardens and a lively, colourful design.',
+            badge: 'Boutique Vibes',
+            features: ['Vibrant Decor', 'Adults Only', 'Unique Style'],
+            desc: 'A vibrant boutique experience with a focus on soul and style. Perfect for those seeking a fresh, colorful getaway.',
         },
         {
             id: 'azal',
             name: 'Azal North Coast',
-            location: 'North Coast, Egypt',
-            img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=1200',
+            location: 'El Alamein, North Coast',
+            img: hotelAzal,
             stars: 5,
             badge: 'Coming Soon',
-            features: ['Mediterranean Coast', 'Private Beach', 'Luxury Villas'],
-            desc: 'An upcoming luxury coastal retreat on Egypt\'s stunning Mediterranean North Coast. Opening soon exclusively for Friends Group clients.',
+            features: ['Mediterranean Shore', 'Luxury Villas', 'Exclusive Access'],
+            desc: 'A new horizon of Mediterranean luxury. Experience the pristine white sands and crystal-clear waters of the North Coast.',
         },
     ];
 
@@ -166,15 +151,12 @@ const Services = () => {
                                         <div className="img-overlay"></div>
                                     </div>
                                     <div className="service-info">
-                                        <h4 className="service-name">{t(`services.spa.${service.id}.title`)}</h4>
-                                        <p className="service-desc">{t(`services.spa.${service.id}.desc`)}</p>
-                                        {service.treatments && (
-                                            <ul className="service-treatments">
-                                                {service.treatments.map((tr, i) => (
-                                                    <li key={i}>{tr}</li>
-                                                ))}
-                                            </ul>
-                                        )}
+                                        <h4 className="service-name">{t(`spa_menu.programs.${service.id}.name`)}</h4>
+                                        <ul className="service-treatments">
+                                            {t(`spa_menu.programs.${service.id}.items`, { returnObjects: true }).map((tr, i) => (
+                                                <li key={i}>{tr}</li>
+                                            ))}
+                                        </ul>
                                         <a href="#booking" className="btn-service-cta">{t('services.cta')}</a>
                                     </div>
                                 </motion.div>

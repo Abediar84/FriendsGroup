@@ -156,8 +156,11 @@ const Booking = () => {
                                         <div className="form-group">
                                             <select name="location" value={formData.location} onChange={handleChange}>
                                                 <option value="" disabled>{t('booking.form.select_location')}</option>
-                                                <option value="New Alamein">New Alamein — Azur One Eleven Hotel</option>
-                                                <option value="Hurghada">Hurghada — Giftun Azur Resort</option>
+                                                <option value="Giftun Azur">Giftun Azur Hurghada</option>
+                                                <option value="Marriott">Marriott Hurghada</option>
+                                                <option value="Sky View">Sky View Hurghada</option>
+                                                <option value="Lemon & Soul">Lemon & Soul Hurghada</option>
+                                                <option value="Azal">Azal North Coast</option>
                                                 <option value="Other">Other / Custom Location</option>
                                             </select>
                                         </div>

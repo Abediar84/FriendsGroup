@@ -95,6 +95,21 @@ section {
 /* RTL Helpers */
 [dir="rtl"] {
     text-align: right;
+    font-family: 'Cairo', sans-serif;
+}
+
+[dir="rtl"] .flex-row {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .ms-auto {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+[dir="rtl"] .me-auto {
+    margin-left: auto;
+    margin-right: 0;
 }
 
 [dir="ltr"] {

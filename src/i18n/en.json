@@ -182,29 +182,29 @@
         "disclaimer": "* All prices are per night. Limited availability for Summer 2026."
     },
     "spa_menu": {
-        "title": "Digital Spa Menu",
+        "title": "Spa Menu",
         "subtitle": "Discover our signature treatments and therapeutic massages.",
         "programs_title": "SPA Programs",
         "massages_title": "Massage Therapy",
         "programs": {
             "red_sea": {
-                "name": "Red Sea",
+                "name": "Red Sea Program",
                 "items": ["Charcoal scrub", "Mud mask", "Steam bath", "Sauna", "50 mins massage"]
             },
             "paradise": {
-                "name": "Paradise",
-                "items": ["Rose scrub", "Chocolate or rose mask", "Steam bath", "Sauna", "+ 50 mins massage"]
+                "name": "Paradise Program",
+                "items": ["Coconut scrub", "Chocolate or rose mask", "Steam bath", "Sauna", "50 mins massage"]
             },
             "hammam": {
                 "name": "Egyptian Hammam",
                 "items": ["Egyptian scrub", "Coconut mask", "Peeling", "Steam bath", "Sauna", "50 mins massage"]
             },
             "vip": {
-                "name": "Friends VIP Program",
+                "name": "Program Friends VIP",
                 "items": [
-                    "Full body sea salt scrub with natural oils",
-                    "Natural organic wrap with a detox drainage massage",
-                    "Natural facial scrub",
+                    "Full body sea salt scrub with natural oil",
+                    "Natural organic facial scrub & detox drainage massage",
+                    "Natural hair mask/scrub",
                     "Rose scrub",
                     "Clay mask",
                     "Steam bath",
@@ -213,10 +213,17 @@
             }
         },
         "massages": {
-            "medical": "Medical",
-            "sporty": "Sporty",
-            "relaxing": "Relaxing",
-            "hot_stone": "Hot Stone"
+            "title": "Massage Therapy",
+            "medical": "Medical Massage",
+            "sporty": "Sports Massage",
+            "relaxing": "Swedish Relaxing",
+            "hot_stone": "Hot Stone Therapy"
+        },
+        "sauna": {
+            "title": "Sauna & Steam",
+            "full": "Sauna & Steam + Jacuzzi",
+            "half": "Sauna & Steam",
+            "single": "Sauna or Steam or Jacuzzi"
         }
     }
 }

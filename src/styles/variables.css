@@ -2,15 +2,15 @@
   /* Design System: Obsidian & Champagne */
   
   /* Shared / Brand */
-  --primary-gold: #76592C;
-  --primary-gold-dark: #5C4522;
-  --primary-gold-light: #8C6D3E;
-  --primary-gold-dim: #E7C08A;
+  --primary-gold: #C9A84C; /* Premium Champagne */
+  --primary-gold-dark: #A68A3D;
+  --primary-gold-light: #D4AF37;
+  --primary-gold-dim: rgba(201, 168, 76, 0.4);
   --accent-gold: #D4AF37;
   
   /* Mode-specific initialization (Light default) */
-  --deep-base: #1A1C1A;
-  --soft-background: #FAF9F6; /* Champagne */
+  --deep-base: #0a0908; /* Luxury Obsidian */
+  --soft-background: #F0EAD6; /* Cream/Champagne Tint */
   --surface-container: #EFEEEB;
   --surface-container-high: #E9E8E5;
   --surface-container-low: #F4F3F1;
@@ -20,7 +20,7 @@
   
   /* Glassmorphism */
   --glass-bg: rgba(250, 249, 246, 0.7);
-  --glass-border: rgba(118, 89, 44, 0.1);
+  --glass-border: rgba(201, 168, 76, 0.1);
   --glass-blur: blur(20px);
   --glass-shadow: 0 8px 60px 0 rgba(26, 28, 26, 0.05);
 
@@ -29,7 +29,7 @@
   --font-body: 'Inter', sans-serif;
 
   /* Studio Spacing */
-  --section-padding: clamp(120px, 15vw, 240px) 0;
+  --section-padding: clamp(140px, 18vw, 280px) 0;
   --container-width: 1540px;
   --overlap-offset: -10vw;
   --border-radius: 0px; /* Sharp edges for luxury */
@@ -41,11 +41,11 @@
 /* Dark Mode Overrides */
 @media (prefers-color-scheme: dark) {
   :root {
-    --deep-base: #0A0A0B; /* Obsidian */
-    --soft-background: #0A0A0B;
+    --deep-base: #0a0908; /* Obsidian */
+    --soft-background: #0a0908;
     --surface-container: #121214;
     --surface-container-high: #1C1B1B;
-    --surface-container-low: #0E0E0E;
+    --surface-container-low: #0e0e0e;
     --text-primary: #F2F1EE;
     --text-secondary: #D0C5AF;
     --white: #1A1C1A;

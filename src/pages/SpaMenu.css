@@ -483,6 +483,104 @@
   border-left: 4px solid var(--primary-gold);
 }
 
+/* Sauna Section */
+.sauna-section {
+  padding: var(--section-padding) 0;
+  background: var(--soft-background);
+}
+
+.sauna-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  background: var(--surface-container);
+  padding: 4rem;
+  border: 1px solid var(--glass-border);
+  margin-bottom: 60px;
+}
+
+.sauna-icon-box {
+  color: var(--primary-gold);
+  margin-bottom: 2rem;
+}
+
+.sauna-info h2 {
+  font-family: var(--font-headings);
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.sauna-info p {
+  opacity: 0.7;
+  font-size: 1.1rem;
+}
+
+.sauna-packages {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sauna-pkg-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  transition: var(--transition-slow);
+}
+
+.sauna-pkg-card:hover {
+  border-color: var(--primary-gold);
+  transform: translateX(10px);
+}
+
+.rtl .sauna-pkg-card:hover {
+  transform: translateX(-10px);
+}
+
+.pkg-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--primary-gold);
+  border-radius: 50%;
+}
+
+.pkg-name {
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.booking-cta-box-horizontal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 4rem;
+  background: linear-gradient(90deg, var(--surface-container), var(--deep-base));
+  border: 1px solid var(--glass-border);
+}
+
+.booking-cta-box-horizontal h3 {
+  font-family: var(--font-headings);
+  font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+  .sauna-grid {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+  }
+  
+  .booking-cta-box-horizontal {
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+    padding: 2rem;
+  }
+}
+
 /* Footer */
 .menu-footer {
   background: var(--deep-base);
