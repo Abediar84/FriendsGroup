@@ -448,18 +448,18 @@ const AdminLogin = ({ onLogin }) => {
                 initial={{ y: 20 }}
                 animate={{ y: 0 }}
             >
-                <Lock size={32} className="login-icon" />
-                <h2>Operator Access</h2>
-                <p>Secure authentication required to manage promotions.</p>
+                <Lock size={42} className="login-icon" />
+                <h2>Operator Panel</h2>
+                <p>Secure authentication required for promotion management.</p>
                 <div className="input-group">
                     <input 
                         type="password" 
-                        placeholder="Enter Password" 
+                        placeholder="Authentication Token" 
                         value={pass}
                         onChange={e => setPass(e.target.value)}
                         autoFocus
                     />
-                    <button type="submit"><LogIn size={18} /></button>
+                    <button type="submit">Access</button>
                 </div>
                 {error && <span className="error-msg">Invalid Credentials</span>}
             </motion.form>
@@ -510,8 +510,11 @@ const OfferForm = ({ offer, onSave, onCancel }) => {
       >
         <div className="form-header">
           <div className="title-group">
-            <Edit3 size={20} className="gold" />
-            <h3>{offer ? 'Refine Offer' : 'Craft New Experience'}</h3>
+            <Settings size={22} className="gold" />
+            <div className="h-meta">
+                <h3>{offer ? 'Refine Promotion' : 'Craft New Experience'}</h3>
+                <span>Configure hotel details, rates, and seasonal supplements</span>
+            </div>
           </div>
           <button type="button" onClick={onCancel} className="close-btn"><X /></button>
         </div>
@@ -519,7 +522,7 @@ const OfferForm = ({ offer, onSave, onCancel }) => {
         <div className="form-scrollable">
             <div className="form-grid">
                 <div className="form-group full">
-                    <label>Destination Hotel</label>
+                    <label><Star size={14} className="gold" /> Destination Hotel</label>
                     <select 
                         value={form.hotel} 
                         onChange={e => {
@@ -532,21 +535,21 @@ const OfferForm = ({ offer, onSave, onCancel }) => {
                 </div>
 
                 <div className="form-group">
-                    <label>Experience Title</label>
-                    <input type="text" value={form.title} onChange={e => setForm({...form, title: e.target.value})} />
+                    <label><Sun size={14} className="gold" /> Experience Title</label>
+                    <input type="text" value={form.title} onChange={e => setForm({...form, title: e.target.value})} placeholder="e.g. Summer 2026 Exclusive" />
                 </div>
 
                 <div className="form-group">
-                    <label>Operational Dates</label>
-                    <input type="text" value={form.period} onChange={e => setForm({...form, period: e.target.value})} />
+                    <label><Calendar size={14} className="gold" /> Operational Dates</label>
+                    <input type="text" value={form.period} onChange={e => setForm({...form, period: e.target.value})} placeholder="e.g. 2026-04-25 to 2026-05-26" />
                 </div>
 
                 <div className="form-group pricing-inputs full">
-                    <label>Rates (SGL / DBL / TRP)</label>
+                    <label><Users2 size={14} className="gold" /> Rates (SGL / DBL / TRP)</label>
                     <div className="rate-fields">
-                        <div className="r-field"><span className="r-tag">S</span><input type="number" value={form.prices?.s || ""} onChange={e => setForm({...form, prices: {...form.prices, s: parseInt(e.target.value)}})} /></div>
-                        <div className="r-field"><span className="r-tag">D</span><input type="number" value={form.prices?.d || ""} onChange={e => setForm({...form, prices: {...form.prices, d: parseInt(e.target.value)}})} /></div>
-                        <div className="r-field"><span className="r-tag">T</span><input type="number" value={form.prices?.t || ""} onChange={e => setForm({...form, prices: {...form.prices, t: parseInt(e.target.value)}})} /></div>
+                        <div className="r-field"><span className="r-tag">S</span><input type="number" value={form.prices?.s || ""} onChange={e => setForm({...form, prices: {...form.prices, s: parseInt(e.target.value)}})} placeholder="Single" /></div>
+                        <div className="r-field"><span className="r-tag">D</span><input type="number" value={form.prices?.d || ""} onChange={e => setForm({...form, prices: {...form.prices, d: parseInt(e.target.value)}})} placeholder="Double" /></div>
+                        <div className="r-field"><span className="r-tag">T</span><input type="number" value={form.prices?.t || ""} onChange={e => setForm({...form, prices: {...form.prices, t: parseInt(e.target.value)}})} placeholder="Triple" /></div>
                     </div>
                 </div>
 
@@ -573,12 +576,12 @@ const OfferForm = ({ offer, onSave, onCancel }) => {
                 </div>
 
                 <div className="form-group">
-                    <label>Policy Highlight</label>
-                    <input type="text" value={form.kids} onChange={e => setForm({...form, kids: e.target.value})} />
+                    <label><ShieldCheck size={14} className="gold" /> Policy Highlight</label>
+                    <input type="text" value={form.kids} onChange={e => setForm({...form, kids: e.target.value})} placeholder="e.g. 1st Child FREE" />
                 </div>
 
                 <div className="form-group">
-                    <label>Validity End Date</label>
+                    <label><Clock size={14} className="gold" /> Validity End Date</label>
                     <input type="date" value={form.validTo} onChange={e => setForm({...form, validTo: e.target.value})} />
                 </div>
             </div>
@@ -743,13 +746,14 @@ ${roomLines.join("\n\n")}
           <div className="container admin-content">
             <header className="admin-header-row">
               <div className="admin-title-group">
+                  <div className="badge-dim">Operational Dashboard</div>
                   <h2>Management Workspace</h2>
-                  <p>Control center for all active promotions and seasonal rates.</p>
+                  <p>Control center for all active promotions, seasonal rates, and B2B configurations.</p>
               </div>
               <div className="admin-master-actions">
                   <button className="reset-btn" onClick={resetToDefaults}>Reset Defaults</button>
                   <button className="add-offer-btn-pro" onClick={() => setIsAdding(true)}>
-                    <Plus size={18} />
+                    <Plus size={20} />
                     <span>Create New Promotion</span>
                   </button>
               </div>
