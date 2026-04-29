@@ -8,13 +8,21 @@ const SpecialOffers = () => {
     const { t, i18n } = useTranslation();
     const isRTL = i18n.language === 'ar';
 
+    // Helper to resolve images robustly across dev/prod
+    const resolveOfferImage = (imgName) => {
+      const base = import.meta.env.BASE_URL || "/";
+      const cleanBase = base.endsWith("/") ? base : `${base}/`;
+      const safeName = imgName.replace(/&/g, '%26');
+      return `${cleanBase}offers/${safeName}`;
+    };
+
     const offers = [
         {
             id: 'marriott',
             hotel: "Hurghada Marriott Red Sea Resort",
             type: "Hard All-Inclusive",
             period: "25/04 - 26/05/2026",
-            image: `${import.meta.env.BASE_URL}offers/marriott.png`,
+            image: resolveOfferImage("Hurghada_Marriott_Red_Sea_Resort.png"),
             prices: [
                 { label: "Single", price: 8200, icon: <User size={18} /> },
                 { label: "Double", price: 8800, icon: <Users size={18} /> },
@@ -34,7 +42,7 @@ const SpecialOffers = () => {
             hotel: "Sky View Hurghada",
             type: "Full Board",
             period: "25/04 - 26/05/2026",
-            image: `${import.meta.env.BASE_URL}offers/skyview.png`,
+            image: resolveOfferImage("Sky_View_Hurghada.png"),
             prices: [
                 { label: "Single", price: 4200, icon: <User size={18} /> },
                 { label: "Double", price: 4800, icon: <Users size={18} /> }
@@ -54,7 +62,7 @@ const SpecialOffers = () => {
                 { dates: "27/05 - 01/06", s: 4200, d: 5500 },
                 { dates: "01/06 - 30/06", s: 4050, d: 5300 }
             ],
-            image: `${import.meta.env.BASE_URL}offers/lemonsoul.png`,
+            image: resolveOfferImage("Lemon&Soul_Makadi_Garden.png"),
             kids: [
                 "1st Child (up to 11.99): FREE",
                 "Max Capacity: 2+1 or 1+2"

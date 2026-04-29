@@ -12,6 +12,16 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import "./PromotionEngine.css";
 
+const DATA_VERSION = "3.2"; // Resetting for path stability
+
+// Helper to resolve images robustly across dev/prod
+const resolveOfferImage = (imgName) => {
+  const base = import.meta.env.BASE_URL || "/";
+  const cleanBase = base.endsWith("/") ? base : `${base}/`;
+  // Avoid double slashes and ensure proper pathing
+  return `${cleanBase}offers/${imgName}`.replace(/\/+/g, '/').replace(':/', '://');
+};
+
 // ─── SEED DATA ────────────────────────────────────────────────────────────────
 const INITIAL_OFFERS = [
   {
@@ -21,12 +31,12 @@ const INITIAL_OFFERS = [
     type: "Hard All-Inclusive",
     title: "Summer 2026 Exclusive",
     period: "2026-04-25 to 2026-05-26",
-    image: "/FriendsGroup/offers/Hurghada_Marriott_Red_Sea_Resort.png",
+    image: resolveOfferImage("Hurghada_Marriott_Red_Sea_Resort.png"),
     prices: { s: 8200, d: 8800, t: 11800 },
-    kids: "1st Child (up to 11.99): FREE | 2nd (1.99-11.99): 2800 LE",
+    kids: "1st Child (up to 11.99): FREE | 2nd (1.99-11.99): 2800 LE / night",
     addons: [
       { id: "sea-view", name: "Sea View Upgrade", price: 300, type: "per_night" },
-      { id: "extra-kid", name: "2nd Child Supplement", price: 2800, type: "per_stay" }
+      { id: "extra-kid", name: "2nd Child Supplement", price: 2800, type: "per_night" }
     ],
     active: true,
     badge: "LUXURY CHOICE",
@@ -39,11 +49,11 @@ const INITIAL_OFFERS = [
     type: "Full Board",
     title: "Sky High Serenity",
     period: "2026-04-25 to 2026-05-26",
-    image: "/FriendsGroup/offers/Sky_View_Hurghada.png",
+    image: resolveOfferImage("Sky_View_Hurghada.png"),
     prices: { s: 4200, d: 4800 },
-    kids: "1st Child (up to 11.99): FREE",
+    kids: "1st Child (up to 11.99): FREE | 2nd (1.99-11.99): 1200 LE / night",
     addons: [
-      { id: "late-checkout", name: "Late Check-out (4PM)", price: 500, type: "per_room" }
+      { id: "extra-kid", name: "2nd Child Supplement", price: 1200, type: "per_night" }
     ],
     active: true,
     badge: "BEST VALUE",
@@ -56,26 +66,27 @@ const INITIAL_OFFERS = [
     type: "Hard All-Inclusive",
     title: "Vibrant Summer Escape",
     period: "2026-04-20 to 2026-06-30",
-    image: "/FriendsGroup/offers/Lemon&Soul_Makadi_Garden.png",
+    image: resolveOfferImage("Lemon&Soul_Makadi_Garden.png"),
     periods: [
         { dates: "20/04 - 26/05", s: 4000, d: 5200 },
         { dates: "27/05 - 01/06", s: 4200, d: 5500 },
         { dates: "01/06 - 30/06", s: 4050, d: 5300 }
     ],
-    kids: "1st Child (up to 11.99): FREE",
+    kids: "1st Child (up to 11.99): FREE | Max 2+1 or 1+2",
     addons: [
       { id: "transfer", name: "Airport Transfer", price: 600, type: "fixed" }
     ],
     active: true,
     badge: "VIBRANT STAY",
-    validTo: "2026-06-30"
+    validTo: "2026-06-30",
+    constraints: { maxPax: 3, maxAdults: 2, maxChildren: 2 }
   }
 ];
 
 const HOTELS = [
-  { id: "marriott", name: "Hurghada Marriott Red Sea Resort" },
-  { id: "skyview", name: "Sky View Hurghada" },
-  { id: "lemonsoul", name: "Lemon & Soul Makadi Garden" }
+  { id: "marriott", name: "Hurghada Marriott Red Sea Resort", img: "Hurghada_Marriott_Red_Sea_Resort.png" },
+  { id: "skyview", name: "Sky View Hurghada", img: "Sky_View_Hurghada.png" },
+  { id: "lemonsoul", name: "Lemon & Soul Makadi Garden", img: "Lemon&Soul_Makadi_Garden.png" }
 ];
 
 // ─── UTILS ───────────────────────────────────────────────────────────────────
@@ -83,8 +94,15 @@ const fmt = (n) => n?.toLocaleString() || "0";
 const daysLeft = (d) => Math.max(0, Math.ceil((new Date(d) - new Date()) / 86400000));
 const getDaysBetween = (start, end) => {
     if (!start || !end) return 1;
-    const diff = new Date(end) - new Date(start);
-    return Math.max(1, Math.ceil(diff / 86400000));
+    // Normalize dates to local midnight to avoid DST/timezone issues
+    const s = new Date(start);
+    const e = new Date(end);
+    s.setHours(0, 0, 0, 0);
+    e.setHours(0, 0, 0, 0);
+    
+    const diff = e.getTime() - s.getTime();
+    const nights = Math.round(diff / 86400000);
+    return Math.max(1, nights); 
 };
 
 // ─── COMPONENTS ───────────────────────────────────────────────────────────────
@@ -111,29 +129,54 @@ const InquiryPanel = ({ offer, partnerName, setPartnerName, onSend, onClose }) =
         }
     ]);
 
+    const getPriceSetForDate = (checkIn) => {
+        if (offer.prices) return offer.prices;
+        if (!offer.periods) return null;
+        
+        const date = new Date(checkIn);
+        return offer.periods.find(p => {
+            const [startStr, endStr] = p.dates.split(" - ");
+            const [sD, sM] = startStr.split("/").map(Number);
+            const [eD, eM] = endStr.split("/").map(Number);
+            // Assume 2026 context
+            const start = new Date(2026, sM - 1, sD);
+            const end = new Date(2026, eM - 1, eD);
+            return date >= start && date <= end;
+        }) || offer.periods[0];
+    };
+
     const calculateTotal = () => {
         let grandTotal = 0;
-        const priceSet = offer.prices || offer.periods[0];
         
         roomRows.forEach(room => {
             const nights = getDaysBetween(room.checkIn, room.checkOut);
+            const priceSet = getPriceSetForDate(room.checkIn);
             let roomTotal = 0;
             
-            // Base room price
-            roomTotal += (priceSet[room.type] || 0);
+            if (!priceSet) return;
+
+            // Base room price (Per Night calculation)
+            const roomPricePerNight = (priceSet[room.type] || 0);
+            roomTotal += roomPricePerNight * nights;
             
-            // 2nd Child Supplement
-            if (room.children >= 2) {
-                const secondChildPrice = offer.addons?.find(a => a.id === "extra-kid")?.price || 2800;
-                roomTotal += secondChildPrice;
+            // Children Supplement logic: 1st is FREE, others are charged per night
+            if (room.children > 1) {
+                const secondChildAddon = offer.addons?.find(a => a.id === "extra-kid");
+                if (secondChildAddon) {
+                    // (Number of children - 1 free child) * price * nights
+                    roomTotal += (room.children - 1) * secondChildAddon.price * nights;
+                }
             }
             
-            // Per-Room Add-ons
+            // Other Add-ons (Upgrade, etc.)
             offer.addons?.forEach(addon => {
                 if (room.addons.includes(addon.id) && addon.id !== "extra-kid") {
                     if (addon.type === "per_night") {
                         roomTotal += addon.price * nights;
+                    } else if (addon.type === "per_stay") {
+                        roomTotal += addon.price;
                     } else {
+                        // Default to fixed if not specified
                         roomTotal += addon.price;
                     }
                 }
@@ -231,7 +274,7 @@ const InquiryPanel = ({ offer, partnerName, setPartnerName, onSend, onClose }) =
                                         >
                                             {/* Show only available room types based on prices */}
                                             {(() => {
-                                                const priceSet = offer.prices || (offer.periods && offer.periods[0]);
+                                                const priceSet = getPriceSetForDate(room.checkIn);
                                                 if (!priceSet) return <option value="d">Double</option>;
                                                 
                                                 return [
@@ -269,11 +312,31 @@ const InquiryPanel = ({ offer, partnerName, setPartnerName, onSend, onClose }) =
 
                                     <div className="row-dates-group">
                                         <div className="mini-date-input">
-                                            <Calendar size={12} />
-                                            <input type="date" value={room.checkIn} onChange={e => updateRoomRow(room.id, 'checkIn', e.target.value)} />
-                                            <ArrowRight size={10} />
-                                            <input type="date" value={room.checkOut} onChange={e => updateRoomRow(room.id, 'checkOut', e.target.value)} />
-                                            <span className="nights-badge">{getDaysBetween(room.checkIn, room.checkOut)}N</span>
+                                            <div className="date-field">
+                                                <label>Check In</label>
+                                                <input 
+                                                    type="date" 
+                                                    value={room.checkIn}
+                                                    min={offer.period.split(" to ")[0]}
+                                                    max={offer.period.split(" to ")[1]}
+                                                    onChange={(e) => updateRoomRow(room.id, 'checkIn', e.target.value)}
+                                                />
+                                            </div>
+                                            <div className="date-sep-v2">
+                                                <span className="nights-count-badge">
+                                                    {getDaysBetween(room.checkIn, room.checkOut)} Nights
+                                                </span>
+                                            </div>
+                                            <div className="date-field">
+                                                <label>Check Out</label>
+                                                <input 
+                                                    type="date" 
+                                                    value={room.checkOut}
+                                                    min={room.checkIn}
+                                                    max={offer.period.split(" to ")[1]}
+                                                    onChange={(e) => updateRoomRow(room.id, 'checkOut', e.target.value)}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
 
@@ -307,6 +370,14 @@ const InquiryPanel = ({ offer, partnerName, setPartnerName, onSend, onClose }) =
                                     )}
                                 </div>
                             ))}
+
+                            {/* Constraint Warning for Lemon & Soul */}
+                            {offer.constraints && roomRows.some(r => (r.adults + r.children) > offer.constraints.maxPax) && (
+                                <div className="constraint-warning">
+                                    <ShieldCheck size={14} />
+                                    <span>Maximum occupancy for this hotel is {offer.constraints.maxPax} persons per room (e.g., 2+1 or 1+2).</span>
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -332,37 +403,31 @@ const InquiryPanel = ({ offer, partnerName, setPartnerName, onSend, onClose }) =
     );
 };
 
-const OfferCard = ({ offer, isActive, onInquire, partnerName, setPartnerName, onSendWhatsApp }) => {
+const OfferCard = ({ offer, onInquire, isActive, partnerName, setPartnerName, onSendWhatsApp }) => {
   const left = daysLeft(offer.validTo);
-  const urgent = left <= 15;
+  const urgent = left <= 5;
 
   return (
     <motion.div 
       className={`promo-card-pro ${isActive ? 'active' : ''}`}
       layout
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
     >
       <div className="promo-card-content">
         <div className="promo-image-box">
             <img src={offer.image} alt={offer.hotelName} loading="lazy" />
-            <div className="promo-badge">{offer.badge}</div>
-            <div className="promo-overlay"></div>
-            {left > 0 && (
-            <div className={`promo-timer ${urgent ? 'urgent' : ''}`}>
-                <Clock size={12} />
-                <span>{left} days remaining</span>
-            </div>
-            )}
         </div>
 
         <div className="promo-body">
-            <div className="promo-header">
-            <span className="promo-type">{offer.type}</span>
-            <h3 className="promo-hotel">{offer.hotelName}</h3>
-            <p className="promo-title">{offer.title}</p>
+            <div className="promo-header-v2">
+                <div className="promo-badges-row">
+                    <span className="promo-badge-v2">{offer.badge}</span>
+                    <span className="promo-type-v2">{offer.type}</span>
+                </div>
+                <h3 className="promo-hotel">{offer.hotelName}</h3>
+                <p className="promo-title">{offer.title}</p>
             </div>
 
             <div className="promo-details-grid">
@@ -398,16 +463,23 @@ const OfferCard = ({ offer, isActive, onInquire, partnerName, setPartnerName, on
                 )}
             </div>
 
-            {!isActive && (
-                <motion.button 
-                    className="promo-cta" 
-                    onClick={() => onInquire(offer.id)}
-                    layoutId={`cta-${offer.id}`}
-                >
-                    <MessageCircle size={18} />
-                    <span>Configure Inquiry</span>
-                </motion.button>
-            )}
+            <div className="promo-footer-v2">
+                <div className={`promo-validity-tag ${urgent ? 'urgent' : ''}`}>
+                    <Clock size={12} />
+                    <span>Valid: {left} days left</span>
+                </div>
+
+                {!isActive && (
+                    <motion.button 
+                        className="promo-cta-v2" 
+                        onClick={() => onInquire(offer.id)}
+                        layoutId={`cta-${offer.id}`}
+                    >
+                        <span>Check Availability</span>
+                        <ChevronRight size={16} />
+                    </motion.button>
+                )}
+            </div>
         </div>
       </div>
 
@@ -448,18 +520,18 @@ const AdminLogin = ({ onLogin }) => {
                 initial={{ y: 20 }}
                 animate={{ y: 0 }}
             >
-                <Lock size={42} className="login-icon" />
-                <h2>Operator Panel</h2>
-                <p>Secure authentication required for promotion management.</p>
+                <Lock size={32} className="login-icon" />
+                <h2>Operator Access</h2>
+                <p>Secure authentication required to manage promotions.</p>
                 <div className="input-group">
                     <input 
                         type="password" 
-                        placeholder="Authentication Token" 
+                        placeholder="Enter Password" 
                         value={pass}
                         onChange={e => setPass(e.target.value)}
                         autoFocus
                     />
-                    <button type="submit">Access</button>
+                    <button type="submit"><LogIn size={18} /></button>
                 </div>
                 {error && <span className="error-msg">Invalid Credentials</span>}
             </motion.form>
@@ -510,11 +582,8 @@ const OfferForm = ({ offer, onSave, onCancel }) => {
       >
         <div className="form-header">
           <div className="title-group">
-            <Settings size={22} className="gold" />
-            <div className="h-meta">
-                <h3>{offer ? 'Refine Promotion' : 'Craft New Experience'}</h3>
-                <span>Configure hotel details, rates, and seasonal supplements</span>
-            </div>
+            <Edit3 size={20} className="gold" />
+            <h3>{offer ? 'Refine Offer' : 'Craft New Experience'}</h3>
           </div>
           <button type="button" onClick={onCancel} className="close-btn"><X /></button>
         </div>
@@ -522,7 +591,7 @@ const OfferForm = ({ offer, onSave, onCancel }) => {
         <div className="form-scrollable">
             <div className="form-grid">
                 <div className="form-group full">
-                    <label><Star size={14} className="gold" /> Destination Hotel</label>
+                    <label>Destination Hotel</label>
                     <select 
                         value={form.hotel} 
                         onChange={e => {
@@ -535,21 +604,21 @@ const OfferForm = ({ offer, onSave, onCancel }) => {
                 </div>
 
                 <div className="form-group">
-                    <label><Sun size={14} className="gold" /> Experience Title</label>
-                    <input type="text" value={form.title} onChange={e => setForm({...form, title: e.target.value})} placeholder="e.g. Summer 2026 Exclusive" />
+                    <label>Experience Title</label>
+                    <input type="text" value={form.title} onChange={e => setForm({...form, title: e.target.value})} />
                 </div>
 
                 <div className="form-group">
-                    <label><Calendar size={14} className="gold" /> Operational Dates</label>
-                    <input type="text" value={form.period} onChange={e => setForm({...form, period: e.target.value})} placeholder="e.g. 2026-04-25 to 2026-05-26" />
+                    <label>Operational Dates</label>
+                    <input type="text" value={form.period} onChange={e => setForm({...form, period: e.target.value})} />
                 </div>
 
                 <div className="form-group pricing-inputs full">
-                    <label><Users2 size={14} className="gold" /> Rates (SGL / DBL / TRP)</label>
+                    <label>Rates (SGL / DBL / TRP)</label>
                     <div className="rate-fields">
-                        <div className="r-field"><span className="r-tag">S</span><input type="number" value={form.prices?.s || ""} onChange={e => setForm({...form, prices: {...form.prices, s: parseInt(e.target.value)}})} placeholder="Single" /></div>
-                        <div className="r-field"><span className="r-tag">D</span><input type="number" value={form.prices?.d || ""} onChange={e => setForm({...form, prices: {...form.prices, d: parseInt(e.target.value)}})} placeholder="Double" /></div>
-                        <div className="r-field"><span className="r-tag">T</span><input type="number" value={form.prices?.t || ""} onChange={e => setForm({...form, prices: {...form.prices, t: parseInt(e.target.value)}})} placeholder="Triple" /></div>
+                        <div className="r-field"><span className="r-tag">S</span><input type="number" value={form.prices?.s || ""} onChange={e => setForm({...form, prices: {...form.prices, s: parseInt(e.target.value)}})} /></div>
+                        <div className="r-field"><span className="r-tag">D</span><input type="number" value={form.prices?.d || ""} onChange={e => setForm({...form, prices: {...form.prices, d: parseInt(e.target.value)}})} /></div>
+                        <div className="r-field"><span className="r-tag">T</span><input type="number" value={form.prices?.t || ""} onChange={e => setForm({...form, prices: {...form.prices, t: parseInt(e.target.value)}})} /></div>
                     </div>
                 </div>
 
@@ -576,12 +645,12 @@ const OfferForm = ({ offer, onSave, onCancel }) => {
                 </div>
 
                 <div className="form-group">
-                    <label><ShieldCheck size={14} className="gold" /> Policy Highlight</label>
-                    <input type="text" value={form.kids} onChange={e => setForm({...form, kids: e.target.value})} placeholder="e.g. 1st Child FREE" />
+                    <label>Policy Highlight</label>
+                    <input type="text" value={form.kids} onChange={e => setForm({...form, kids: e.target.value})} />
                 </div>
 
                 <div className="form-group">
-                    <label><Clock size={14} className="gold" /> Validity End Date</label>
+                    <label>Validity End Date</label>
                     <input type="date" value={form.validTo} onChange={e => setForm({...form, validTo: e.target.value})} />
                 </div>
             </div>
@@ -601,8 +670,15 @@ const OfferForm = ({ offer, onSave, onCancel }) => {
 export default function PromotionEngine() {
   const [offers, setOffers] = useState(() => {
     const saved = localStorage.getItem("fg_promos");
-    return saved ? JSON.parse(saved) : INITIAL_OFFERS;
+    const savedVer = localStorage.getItem("fg_promos_ver");
+    if (saved && savedVer === DATA_VERSION) return JSON.parse(saved);
+    return INITIAL_OFFERS;
   });
+
+  useEffect(() => {
+    localStorage.setItem("fg_promos", JSON.stringify(offers));
+    localStorage.setItem("fg_promos_ver", DATA_VERSION);
+  }, [offers]);
   const [view, setView] = useState("public"); // public | admin | login
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [editing, setEditing] = useState(null);
@@ -705,7 +781,7 @@ ${roomLines.join("\n\n")}
           <div className="public-content">
             <section className="promo-hero-pro">
               <div className="hero-bg-overlay">
-                  <img src="/FriendsGroup/offers/hero-bg.png" alt="" className="hero-img" />
+                  <img src={resolveOfferImage("hero-bg.png")} alt="" className="hero-img" />
                   <div className="hero-gradient"></div>
               </div>
               <div className="container hero-inner">
@@ -716,8 +792,8 @@ ${roomLines.join("\n\n")}
                     className="hero-text-box"
                 >
                     <span className="hero-tag">B2B Partner Portal</span>
-                    <h1>Inquiry Orchestrator</h1>
-                    <p>Configure and generate professional inquiries for your clients with real-time rate calculation and instant WhatsApp delivery.</p>
+                    <h1>Smart Distribution. Stronger Booking Performance</h1>
+                    <p>We bring the demand. You provide the rate. Together, we drive occupancy.</p>
                 </motion.div>
               </div>
             </section>
@@ -746,14 +822,13 @@ ${roomLines.join("\n\n")}
           <div className="container admin-content">
             <header className="admin-header-row">
               <div className="admin-title-group">
-                  <div className="badge-dim">Operational Dashboard</div>
                   <h2>Management Workspace</h2>
-                  <p>Control center for all active promotions, seasonal rates, and B2B configurations.</p>
+                  <p>Control center for all active promotions and seasonal rates.</p>
               </div>
               <div className="admin-master-actions">
                   <button className="reset-btn" onClick={resetToDefaults}>Reset Defaults</button>
                   <button className="add-offer-btn-pro" onClick={() => setIsAdding(true)}>
-                    <Plus size={20} />
+                    <Plus size={18} />
                     <span>Create New Promotion</span>
                   </button>
               </div>

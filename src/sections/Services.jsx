@@ -14,9 +14,18 @@ import hammamImg from '../assets/spa/egyptian_hammam.png';
 import vipImg from '../assets/spa/vip_wellness.png';
 
 import hotelGiftun from '../assets/images/hotels/giftun_azur.png';
-import hotelMarriott from '../assets/images/hotels/marriott_hurghada.png';
-import hotelSkyView from '../assets/images/hotels/sky_view_hurghada.png';
-const hotelLemon = '/offers/lemonsoul.png';
+
+// Helper to resolve images robustly across dev/prod
+const resolveOfferImage = (imgName) => {
+  const base = import.meta.env.BASE_URL || "/";
+  const cleanBase = base.endsWith("/") ? base : `${base}/`;
+  const safeName = imgName.replace(/&/g, '%26');
+  return `${cleanBase}offers/${safeName}`;
+};
+
+const hotelMarriott = resolveOfferImage("Hurghada_Marriott_Red_Sea_Resort.png");
+const hotelSkyView = resolveOfferImage("Sky_View_Hurghada.png");
+const hotelLemon = resolveOfferImage("Lemon&Soul_Makadi_Garden.png");
 const hotelAzal = 'https://images.unsplash.com/photo-1544124499-58912cbddaad?auto=format&fit=crop&q=80&w=1200'; // High-end North Coast feel
 
 const Services = () => {

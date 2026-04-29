@@ -4,7 +4,7 @@ import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/FriendsGroup/',
+  base: process.env.NODE_ENV === 'production' ? '/FriendsGroup/' : '/',
   plugins: [
     react(),
     ViteImageOptimizer({

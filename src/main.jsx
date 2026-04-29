@@ -9,7 +9,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <BrowserRouter basename="/FriendsGroup">
+        <BrowserRouter basename={import.meta.env.DEV ? '/' : '/FriendsGroup'}>
             <LanguageProvider>
                 <App />
             </LanguageProvider>
