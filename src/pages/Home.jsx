@@ -18,8 +18,6 @@ function Home() {
 
     return (
         <div className="app-wrapper">
-            <CustomCursor />
-            <div className="noise-overlay"></div>
             <WhatsAppFloat />
             <Navbar />
             <main>

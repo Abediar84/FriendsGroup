@@ -36,11 +36,14 @@
     font-weight: 700;
     font-size: 13px;
     transition: var(--transition-studio);
+    padding: 8px 16px;
+    border-radius: 6px;
 }
 
 .visit-site-link:hover {
     color: var(--primary-gold);
-    transform: translateX(-5px);
+    background: rgba(184, 153, 90, 0.05);
+    transform: translateY(-2px);
 }
 
 .admin-access-btn {
@@ -51,15 +54,22 @@
     color: var(--white);
     border: none;
     padding: 10px 20px;
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 12px;
     font-weight: 700;
     cursor: pointer;
     transition: var(--transition-studio);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .admin-access-btn:hover {
     background: var(--primary-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(184, 153, 90, 0.3);
+}
+
+.admin-access-btn:active {
+    transform: translateY(0) scale(0.96);
 }
 
 .admin-access-btn.active {
@@ -328,10 +338,46 @@
     cursor: pointer;
     transition: var(--transition-studio);
     margin-top: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .promo-cta:hover {
     background: var(--primary-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(184, 153, 90, 0.4);
+}
+
+.promo-cta:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.confirm-inquiry-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: var(--text-primary);
+    color: var(--white);
+    border: none;
+    padding: 16px 30px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-studio);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+.confirm-inquiry-btn:hover {
+    background: #25d366; /* WhatsApp Green */
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(37, 211, 102, 0.3);
+}
+
+.confirm-inquiry-btn:active {
+    transform: translateY(0) scale(0.97);
 }
 
 /* Admin Login Panel */

@@ -8,14 +8,17 @@ const CustomCursor = () => {
     const cursorX = useMotionValue(-100);
     const cursorY = useMotionValue(-100);
 
-    const springConfig = { damping: 25, stiffness: 700 };
+    const springConfig = { damping: 35, stiffness: 400, mass: 0.8 };
     const cursorXSpring = useSpring(cursorX, springConfig);
     const cursorYSpring = useSpring(cursorY, springConfig);
 
     useEffect(() => {
-        // Only enable on devices with a fine pointer (mouse)
+        // Strict desktop detection
         const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
-        if (!hasFinePointer) return;
+        if (!hasFinePointer) {
+            setIsVisible(false);
+            return;
+        }
 
         setIsVisible(true);
         
@@ -25,7 +28,8 @@ const CustomCursor = () => {
         };
 
         const handleHover = (e) => {
-            if (e.target.closest('a, button, .interactive')) {
+            const target = e.target.closest('a, button, .interactive, select, input');
+            if (target) {
                 setIsHovering(true);
             } else {
                 setIsHovering(false);
@@ -34,37 +38,46 @@ const CustomCursor = () => {
 
         window.addEventListener('mousemove', moveCursor);
         window.addEventListener('mouseover', handleHover);
+        window.addEventListener('mouseleave', () => setIsVisible(false));
+        window.addEventListener('mouseenter', () => setIsVisible(true));
 
         return () => {
             window.removeEventListener('mousemove', moveCursor);
             window.removeEventListener('mouseover', handleHover);
+            window.removeEventListener('mouseleave', () => setIsVisible(false));
+            window.removeEventListener('mouseenter', () => setIsVisible(true));
         };
     }, [cursorX, cursorY]);
 
     if (!isVisible) return null;
 
     return (
-        <>
+        <div className="custom-cursor-wrapper">
             <motion.div
                 className="cursor-dot"
                 style={{
-                    translateX: cursorXSpring,
-                    translateY: cursorYSpring,
+                    x: cursorXSpring,
+                    y: cursorYSpring,
+                    translateX: '-50%',
+                    translateY: '-50%'
                 }}
             />
             <motion.div
                 className={`cursor-outline ${isHovering ? 'hovering' : ''}`}
                 style={{
-                    translateX: cursorXSpring,
-                    translateY: cursorYSpring,
+                    x: cursorXSpring,
+                    y: cursorYSpring,
+                    translateX: '-50%',
+                    translateY: '-50%'
                 }}
                 animate={{
-                    scale: isHovering ? 2.5 : 1,
-                    opacity: isHovering ? 0.15 : 0.4,
+                    scale: isHovering ? 2.2 : 1,
+                    opacity: isHovering ? 0.2 : 0.4,
+                    borderWidth: isHovering ? '1px' : '2px'
                 }}
-                transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             />
-        </>
+        </div>
     );
 };
 

@@ -1,36 +1,36 @@
-.cursor-dot {
+.custom-cursor-wrapper {
     position: fixed;
-    top: -4px;
-    left: -4px;
-    width: 8px;
-    height: 8px;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 999999;
+}
+
+.cursor-dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
     background-color: var(--primary-gold);
     border-radius: 50%;
-    pointer-events: none;
-    z-index: 100000;
 }
 
 .cursor-outline {
-    position: fixed;
-    top: -20px;
-    left: -20px;
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--primary-gold);
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--primary-gold);
     border-radius: 50%;
-    pointer-events: none;
-    z-index: 99999;
+    transition: background-color 0.3s ease;
 }
 
 .cursor-outline.hovering {
     background-color: var(--primary-gold);
-    border: none;
 }
 
-@media (max-width: 1024px) {
-
-    .cursor-dot,
-    .cursor-outline {
+@media (pointer: coarse) {
+    .custom-cursor-wrapper {
         display: none;
     }
 }

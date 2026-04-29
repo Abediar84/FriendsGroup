@@ -31,8 +31,17 @@ body {
     background-color: var(--soft-background);
     line-height: 1.6;
     overflow-x: hidden;
-    cursor: none;
     transition: background-color 0.8s var(--transition-studio), color 0.8s var(--transition-studio);
+}
+
+@media (pointer: fine) {
+    body {
+        cursor: none;
+    }
+    
+    a, button, select, .interactive {
+        cursor: none;
+    }
 }
 
 /* Elite Typography Utilities */
