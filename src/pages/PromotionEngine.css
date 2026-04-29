@@ -269,9 +269,10 @@
 .gold { color: var(--primary-gold); }
 
 .promo-pricing-box {
-    background: #f8f8f7;
+    background: var(--surface-container-low);
     padding: 20px;
     margin-bottom: 25px;
+    border-radius: 4px;
 }
 
 .pricing-grid {
@@ -1180,7 +1181,7 @@
     }
     
     .visit-site-link {
-        background: #f8f8f7;
+        background: var(--surface-container-low);
         border: 1px solid var(--glass-border);
     }
     
@@ -1211,7 +1212,7 @@
     }
 
     .pax-ctrl-mini {
-        background: #f8f8f7;
+        background: var(--surface-container-low);
         padding: 8px 12px;
         border-radius: 6px;
         flex: 1;
@@ -1221,7 +1222,7 @@
     .mini-date-input { 
         flex-direction: column; 
         gap: 12px;
-        background: #f8f8f7;
+        background: var(--surface-container-low);
         padding: 15px;
         border-radius: 8px;
     }

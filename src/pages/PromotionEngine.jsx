@@ -21,7 +21,7 @@ const INITIAL_OFFERS = [
     type: "Hard All-Inclusive",
     title: "Summer 2026 Exclusive",
     period: "2026-04-25 to 2026-05-26",
-    image: "/FriendsGroup/offers/marriott.png",
+    image: "/FriendsGroup/offers/Hurghada_Marriott_Red_Sea_Resort.png",
     prices: { s: 8200, d: 8800, t: 11800 },
     kids: "1st Child (up to 11.99): FREE | 2nd (1.99-11.99): 2800 LE",
     addons: [
@@ -39,7 +39,7 @@ const INITIAL_OFFERS = [
     type: "Full Board",
     title: "Sky High Serenity",
     period: "2026-04-25 to 2026-05-26",
-    image: "/FriendsGroup/offers/skyview.png",
+    image: "/FriendsGroup/offers/Sky_View_Hurghada.png",
     prices: { s: 4200, d: 4800 },
     kids: "1st Child (up to 11.99): FREE",
     addons: [
@@ -56,7 +56,7 @@ const INITIAL_OFFERS = [
     type: "Hard All-Inclusive",
     title: "Vibrant Summer Escape",
     period: "2026-04-20 to 2026-06-30",
-    image: "/FriendsGroup/offers/lemonsoul.png",
+    image: "/FriendsGroup/offers/Lemon&Soul_Makadi_Garden.png",
     periods: [
         { dates: "20/04 - 26/05", s: 4000, d: 5200 },
         { dates: "27/05 - 01/06", s: 4200, d: 5500 },
