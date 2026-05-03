@@ -15,22 +15,29 @@ import {
   Facebook,
   Globe,
   Gem,
-  Thermometer
+  Thermometer,
+  Sun,
+  Moon
 } from 'lucide-react';
+import { useTheme } from '../hooks/useTheme';
 import CustomCursor from '../components/CustomCursor';
 import WhatsAppFloat from '../components/WhatsAppFloat';
+import OptimizedImage from '../components/common/OptimizedImage';
 import './SpaMenu.css';
 
 import logo from '../assets/logo.png';
 
 // Import images
-import redSeaImg from '../assets/spa/red_sea_spa.png';
-import paradiseImg from '../assets/spa/paradise_spa.png';
-import hammamImg from '../assets/spa/egyptian_hammam.png';
-import vipImg from '../assets/spa/vip_wellness.png';
+import spaMenuHero from '../assets/images/hero/spa_menu_hero_elite.png';
+import redSeaImg from '../assets/images/programs/red_sea_spa.png';
+import paradiseImg from '../assets/images/programs/paradise_spa.png';
+import hammamImg from '../assets/images/programs/egyptian_hammam.png';
+import vipImg from '../assets/images/programs/vip_wellness.png';
+import massageImg from '../assets/images/services/massage_therapy.png';
 
 const SpaMenu = () => {
   const { t, language, setLanguage } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   const isRTL = language === 'ar';
 
   useEffect(() => {
@@ -66,12 +73,31 @@ const SpaMenu = () => {
           </Link>
           
           <div className="nav-actions">
-            <button onClick={toggleLanguage} className="lang-toggle-btn">
+            <motion.button
+              className="theme-toggle"
+              onClick={toggleTheme}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label="Toggle Theme"
+            >
+              {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+            </motion.button>
+            <motion.button 
+              onClick={toggleLanguage} 
+              className="lang-toggle"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               {language === 'en' ? 'العربية' : 'English'}
-            </button>
-            <Link to="/" className="visit-site-btn">
-              {t('nav.home')} <ArrowRight size={16} />
-            </Link>
+            </motion.button>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link to="/" className="lang-toggle">
+                {t('nav.home')}
+              </Link>
+            </motion.div>
           </div>
         </div>
       </nav>
@@ -79,41 +105,37 @@ const SpaMenu = () => {
       {/* Hero Section */}
       <header className="menu-hero cinematic">
         <div className="hero-split">
-          <div className="hero-pane">
-            <motion.div 
-              className="pane-image"
-              initial={{ scale: 1.1 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 3 }}
+          <motion.div 
+            className="hero-pane"
+            initial={{ scale: 1.2, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 2.5, ease: [0.19, 1, 0.22, 1] }}
+          >
+            <div 
+              className="pane-image" 
+              style={{ backgroundImage: `url(${spaMenuHero})` }} 
             />
             <div className="pane-overlay" />
-          </div>
+          </motion.div>
           <div className="hero-texture-overlay" />
         </div>
 
         <div className="hero-content">
-          <motion.span 
-            className="hero-eyebrow"
-            initial={{ y: 20, opacity: 0 }}
+          <motion.div
+            initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
+            transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
           >
-            {t('services.spa.category')}
-          </motion.span>
-          <motion.h1 
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
-          >
-            {t('spa_menu.title')}
-          </motion.h1>
-          <motion.p 
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.6 }}
-          >
-            {t('spa_menu.subtitle')}
-          </motion.p>
+            <span className="hero-eyebrow">
+              {t('services.spa.category')}
+            </span>
+            <h1 className="hero-title-main">
+              {t('spa_menu.title')}
+            </h1>
+            <p className="hero-description">
+              {t('spa_menu.subtitle')}
+            </p>
+          </motion.div>
         </div>
         
         <div className="scroll-indicator">
@@ -141,7 +163,10 @@ const SpaMenu = () => {
               transition={{ delay: index * 0.1 }}
             >
               <div className="card-image-container">
-                <img src={program.image} alt={t(`spa_menu.programs.${program.key}.name`)} />
+                <OptimizedImage 
+                  src={program.image} 
+                  alt={t(`spa_menu.programs.${program.key}.name`)} 
+                />
                 <div className="image-overlay" />
                 <div className="card-icon-box">{program.icon}</div>
               </div>
@@ -197,7 +222,10 @@ const SpaMenu = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 1 }}
               >
-                <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80" alt="Massage Therapy" />
+                <OptimizedImage 
+                  src={massageImg} 
+                  alt="Massage Therapy" 
+                />
                 <div className="frame-border" />
               </motion.div>
             </div>

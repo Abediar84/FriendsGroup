@@ -36,7 +36,7 @@
 
 .offers-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
     gap: 40px;
     max-width: var(--container-width);
     margin: 0 auto;
@@ -44,11 +44,10 @@
 }
 
 .offer-card {
-    background: var(--white);
+    background: var(--card-bg);
     border: 1px solid var(--glass-border);
     overflow: hidden;
     display: flex;
-    flex-col: column;
     flex-direction: column;
     transition: var(--transition-slow);
     box-shadow: var(--glass-shadow);
@@ -254,22 +253,28 @@
 
 .book-btn {
     width: 100%;
-    padding: 18px;
-    background: var(--text-primary);
-    color: var(--white);
-    border: none;
-    font-size: 12px;
+    padding: 15px 25px;
+    background: transparent;
+    color: var(--primary-gold);
+    border: 1px solid var(--primary-gold);
+    font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 2px;
     cursor: pointer;
-    transition: var(--transition-studio);
+    transition: all 0.4s var(--transition-studio);
     margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .book-btn:hover {
     background: var(--primary-gold);
-    letter-spacing: 0.25em;
+    color: #FFFFFF;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(198, 166, 100, 0.2);
 }
 
 .marketing-note {

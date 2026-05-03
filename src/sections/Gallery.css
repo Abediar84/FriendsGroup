@@ -213,4 +213,29 @@
         grid-template-columns: 1fr;
         gap: 20px;
     }
+
+    .close-btn {
+        top: 20px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+    }
+
+    .lightbox {
+        padding: 16px;
+    }
+}
+
+/* Dark mode: reduce overlay opacity so icons remain visible */
+@media (prefers-color-scheme: dark) {
+    .gallery-overlay {
+        background: rgba(10, 10, 11, 0.55);
+    }
+}
+
+/* Touch devices: show overlay on active/focus instead of hover */
+@media (hover: none) {
+    .gallery-item:active .gallery-overlay {
+        opacity: 1;
+    }
 }

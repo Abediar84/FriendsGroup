@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { fadeIn } from '../styles/animations';
 import { Building2, Star, Trophy, Shield } from 'lucide-react';
 import './About.css';
-import aboutOffice from '../assets/images/about_office.png';
+import aboutOffice from '../assets/images/about/about_office.png';
 
 const About = () => {
     const { t } = useLanguage();

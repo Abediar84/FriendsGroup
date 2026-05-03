@@ -3,6 +3,7 @@ import { useLanguage } from '../hooks/useLanguage';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fadeIn } from '../styles/animations';
 import { Maximize2, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import OptimizedImage from '../components/common/OptimizedImage';
 import './Gallery.css';
 
 const galleryItems = [
@@ -69,7 +70,11 @@ const Gallery = () => {
                                 transition={{ duration: 0.4 }}
                                 onClick={() => setSelectedImg(item.img)}
                             >
-                                <img src={item.img} alt={`Gallery ${item.id}`} loading="lazy" />
+                                <OptimizedImage 
+                                    src={item.img} 
+                                    alt={`Gallery ${item.id}`} 
+                                    className="gallery-img-tag"
+                                />
                                 <div className="gallery-overlay">
                                     <span className="overlay-icon"><Maximize2 size={32} /></span>
                                 </div>
@@ -96,7 +101,7 @@ const Gallery = () => {
                             onClick={(e) => e.stopPropagation()}
                         >
                             <img src={selectedImg} alt="Enlarged" />
-                            <button className="close-btn" onClick={() => setSelectedImg(null)}>&times;</button>
+                            <button className="close-btn" onClick={() => setSelectedImg(null)}><X size={32} /></button>
                         </motion.div>
                     </motion.div>
                 )}

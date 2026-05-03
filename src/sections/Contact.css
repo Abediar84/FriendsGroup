@@ -81,6 +81,12 @@
     border-bottom-color: var(--primary-gold);
 }
 
+.structured-form input::placeholder,
+.structured-form textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.5;
+}
+
 .social-connect {
     margin-top: 60px;
     padding-top: 40px;
@@ -131,7 +137,7 @@
     overflow: hidden;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1024px) {
     .contact-main-grid {
         grid-template-columns: 1fr;
         gap: 60px;
@@ -143,6 +149,7 @@
 
     .contact-map-side {
         height: 400px;
+        min-height: unset;
         position: static;
     }
 }

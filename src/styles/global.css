@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap');
+/* Fonts loaded via <link> in index.html — no duplicate @import needed */
 @import './variables.css';
 
 * {
@@ -44,6 +44,56 @@ body {
     }
 }
 
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    body {
+        cursor: auto !important;
+    }
+    a, button, select, .interactive {
+        cursor: auto !important;
+    }
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Accessibility: Focus visible ring */
+:focus-visible {
+    outline: 2px solid var(--primary-gold);
+    outline-offset: 3px;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: none;
+    border-bottom-color: var(--primary-gold) !important;
+}
+
+/* Skip to content link */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-gold);
+    color: #FFFFFF;
+    padding: 12px 24px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    z-index: 100000;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 10px;
+}
+
 /* Elite Typography Utilities */
 h1,
 h2,
@@ -77,6 +127,14 @@ ul {
     max-width: var(--container-width);
     margin: 0 auto;
     padding: 0 clamp(24px, 5vw, 60px);
+}
+
+/* Safe area support for notched devices */
+@supports(padding: max(0px)) {
+    .container {
+        padding-left: max(clamp(24px, 5vw, 60px), env(safe-area-inset-left));
+        padding-right: max(clamp(24px, 5vw, 60px), env(safe-area-inset-right));
+    }
 }
 
 img {
@@ -158,4 +216,54 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+}
+
+/* Premium Decorative Elements */
+.section-separator {
+    width: 80px;
+    height: 1px;
+    background: var(--primary-gold);
+    margin: 40px auto;
+    opacity: 0.5;
+    position: relative;
+}
+
+.section-separator::before,
+.section-separator::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--primary-gold);
+    border-radius: 50%;
+}
+
+.section-separator::before { left: -10px; }
+.section-separator::after { right: -10px; }
+
+/* Glassmorphism Refinement */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    transition: var(--transition-base);
+}
+
+.glass-panel:hover {
+    background: var(--glass-bg-hover);
+    border-color: var(--primary-gold-dim);
+}
+
+/* Character Reveal Base */
+.reveal-text {
+    overflow: hidden;
+    display: inline-block;
+}
+
+.reveal-char {
+    display: inline-block;
 }

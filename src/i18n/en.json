@@ -6,6 +6,7 @@
         "testimonials": "Testimonials",
         "gallery": "Gallery",
         "booking": "Book Now",
+        "offers": "Offers",
         "contact": "Contact"
     },
     "hero": {
@@ -20,9 +21,9 @@
         "subtitle": "Expert treatments and bespoke travel since 2003.",
         "cta": "Explore More",
         "spa": {
-            "category": "SPA Programs",
+            "category": "SPA",
             "red_sea": {
-                "title": "Red Sea Program",
+                "title": "Red Sea",
                 "desc": "Charcoal scrub & Mud mask treatment."
             },
             "paradise": {
@@ -60,6 +61,43 @@
         },
         "hotels": {
             "intro": "We partner exclusively with handpicked five-star hotels across Egypt's Red Sea and Mediterranean coasts. Select your preferred destination and we will handle every detail of your stay."
+        },
+        "hotel_list": {
+            "giftun": {
+                "name": "Giftun Azur Hurghada",
+                "location": "Hurghada, Red Sea",
+                "badge": "Partner Hotel",
+                "features": ["Private Beach", "Coral Reefs", "All-Inclusive"],
+                "desc": "A legendary Hurghada landmark offering authentic Red Sea hospitality with pristine sandy beaches and turquoise waters."
+            },
+            "marriott": {
+                "name": "Marriott Hurghada",
+                "location": "Hurghada, Red Sea",
+                "badge": "International Luxury",
+                "features": ["Private Island", "Sea View Rooms", "Elite Service"],
+                "desc": "Exceptional five-star luxury featuring a private island, world-class dining, and unparalleled service in the heart of Hurghada."
+            },
+            "skyview": {
+                "name": "Sky View Hurghada",
+                "location": "Hurghada, Red Sea",
+                "badge": "Modern Comfort",
+                "features": ["Rooftop Pool", "City Center", "Panoramic Views"],
+                "desc": "Modern sophistication meeting Red Sea charm. Enjoy panoramic views from the rooftop and premium city-center convenience."
+            },
+            "lemon": {
+                "name": "Lemon & Soul Hurghada",
+                "location": "Hurghada, Red Sea",
+                "badge": "Boutique Vibes",
+                "features": ["Vibrant Decor", "Adults Only", "Unique Style"],
+                "desc": "A vibrant boutique experience with a focus on soul and style. Perfect for those seeking a fresh, colorful getaway."
+            },
+            "azal": {
+                "name": "Azal North Coast",
+                "location": "El Alamein, North Coast",
+                "badge": "Coming Soon",
+                "features": ["Mediterranean Shore", "Luxury Villas", "Exclusive Access"],
+                "desc": "A new horizon of Mediterranean luxury. Experience the pristine white sands and crystal-clear waters of the North Coast."
+            }
         }
     },
     "about": {
@@ -121,22 +159,57 @@
     },
     "booking": {
         "title": "Book Your Experience",
+        "title_spa": "Exclusive Spa Reservations",
+        "title_hotel": "Elite Hotel Bookings",
         "subtitle": "Ready to begin your journey or relaxation session? Let us handle the details.",
         "form": {
             "name": "Full Name",
             "phone": "Phone Number",
             "email": "Email Address",
-            "service": "Service Type",
-            "location": "Preferred Location",
+            "location_fixed": "Location: Azur One Eleven",
+            "select_category": "Select Category",
+            "select_program": "Select Program",
+            "select_hotel": "Select Hotel",
+            "select_service": "Select Service",
+            "select_time": "Preferred Time Slot",
             "date": "Preferred Date",
-            "select_service": "Select a service",
-            "select_location": "Select a location",
-            "message": "Additional Notes or Special Requests",
-            "submit": "Submit Inquiry",
-            "whatsapp": "Chat on WhatsApp"
+            "check_in": "Check-in Date",
+            "check_out": "Check-out Date",
+            "room_type": "Room Type",
+            "adults": "Adults",
+            "children": "Children",
+            "message": "Additional Notes...",
+            "submit": "Send Request",
+            "whatsapp": "Chat on WhatsApp",
+            "processing": "Processing..."
+        },
+        "types": {
+            "spa": "Spa & Massage",
+            "hotel": "Hotel Booking"
+        },
+        "programs": {
+            "red_sea": "Red Sea Program",
+            "paradise": "Paradise Program",
+            "hammam": "Egyptian Hammam",
+            "vip": "Friends VIP",
+            "medical": "Medical Massage",
+            "sport": "Sports Massage",
+            "relax": "Relaxing Massage",
+            "hot_stone": "Hot Stone Therapy",
+            "sauna_jacuzzi": "Sauna & Steam + Jacuzzi",
+            "sauna_steam": "Sauna & Steam",
+            "sauna_or_steam": "Sauna or Steam"
+        },
+        "room_types": {
+            "single": "Single Room",
+            "double": "Double Room",
+            "triple": "Triple Room",
+            "suite": "Executive Suite"
         },
         "status": {
-            "success": "Inquiry sent successfully! We will contact you shortly.",
+            "success": "Request Sent Successfully!",
+            "success_desc": "We will contact you shortly to confirm your booking.",
+            "send_another": "Send Another Inquiry",
             "error": "Something went wrong. Please try again.",
             "valid_email": "Please enter a valid email.",
             "valid_phone": "Please enter a valid phone number."
@@ -184,15 +257,15 @@
     "spa_menu": {
         "title": "Spa Menu",
         "subtitle": "Discover our signature treatments and therapeutic massages.",
-        "programs_title": "SPA Programs",
+        "programs_title": "SPA",
         "massages_title": "Massage Therapy",
         "programs": {
             "red_sea": {
-                "name": "Red Sea Program",
+                "name": "Red Sea",
                 "items": ["Charcoal scrub", "Mud mask", "Steam bath", "Sauna", "50 mins massage"]
             },
             "paradise": {
-                "name": "Paradise Program",
+                "name": "Paradise",
                 "items": ["Coconut scrub", "Chocolate or rose mask", "Steam bath", "Sauna", "50 mins massage"]
             },
             "hammam": {
@@ -200,7 +273,7 @@
                 "items": ["Egyptian scrub", "Coconut mask", "Peeling", "Steam bath", "Sauna", "50 mins massage"]
             },
             "vip": {
-                "name": "Program Friends VIP",
+                "name": "Friends VIP",
                 "items": [
                     "Full body sea salt scrub with natural oil",
                     "Natural organic facial scrub & detox drainage massage",
@@ -225,5 +298,55 @@
             "half": "Sauna & Steam",
             "single": "Sauna or Steam or Jacuzzi"
         }
+    },
+    "promo_engine": {
+        "title": "B2B Partner Portal",
+        "verified": "VERIFIED PARTNER ACCESS",
+        "configure": "Configure Inquiry & Request Availability",
+        "partner_id": "Partner Agency Name / ID",
+        "partner_placeholder": "Enter your agency name or ID",
+        "room_configs": "Room Configurations",
+        "add_room": "Add Another Room",
+        "hero_title": "Elite Portfolio of Summer Destinations",
+        "hero_subtitle": "Real-time availability and dynamic pricing for verified Friends Group B2B partners across Egypt's premium properties.",
+        "partners_count": "500+ Active Agencies",
+        "premium_inventory": "Verified Inventory",
+        "check_in": "Check In",
+        "check_out": "Check Out",
+        "nights": "Nights",
+        "enhancements": "Enhancements",
+        "total_rate": "ESTIMATED TOTAL RATE",
+        "check_availability": "Check Availability",
+        "per_night": "per night",
+        "valid_until": "Valid until",
+        "days_left": "days left",
+        "urgent": "Ending soon!",
+        "admin_mode": "Operator Mode",
+        "admin_subtitle": "Control center for all active promotions.",
+        "session_active": "Secure B2B Session Active",
+        "add_new": "New Promotion",
+        "reset": "Reset Defaults",
+        "save": "Publish Changes",
+        "discard": "Discard",
+        "room_s": "Single",
+        "room_d": "Double",
+        "room_t": "Triple",
+        "second_child": "2nd Child Suppl.",
+        "max_occupancy": "Maximum occupancy for this hotel is {{max}} persons per room.",
+        "login_title": "Partner Authentication",
+        "login_subtitle": "Friends Group B2B Management System",
+        "login_placeholder": "B2B Access Code",
+        "login_btn": "Authenticate & Enter",
+        "login_error": "Invalid access code. Please verify credentials.",
+        "badge_luxury_choice": "LUXURY CHOICE",
+        "badge_best_value": "BEST VALUE",
+        "badge_vibrant_stay": "Vibrant Stay",
+        "badge_summer_2026_exclusive": "Summer 2026 Exclusive",
+        "badge_sky_high_serenity": "Sky High Serenity",
+        "badge_vibrant_summer_escape": "Vibrant Summer Escape",
+        "type_hard_all-inclusive": "Hard All-Inclusive",
+        "type_full_board": "Full Board",
+        "exit_admin": "Exit Admin",
+        "operator": "Operator"
     }
 }

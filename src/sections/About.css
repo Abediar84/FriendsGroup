@@ -3,6 +3,8 @@
     padding: var(--spacing-xl) 0;
     position: relative;
     overflow: hidden;
+    scroll-margin-top: 80px;
+    transition: background-color 0.8s var(--transition-studio);
 }
 
 .about-container {
@@ -21,6 +23,7 @@
     backdrop-filter: var(--glass-blur);
     margin-right: -150px; /* Strong Overlap */
     border-left: 2px solid var(--primary-gold);
+    transition: background-color 0.8s var(--transition-studio);
 }
 
 [dir="rtl"] .about-story {
@@ -37,57 +40,63 @@
     text-transform: uppercase;
     color: var(--primary-gold);
     letter-spacing: 5px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     opacity: 0.8;
 }
 
 .about-title {
     font-family: var(--font-display);
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2.2rem, 5vw, 4rem);
     line-height: 1.1;
-    margin-bottom: 40px;
+    margin-bottom: 35px;
     color: var(--text-primary);
+}
+
+[dir="rtl"] .about-title {
+    line-height: 1.3;
 }
 
 .about-text {
     font-size: 1.1rem;
     color: var(--text-primary);
     opacity: 0.8;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
     line-height: 1.8;
 }
 
 .about-pillars {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin-bottom: 60px;
+    gap: 25px;
+    margin-bottom: 50px;
 }
 
 .pillar-item {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    padding: 30px;
-    background: rgba(var(--primary-gold-rgb), 0.03);
+    gap: 12px;
+    padding: 25px;
+    background: rgba(var(--primary-gold-rgb), 0.05);
+    border: 1px solid transparent;
     transition: var(--transition-slow);
 }
 
 .pillar-item:hover {
-    background-color: var(--glass-bg-hover);
+    background: rgba(var(--primary-gold-rgb), 0.1);
+    border-color: rgba(var(--primary-gold-rgb), 0.2);
     transform: translateY(-5px);
 }
 
 .pillar-icon {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     color: var(--primary-gold);
 }
 
 .pillar-info h4 {
     font-family: var(--font-display);
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+    font-size: 1.15rem;
+    margin-bottom: 8px;
     color: var(--text-primary);
 }
 
@@ -95,7 +104,7 @@
     font-size: 0.9rem;
     color: var(--text-primary);
     opacity: 0.75;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 .about-visual {
@@ -174,6 +183,11 @@
         margin-right: -80px;
         padding: 50px;
     }
+    
+    [dir="rtl"] .about-story {
+        margin-right: 0;
+        margin-left: -80px;
+    }
 }
 
 @media (max-width: 1024px) {
@@ -184,21 +198,66 @@
     .about-story {
         grid-column: 1;
         margin-right: 0;
-        margin-left: 0;
-        padding: 60px 40px;
+        margin-left: 0 !important;
+        padding: 60px 24px;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid rgba(var(--primary-gold-rgb), 0.2);
+    }
+
+    [dir="rtl"] .about-story {
+        border-right: none;
     }
 
     .about-visual {
         grid-column: 1;
-        margin-top: -50px;
+        margin-top: 0;
     }
 
     .image-wrapper {
-        height: 600px;
+        height: 450px;
     }
 
     .about-bg-text {
         display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-section.refined {
+        padding: 60px 0;
+    }
+
+    .about-subtitle {
+        margin-bottom: 15px;
+        letter-spacing: 3px;
+    }
+
+    .about-title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .about-text {
+        font-size: 1rem;
+        margin-bottom: 35px;
+        line-height: 1.7;
+    }
+
+    .about-pillars {
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    .pillar-item {
+        padding: 20px;
+        gap: 10px;
+    }
+    
+    .about-story .btn {
+        width: 100%;
+        text-align: center;
+        padding: 18px;
     }
 }
 
@@ -208,12 +267,27 @@
     }
     
     .experience-badge {
-        right: 20px;
-        bottom: 20px;
-        padding: 20px;
+        position: relative;
+        bottom: 0;
+        right: 0;
+        left: 0 !important;
+        padding: 30px;
+        text-align: center;
+        width: 100%;
     }
     
     .experience-badge .years {
-        font-size: 2rem;
+        font-size: 2.5rem;
+    }
+}
+
+/* Dark mode: brighten the About image which is too dark with grayscale+brightness */
+@media (prefers-color-scheme: dark) {
+    .image-wrapper img {
+        filter: grayscale(20%) brightness(0.9);
+    }
+
+    .about-visual:hover img {
+        filter: grayscale(0%) brightness(1);
     }
 }

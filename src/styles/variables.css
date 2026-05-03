@@ -3,6 +3,7 @@
   
   /* Shared / Brand */
   --primary-gold: #C9A84C; /* Premium Champagne */
+  --primary-gold-rgb: 201, 168, 76;
   --primary-gold-dark: #A68A3D;
   --primary-gold-light: #D4AF37;
   --primary-gold-dim: rgba(201, 168, 76, 0.4);
@@ -29,19 +30,60 @@
   --font-body: 'Inter', sans-serif;
 
   /* Studio Spacing */
-  --section-padding: clamp(140px, 18vw, 280px) 0;
+  --spacing-xl: clamp(140px, 18vw, 280px);
+  --section-padding: var(--spacing-xl) 0;
   --container-width: 1540px;
   --overlap-offset: -10vw;
   --border-radius: 0px; /* Sharp edges for luxury */
   
+  /* Glass Hover */
+  --glass-bg-hover: rgba(250, 249, 246, 0.85);
+  --card-bg: #FFFFFF;
+  --footer-bg: #0a0908;
+  
   --transition-studio: cubic-bezier(0.2, 0, 0.2, 1);
+  --transition-base: all 0.3s ease;
   --transition-slow: all 0.8s var(--transition-studio);
 }
 
-/* Dark Mode Overrides */
+/* Explicit Light Mode (When data-theme="light") */
+[data-theme='light'] {
+  --deep-base: #0a0908;
+  --soft-background: #F0EAD6;
+  --surface-container: #EFEEEB;
+  --surface-container-high: #E9E8E5;
+  --surface-container-low: #F4F3F1;
+  --text-primary: #1A1C1A;
+  --text-secondary: #4D4635;
+  --white: #FFFFFF;
+  --glass-bg: rgba(250, 249, 246, 0.7);
+  --glass-bg-hover: rgba(250, 249, 246, 0.85);
+  --card-bg: #FFFFFF;
+}
+
+/* Dark Mode Overrides (Attribute based) */
+[data-theme='dark'] {
+  --deep-base: #0a0908; /* Obsidian */
+  --soft-background: #0a0908;
+  --surface-container: #121214;
+  --surface-container-high: #1C1B1B;
+  --surface-container-low: #0e0e0e;
+  --text-primary: #F2F1EE;
+  --text-secondary: #D0C5AF;
+  --white: #1A1C1A;
+  
+  --glass-bg: rgba(10, 10, 11, 0.75);
+  --glass-bg-hover: rgba(18, 18, 20, 0.85);
+  --glass-border: rgba(212, 175, 55, 0.1);
+  --glass-shadow: 0 8px 60px 0 rgba(0, 0, 0, 0.4);
+  --card-bg: #141416;
+  --footer-bg: #050504;
+}
+
+/* Fallback for System Preference if no attribute set */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --deep-base: #0a0908; /* Obsidian */
+  :root:not([data-theme]) {
+    --deep-base: #0a0908;
     --soft-background: #0a0908;
     --surface-container: #121214;
     --surface-container-high: #1C1B1B;
@@ -49,10 +91,12 @@
     --text-primary: #F2F1EE;
     --text-secondary: #D0C5AF;
     --white: #1A1C1A;
-    
     --glass-bg: rgba(10, 10, 11, 0.75);
+    --glass-bg-hover: rgba(18, 18, 20, 0.85);
     --glass-border: rgba(212, 175, 55, 0.1);
     --glass-shadow: 0 8px 60px 0 rgba(0, 0, 0, 0.4);
+    --card-bg: #141416;
+    --footer-bg: #050504;
   }
 }
 
@@ -60,4 +104,5 @@
 [dir="rtl"] {
   --font-headings: 'Cairo', sans-serif;
   --font-body: 'Cairo', sans-serif;
+  line-height: 1.8;
 }

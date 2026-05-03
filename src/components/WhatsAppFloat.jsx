@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../hooks/useLanguage';
+import { BUSINESS_INFO } from '../config/constants';
 import './WhatsAppFloat.css';
 
-const WA_NUMBER = '201207776033';
 const MESSAGES = {
     en: "Hello, I'd like to inquire about Friends Group services.",
     ar: 'مرحباً، أريد الاستفسار عن خدمات فريندز جروب.',
@@ -22,7 +22,7 @@ const WhatsAppFloat = () => {
     }, []);
 
     const msg = MESSAGES[language] || MESSAGES.en;
-    const href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+    const href = `${BUSINESS_INFO.WHATSAPP_LINK}?text=${encodeURIComponent(msg)}`;
 
     return (
         <AnimatePresence>

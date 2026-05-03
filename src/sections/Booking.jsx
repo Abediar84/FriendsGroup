@@ -2,28 +2,63 @@ import React, { useState } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fadeIn } from '../styles/animations';
+import { BUSINESS_INFO } from '../config/constants';
 import './Booking.css';
 
 const Booking = () => {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
+    const [bookingType, setBookingType] = useState('spa'); // 'spa' or 'hotel'
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
         email: '',
-        service: '',
-        location: '',
+        // SPA specific
+        spaCategory: '',
+        spaProgram: '',
+        timeSlot: '',
         date: '',
-        message: ''
+        // Hotel specific
+        hotel: '',
+        checkIn: '',
+        checkOut: '',
+        roomType: '',
+        adults: '2',
+        children: '0',
+        notes: ''
     });
-    const [status, setStatus] = useState('idle'); // idle, loading, success, error
+    const [status, setStatus] = useState('idle');
     const [errors, setErrors] = useState({});
+
+    // Use keys that map to i18n paths
+    const spaMenu = {
+        'SPA': ['red_sea', 'paradise', 'hammam', 'vip'],
+        'Massage': ['medical', 'sport', 'relax', 'hot_stone'],
+        'Sauna & Steam': ['sauna_jacuzzi', 'sauna_steam', 'sauna_or_steam']
+    };
+
+    const hotels = [
+        { id: 'marriott', nameKey: 'services.hotel_list.marriott.name' },
+        { id: 'giftun', nameKey: 'services.hotel_list.giftun.name' },
+        { id: 'skyview', nameKey: 'services.hotel_list.skyview.name' },
+        { id: 'lemon', nameKey: 'services.hotel_list.lemon.name' },
+        { id: 'azal', nameKey: 'services.hotel_list.azal.name', disabled: true }
+    ];
 
     const validate = () => {
         let newErrors = {};
         if (!formData.name) newErrors.name = true;
-        if (!formData.phone || !/^\+?[0-9]{8,15}$/.test(formData.phone.replace(/\s/g, ''))) newErrors.phone = true;
-        if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = true;
-        if (!formData.service) newErrors.service = true;
+        if (!formData.phone) newErrors.phone = true;
+        if (!formData.email) newErrors.email = true;
+        
+        if (bookingType === 'spa') {
+            if (!formData.spaCategory) newErrors.spaCategory = true;
+            if (!formData.spaProgram) newErrors.spaProgram = true;
+            if (!formData.date) newErrors.date = true;
+        } else {
+            if (!formData.hotel) newErrors.hotel = true;
+            if (!formData.checkIn) newErrors.checkIn = true;
+            if (!formData.checkOut) newErrors.checkOut = true;
+        }
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -31,35 +66,54 @@ const Booking = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        setFormData(prev => ({ 
+            ...prev, 
+            [name]: value,
+            // Reset program if category changes
+            ...(name === 'spaCategory' ? { spaProgram: '' } : {})
+        }));
         if (errors[name]) setErrors(prev => ({ ...prev, [name]: false }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validate()) return;
-
         setStatus('loading');
-
         // Simulate API call
-        setTimeout(() => {
-            setStatus('success');
-            // In a real app, you would send email notification here via EmailJS or Backend
-        }, 1500);
+        setTimeout(() => setStatus('success'), 1500);
     };
 
     const handleWhatsApp = () => {
         if (!validate()) return;
 
-        const message = `*New Inquiry from Friends Group Website*%0A%0A` +
-            `*Name:* ${formData.name}%0A` +
-            `*Service:* ${formData.service}%0A` +
-            `*Location:* ${formData.location}%0A` +
-            `*Date:* ${formData.date}%0A` +
-            `*Phone:* ${formData.phone}%0A` +
-            `*Email:* ${formData.email}`;
+        let details = '';
+        if (bookingType === 'spa') {
+            const categoryLabel = formData.spaCategory === 'SPA' ? t('spa_menu.programs_title') 
+                                : formData.spaCategory === 'Massage' ? t('spa_menu.massages_title') 
+                                : t('spa_menu.sauna.title');
+            
+            details = `*Service:* SPA & Massage%0A` +
+                      `*Location:* Azur One Eleven%0A` +
+                      `*Category:* ${categoryLabel}%0A` +
+                      `*Program:* ${t(`booking.programs.${formData.spaProgram}`)}%0A` +
+                      `*Date:* ${formData.date}%0A` +
+                      `*Time:* ${formData.timeSlot}`;
+        } else {
+            details = `*Service:* Hotel Reservation%0A` +
+                      `*Hotel:* ${formData.hotel}%0A` +
+                      `*Check-in:* ${formData.checkIn}%0A` +
+                      `*Check-out:* ${formData.checkOut}%0A` +
+                      `*Room:* ${t(`booking.room_types.${formData.roomType.toLowerCase()}`)}%0A` +
+                      `*Guests:* ${formData.adults} Adults, ${formData.children} Children`;
+        }
 
-        const whatsappUrl = `https://wa.me/201207776033?text=${message}`;
+        const message = `*New Booking Inquiry*%0A%0A` +
+            `*Name:* ${formData.name}%0A` +
+            `*Phone:* ${formData.phone}%0A` +
+            details + `%0A` +
+            `*Notes:* ${formData.notes}`;
+
+        const whatsappUrl = `https://wa.me/${BUSINESS_INFO.contact.whatsapp_clean}?text=${message}`;
         window.open(whatsappUrl, '_blank');
     };
 
@@ -86,6 +140,26 @@ const Booking = () => {
                         whileInView="show"
                         viewport={{ once: true }}
                     >
+                        {/* Booking Type Toggle */}
+                        <div className="booking-type-toggle">
+                            <button 
+                                className={`toggle-btn ${bookingType === 'spa' ? 'active' : ''}`}
+                                onClick={() => setBookingType('spa')}
+                            >
+                                {t('booking.types.spa')}
+                            </button>
+                            <button 
+                                className={`toggle-btn ${bookingType === 'hotel' ? 'active' : ''}`}
+                                onClick={() => setBookingType('hotel')}
+                            >
+                                {t('booking.types.hotel')}
+                            </button>
+                        </div>
+
+                        <h3 className="booking-form-title">
+                            {bookingType === 'spa' ? t('booking.title_spa') : t('booking.title_hotel')}
+                        </h3>
+
                         <AnimatePresence mode="wait">
                             {status === 'success' ? (
                                 <motion.div
@@ -97,12 +171,14 @@ const Booking = () => {
                                 >
                                     <div className="success-icon">✓</div>
                                     <h3>{t('booking.status.success')}</h3>
+                                    <p>{t('booking.status.success_desc')}</p>
                                     <button className="btn btn-outline" onClick={() => setStatus('idle')}>
-                                        Send Another Inquiry
+                                        {t('booking.status.send_another')}
                                     </button>
                                 </motion.div>
                             ) : (
-                                <form onSubmit={handleSubmit} className="premium-form">
+                                <form onSubmit={handleSubmit} className="premium-form smart-form">
+                                    {/* Common Personal Info */}
                                     <div className="form-row">
                                         <div className={`form-group ${errors.name ? 'error' : ''}`}>
                                             <input
@@ -124,51 +200,128 @@ const Booking = () => {
                                         </div>
                                     </div>
 
-                                    <div className="form-row">
-                                        <div className={`form-group ${errors.email ? 'error' : ''}`}>
-                                            <input
-                                                type="email"
-                                                name="email"
-                                                placeholder={t('booking.form.email')}
-                                                value={formData.email}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
-                                        <div className={`form-group ${errors.date ? 'error' : ''}`}>
-                                            <input
-                                                type="date"
-                                                name="date"
-                                                value={formData.date}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
+                                    <div className={`form-group ${errors.email ? 'error' : ''}`}>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            placeholder={t('booking.form.email')}
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                        />
                                     </div>
 
-                                    <div className="form-row">
-                                        <div className={`form-group ${errors.service ? 'error' : ''}`}>
-                                            <select name="service" value={formData.service} onChange={handleChange}>
-                                                <option value="" disabled>{t('booking.form.select_service')}</option>
-                                                <option value="SPA">SPA & Wellness</option>
-                                                <option value="Travel">Travel & Tourism</option>
-                                                <option value="Corporate">Corporate Services</option>
-                                            </select>
+                                    {/* Conditional Fields */}
+                                    {bookingType === 'spa' ? (
+                                        <div className="conditional-fields">
+                                            <div className="form-row">
+                                                <div className="form-group">
+                                                    <input type="text" value={t('booking.form.location_fixed')} disabled className="disabled-input" />
+                                                </div>
+                                                <div className={`form-group ${errors.spaCategory ? 'error' : ''}`}>
+                                                    <select name="spaCategory" value={formData.spaCategory} onChange={handleChange}>
+                                                        <option value="">{t('booking.form.select_category')}</option>
+                                                        <option value="SPA">{t('spa_menu.programs_title')}</option>
+                                                        <option value="Massage">{t('spa_menu.massages_title')}</option>
+                                                        <option value="Sauna & Steam">{t('spa_menu.sauna.title')}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            {formData.spaCategory && (
+                                                <div className={`form-group ${errors.spaProgram ? 'error' : ''}`}>
+                                                    <select name="spaProgram" value={formData.spaProgram} onChange={handleChange}>
+                                                        <option value="">{t('booking.form.select_program')}</option>
+                                                        {spaMenu[formData.spaCategory].map(progKey => (
+                                                            <option key={progKey} value={progKey}>
+                                                                {t(`booking.programs.${progKey}`)}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                            )}
+
+                                            <div className="form-row">
+                                                <div className={`form-group ${errors.date ? 'error' : ''}`}>
+                                                    <label className="input-label">{t('booking.form.date')}</label>
+                                                    <input type="date" name="date" value={formData.date} onChange={handleChange} />
+                                                </div>
+                                                <div className="form-group">
+                                                    <label className="input-label">{t('booking.form.select_time')}</label>
+                                                    <select name="timeSlot" value={formData.timeSlot} onChange={handleChange}>
+                                                        <option value="">{t('booking.form.select_service')}</option>
+                                                        {['09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '01:00 PM', '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM', '06:00 PM', '07:00 PM', '08:00 PM', '09:00 PM', '10:00 PM'].map(slot => {
+                                                            const localizedSlot = language === 'ar' 
+                                                                ? slot.replace('AM', 'صباحاً').replace('PM', 'مساءً')
+                                                                : slot;
+                                                            return (
+                                                                <option key={slot} value={slot}>{localizedSlot}</option>
+                                                            );
+                                                        })}
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="form-group">
-                                            <select name="location" value={formData.location} onChange={handleChange}>
-                                                <option value="" disabled>{t('booking.form.select_location')}</option>
-                                                <option value="Giftun Azur">Giftun Azur Hurghada</option>
-                                                <option value="Marriott">Marriott Hurghada</option>
-                                                <option value="Sky View">Sky View Hurghada</option>
-                                                <option value="Lemon & Soul">Lemon & Soul Hurghada</option>
-                                                <option value="Azal">Azal North Coast</option>
-                                                <option value="Other">Other / Custom Location</option>
-                                            </select>
+                                    ) : (
+                                        <div className="conditional-fields">
+                                            <div className={`form-group ${errors.hotel ? 'error' : ''}`}>
+                                                <select name="hotel" value={formData.hotel} onChange={handleChange}>
+                                                    <option value="">{t('booking.form.select_hotel')}</option>
+                                                    {hotels.map(h => (
+                                                        <option key={h.id} value={t(h.nameKey)} disabled={h.disabled}>
+                                                            {t(h.nameKey)} {h.disabled ? `(${language === 'en' ? 'Sold Out' : 'تم البيع'})` : ''}
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                            </div>
+
+                                            <div className="form-row">
+                                                <div className={`form-group ${errors.checkIn ? 'error' : ''}`}>
+                                                    <label className="input-label">{t('booking.form.check_in')}</label>
+                                                    <input type="date" name="checkIn" value={formData.checkIn} onChange={handleChange} />
+                                                </div>
+                                                <div className={`form-group ${errors.checkOut ? 'error' : ''}`}>
+                                                    <label className="input-label">{t('booking.form.check_out')}</label>
+                                                    <input type="date" name="checkOut" value={formData.checkOut} onChange={handleChange} />
+                                                </div>
+                                            </div>
+
+                                            <div className="form-row">
+                                                <div className="form-group">
+                                                    <select name="roomType" value={formData.roomType} onChange={handleChange}>
+                                                        <option value="">{t('booking.form.room_type')}</option>
+                                                        <option value="Single">{t('booking.room_types.single')}</option>
+                                                        <option value="Double">{t('booking.room_types.double')}</option>
+                                                        <option value="Triple">{t('booking.room_types.triple')}</option>
+                                                        <option value="Suite">{t('booking.room_types.suite')}</option>
+                                                    </select>
+                                                </div>
+                                                <div className="form-group guest-inputs">
+                                                    <div className="guest-col">
+                                                        <label>{t('booking.form.adults')}</label>
+                                                        <input type="number" name="adults" min="1" max="10" value={formData.adults} onChange={handleChange} />
+                                                    </div>
+                                                    <div className="guest-col">
+                                                        <label>{t('booking.form.children')}</label>
+                                                        <input type="number" name="children" min="0" max="10" value={formData.children} onChange={handleChange} />
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+                                    )}
+
+                                    <div className="form-group">
+                                        <textarea
+                                            name="notes"
+                                            placeholder={t('booking.form.message')}
+                                            value={formData.notes}
+                                            onChange={handleChange}
+                                            rows="3"
+                                        ></textarea>
                                     </div>
 
                                     <div className="form-actions">
                                         <button type="submit" className="btn btn-primary" disabled={status === 'loading'}>
-                                            {status === 'loading' ? 'Processing...' : t('booking.form.submit')}
+                                            {status === 'loading' ? t('booking.form.processing') : t('booking.form.submit')}
                                         </button>
                                         <button type="button" className="btn btn-whatsapp" onClick={handleWhatsApp}>
                                             <span className="wa-icon">📲</span> {t('booking.form.whatsapp')}

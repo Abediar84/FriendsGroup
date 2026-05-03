@@ -36,16 +36,19 @@ const CustomCursor = () => {
             }
         };
 
+        const handleLeave = () => setIsVisible(false);
+        const handleEnter = () => setIsVisible(true);
+
         window.addEventListener('mousemove', moveCursor);
         window.addEventListener('mouseover', handleHover);
-        window.addEventListener('mouseleave', () => setIsVisible(false));
-        window.addEventListener('mouseenter', () => setIsVisible(true));
+        window.addEventListener('mouseleave', handleLeave);
+        window.addEventListener('mouseenter', handleEnter);
 
         return () => {
             window.removeEventListener('mousemove', moveCursor);
             window.removeEventListener('mouseover', handleHover);
-            window.removeEventListener('mouseleave', () => setIsVisible(false));
-            window.removeEventListener('mouseenter', () => setIsVisible(true));
+            window.removeEventListener('mouseleave', handleLeave);
+            window.removeEventListener('mouseenter', handleEnter);
         };
     }, [cursorX, cursorY]);
 

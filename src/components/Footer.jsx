@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { motion } from 'framer-motion';
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, ExternalLink } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Linkedin } from 'lucide-react';
+import { BUSINESS_INFO } from '../config/constants';
 import logo from '../assets/logo.png';
 import './Footer.css';
 
@@ -11,9 +12,10 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     const socialLinks = [
-        { icon: <Facebook strokeWidth={1.5} />, url: 'https://facebook.com/Friendsgrp.AzurOneEleven', label: 'Facebook' },
-        { icon: <Instagram strokeWidth={1.5} />, url: 'https://instagram.com/Friendsgrp.AzurOneEleven', label: 'Instagram' },
-        { icon: <Twitter strokeWidth={1.5} />, url: 'https://twitter.com', label: 'Twitter' },
+        { icon: <Facebook strokeWidth={1.5} />, url: BUSINESS_INFO.SOCIAL.FACEBOOK, label: 'Facebook' },
+        { icon: <Instagram strokeWidth={1.5} />, url: BUSINESS_INFO.SOCIAL.INSTAGRAM, label: 'Instagram' },
+        { icon: <Twitter strokeWidth={1.5} />, url: BUSINESS_INFO.SOCIAL.TWITTER, label: 'Twitter' },
+        { icon: <Linkedin strokeWidth={1.5} />, url: BUSINESS_INFO.SOCIAL.LINKEDIN, label: 'LinkedIn' },
     ];
 
     const footerLinks = {
@@ -27,7 +29,6 @@ const Footer = () => {
             { name: t('services.spa.category'), url: '/#services' },
             { name: t('services.travel.category'), url: '/#services' },
             { name: t('spa_menu.title'), url: '/menu', isRoute: true },
-            { name: "Special Promotions", url: '/promotions', isRoute: true },
         ],
     };
 
@@ -51,6 +52,8 @@ const Footer = () => {
                                 <a
                                     key={i}
                                     href={social.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="social-icon"
                                     aria-label={social.label}
                                 >
@@ -108,15 +111,15 @@ const Footer = () => {
                             <ul className="footer-contact-list">
                                 <li>
                                     <MapPin className="contact-icon" />
-                                    <span>{t('contact.info.address_val')}</span>
+                                    <span>{BUSINESS_INFO.LOCATIONS.HURGHADA.NAME}</span>
                                 </li>
                                 <li>
                                     <Phone className="contact-icon" />
-                                    <span>{t('contact.info.phone_val')}</span>
+                                    <span>{BUSINESS_INFO.WHATSAPP}</span>
                                 </li>
                                 <li>
                                     <Mail className="contact-icon" />
-                                    <span>{t('contact.info.email_val')}</span>
+                                    <span>{BUSINESS_INFO.EMAILS.INFO}</span>
                                 </li>
                             </ul>
                         </motion.div>
@@ -127,7 +130,7 @@ const Footer = () => {
             <div className="footer-bottom">
                 <div className="container footer-bottom-container">
                     <p className="copyright">
-                        &copy; {currentYear} Friends Group. Everywhere Luxury Since 2003.
+                        &copy; {currentYear} Friends Group. Everywhere Luxury Since {BUSINESS_INFO.FOUNDED_YEAR}.
                     </p>
                     <div className="footer-legal">
                         <Link to="/roadmap">Roadmap</Link>

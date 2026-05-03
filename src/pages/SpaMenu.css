@@ -19,19 +19,20 @@
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   border-bottom: 1px solid var(--glass-border);
+  transition: all 0.4s var(--transition-studio);
 }
 
 .menu-nav-content {
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 1.5rem 2rem;
+  padding: 1rem 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .menu-logo-brand {
-  height: 60px;
+  height: 50px;
   display: flex;
   align-items: center;
 }
@@ -44,44 +45,60 @@
 
 .nav-actions {
   display: flex;
-  gap: 2rem;
+  gap: 15px;
   align-items: center;
 }
 
-.lang-toggle-btn {
-  background: none;
-  border: none;
+/* Unifying with Home Navbar */
+.lang-toggle {
+  background: transparent;
+  border: 1px solid var(--primary-gold-dim);
   color: var(--text-primary);
+  padding: 8px 18px;
+  border-radius: 0;
   cursor: pointer;
-  font-size: 0.9rem;
-  letter-spacing: 0.1em;
-  opacity: 0.7;
-  transition: opacity 0.3s;
-}
-
-.lang-toggle-btn:hover {
-  opacity: 1;
-}
-
-.visit-site-btn {
-  background: var(--primary-gold);
-  color: var(--white);
-  padding: 0.8rem 2rem;
-  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
   font-weight: 700;
-  font-size: 0.8rem;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  transition: var(--transition-slow);
 }
 
-.visit-site-btn:hover {
-  background: var(--primary-gold-dark);
-  transform: translateY(-5px);
-  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+.lang-toggle:hover {
+  background-color: var(--primary-gold);
+  border-color: var(--primary-gold);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--primary-gold-dim);
+  color: var(--text-primary);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  border-radius: 50%;
+}
+
+.theme-toggle:hover {
+  background-color: var(--primary-gold-dim);
+  color: var(--deep-base);
+  transform: translateY(-2px);
+}
+
+[data-theme='dark'] .theme-toggle:hover {
+  color: #FFFFFF;
 }
 
 /* Hero */
@@ -92,7 +109,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--soft-background);
+  background-color: var(--deep-base);
   padding: 0;
 }
 
@@ -120,9 +137,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbecee?auto=format&fit=crop&q=80');
   background-size: cover;
   background-position: center;
+  filter: brightness(0.7) contrast(1.1);
+  transform: scale(1.05);
 }
 
 .pane-overlay {
@@ -131,8 +149,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.4), var(--deep-base));
-  opacity: 0.8;
+  background: linear-gradient(to bottom, 
+    rgba(0,0,0,0.4) 0%, 
+    rgba(0,0,0,0.2) 40%, 
+    rgba(0,0,0,0.6) 100%);
   z-index: 4;
 }
 
@@ -142,8 +162,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at center, transparent 0%, var(--deep-base) 100%);
-  opacity: 0.4;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
   z-index: 5;
   pointer-events: none;
 }
@@ -151,38 +170,54 @@
 .hero-content {
   position: relative;
   z-index: 10;
-  max-width: 800px;
+  max-width: 1000px;
   text-align: center;
+  padding: 0 2rem;
 }
 
 .hero-eyebrow {
-  display: block;
+  display: inline-block;
   font-size: 0.9rem;
-  letter-spacing: 0.6em;
+  letter-spacing: 0.5em;
   color: var(--primary-gold);
   margin-bottom: 2rem;
   text-transform: uppercase;
   font-weight: 700;
+  position: relative;
+  padding-bottom: 10px;
 }
 
-.menu-hero h1 {
+.hero-eyebrow::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 1px;
+  background: var(--primary-gold);
+}
+
+.hero-title-main {
   font-family: var(--font-headings);
-  font-size: clamp(3.5rem, 10vw, 7rem);
-  line-height: 1.05;
-  margin-bottom: 2.5rem;
+  font-size: clamp(3.5rem, 10vw, 7.5rem);
+  line-height: 0.95;
+  margin-bottom: 3rem;
   font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  letter-spacing: -0.04em;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-.menu-hero p {
-  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-  opacity: 0.9;
-  font-weight: 400;
-  letter-spacing: 0.02em;
+.hero-description {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  opacity: 0.8;
+  font-weight: 300;
+  letter-spacing: 0.05em;
   color: var(--text-secondary);
-  max-width: 700px;
+  max-width: 600px;
   margin: 0 auto;
+  line-height: 1.6;
 }
 
 
@@ -249,26 +284,45 @@
 
 .programs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
 }
 
 .program-card {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
-  transition: var(--transition-slow);
+  transition: all 0.8s var(--transition-studio);
+  position: relative;
+  overflow: hidden;
+}
+
+.program-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.1), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.8s var(--transition-studio);
 }
 
 .program-card:hover {
-  transform: translateY(-20px);
-  border-color: var(--primary-gold);
-  background: var(--surface-container);
+  transform: translateY(-15px);
+  border-color: var(--primary-gold-dim);
+  background: var(--surface-container-high);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+}
+
+.program-card:hover::before {
+  opacity: 1;
 }
 
 .card-image-container {
   position: relative;
-  height: 400px;
+  height: 450px;
   overflow: hidden;
 }
 
@@ -276,7 +330,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 1s;
+  transition: transform 1.5s var(--transition-studio);
 }
 
 .program-card:hover .card-image-container img {
@@ -286,31 +340,43 @@
 .image-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, var(--surface-container), transparent);
+  background: linear-gradient(to top, var(--deep-base) 0%, transparent 60%);
+  opacity: 0.8;
 }
 
 .card-icon-box {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  bottom: 30px;
+  right: 30px;
   background: var(--primary-gold);
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--white);
+  color: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+  z-index: 2;
+  transition: transform 0.5s var(--transition-studio);
+}
+
+.program-card:hover .card-icon-box {
+  transform: scale(1.1) rotate(15deg);
 }
 
 .card-content {
-  padding: 2.5rem;
+  padding: 3rem;
+  position: relative;
+  z-index: 2;
 }
 
 .card-content h3 {
   font-family: var(--font-headings);
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin-bottom: 1.5rem;
   color: var(--primary-gold);
+  letter-spacing: -0.01em;
 }
 
 .program-items {
@@ -321,23 +387,29 @@
 .program-items li {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.8rem;
+  gap: 1.2rem;
+  margin-bottom: 1rem;
   font-size: 1rem;
-  opacity: 0.8;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.program-card:hover li {
+  opacity: 1;
 }
 
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   background: var(--primary-gold);
+  border-radius: 50%;
   flex-shrink: 0;
 }
 
 /* Massage Section */
 .massages-section {
   position: relative;
-  padding: var(--section-padding);
+  padding: 180px 0;
   background: var(--deep-base);
   overflow: hidden;
 }
@@ -347,108 +419,91 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 20vw;
+  font-size: 25vw;
   font-weight: 900;
-  color: rgba(255, 255, 255, 0.02);
+  color: rgba(212, 175, 55, 0.03);
   z-index: 1;
   pointer-events: none;
   font-family: var(--font-headings);
-}
-
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  position: relative;
-  z-index: 2;
+  letter-spacing: -0.05em;
+  white-space: nowrap;
 }
 
 .massages-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 100px;
   align-items: center;
 }
 
 .text-side h2 {
   font-family: var(--font-headings);
-  font-size: 3.5rem;
-  margin-bottom: 2rem;
+  font-size: 4.5rem;
+  line-height: 1;
+  margin-bottom: 2.5rem;
+  color: #FFFFFF;
 }
 
 .massages-intro {
-  font-size: 1.2rem;
-  opacity: 0.7;
-  margin-bottom: 3rem;
-  max-width: 500px;
-  line-height: 1.6;
+  font-size: 1.25rem;
+  opacity: 0.6;
+  margin-bottom: 4rem;
+  max-width: 550px;
+  line-height: 1.7;
+  font-weight: 300;
 }
 
 .massage-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-bottom: 40px;
+  gap: 30px;
 }
 
 .massage-item {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  padding: 2rem;
+  padding: 2.5rem;
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
-  border-left: 3px solid var(--primary-gold);
-  transition: var(--transition-slow);
+  border: 1px solid var(--glass-border);
+  transition: all 0.6s var(--transition-studio);
+  position: relative;
+}
+
+.massage-item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-gold);
+  transition: width 0.6s var(--transition-studio);
 }
 
 .massage-item:hover {
-  background: var(--surface-container);
-  transform: translateX(10px);
+  background: var(--surface-container-high);
+  transform: translateY(-5px);
+  border-color: var(--primary-gold-dim);
 }
 
-.rtl .massage-item {
-  border-left: none;
-  border-right: 2px solid var(--primary-gold);
+.massage-item:hover::after {
+  width: 100%;
 }
 
 .massage-number {
   font-family: var(--font-headings);
   color: var(--primary-gold);
-  font-size: 0.9rem;
-  letter-spacing: 0.1em;
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  opacity: 0.5;
 }
 
 .massage-name {
   font-size: 1.1rem;
   font-weight: 500;
-}
-
-.booking-cta-box {
-  margin-top: 50px;
-  padding-top: 30px;
-  border-top: 1px solid rgba(212, 175, 55, 0.1);
-}
-
-.booking-cta-box p {
-  margin-bottom: 1.5rem;
-  opacity: 0.6;
-}
-
-.cta-btn {
-  display: inline-block;
-  padding: 1rem 2.5rem;
-  background: transparent;
-  border: 1px solid var(--primary-gold);
-  color: var(--primary-gold);
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s;
-}
-
-.cta-btn:hover {
-  background: var(--primary-gold);
-  color: var(--white);
+  letter-spacing: 0.02em;
 }
 
 .image-side {
@@ -457,114 +512,99 @@
 
 .massage-image-frame {
   position: relative;
-  padding: 20px;
+  z-index: 2;
 }
 
 .massage-image-frame img {
   width: 100%;
-  height: 600px;
+  height: 700px;
   object-fit: cover;
+  filter: sepia(0.2) contrast(1.1);
+  box-shadow: 0 50px 100px rgba(0,0,0,0.5);
 }
 
 .frame-border {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 150px;
-  height: 150px;
-  border-top: 4px solid var(--primary-gold);
-  border-right: 4px solid var(--primary-gold);
-}
-
-.rtl .frame-border {
-  right: auto;
-  left: 0;
-  border-right: none;
-  border-left: 4px solid var(--primary-gold);
+  top: -20px;
+  right: -20px;
+  width: 200px;
+  height: 200px;
+  border-top: 2px solid var(--primary-gold);
+  border-right: 2px solid var(--primary-gold);
+  z-index: 1;
 }
 
 /* Sauna Section */
 .sauna-section {
-  padding: var(--section-padding) 0;
+  padding: 150px 0;
   background: var(--soft-background);
 }
 
 .sauna-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
   align-items: center;
   background: var(--surface-container);
-  padding: 4rem;
-  border: 1px solid var(--glass-border);
-  margin-bottom: 60px;
+  padding: 6rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.sauna-icon-box {
-  color: var(--primary-gold);
-  margin-bottom: 2rem;
+.sauna-grid::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.03));
 }
 
 .sauna-info h2 {
   font-family: var(--font-headings);
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-}
-
-.sauna-info p {
-  opacity: 0.7;
-  font-size: 1.1rem;
+  font-size: 3.5rem;
+  margin-bottom: 2rem;
+  line-height: 1.1;
 }
 
 .sauna-packages {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
 .sauna-pkg-card {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  padding: 1.5rem;
+  gap: 2rem;
+  padding: 2.5rem;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  transition: var(--transition-slow);
+  transition: all 0.5s var(--transition-studio);
 }
 
 .sauna-pkg-card:hover {
   border-color: var(--primary-gold);
-  transform: translateX(10px);
-}
-
-.rtl .sauna-pkg-card:hover {
-  transform: translateX(-10px);
-}
-
-.pkg-dot {
-  width: 10px;
-  height: 10px;
-  background: var(--primary-gold);
-  border-radius: 50%;
-}
-
-.pkg-name {
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  background: var(--surface-container-high);
+  padding-left: 3rem;
 }
 
 .booking-cta-box-horizontal {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 3rem 4rem;
-  background: linear-gradient(90deg, var(--surface-container), var(--deep-base));
+  padding: 4rem 6rem;
+  margin-top: 80px;
+  background: var(--deep-base);
   border: 1px solid var(--glass-border);
+  position: relative;
 }
 
 .booking-cta-box-horizontal h3 {
   font-family: var(--font-headings);
-  font-size: 2rem;
+  font-size: 2.5rem;
+  color: #FFFFFF;
 }
 
 @media (max-width: 768px) {
@@ -687,13 +727,20 @@
   }
   
   .nav-actions {
-    gap: 1rem;
+    gap: 0.8rem;
+  }
+
+  .theme-toggle-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .lang-toggle-btn, .visit-site-btn {
+    padding: 6px 12px;
+    font-size: 0.65rem;
   }
   
-  .visit-site-btn {
-    padding: 0.6rem 1rem;
-    font-size: 0.8rem;
-  }
+
   
   .logo-text {
     font-size: 1.1rem;
@@ -710,10 +757,34 @@
   .massage-list {
     grid-template-columns: 1fr;
   }
+
+  .massage-image-frame img {
+    height: 350px;
+  }
+
+  .frame-border {
+    width: 80px;
+    height: 80px;
+  }
   
   .footer-bottom {
     flex-direction: column;
     gap: 30px;
     text-align: center;
+  }
+}
+
+/* Touch devices: disable hover-translateX that causes sticky states */
+@media (hover: none) {
+  .massage-item:hover {
+    transform: none;
+  }
+
+  .sauna-pkg-card:hover {
+    transform: none;
+  }
+
+  .program-card:hover {
+    transform: none;
   }
 }

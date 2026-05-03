@@ -29,18 +29,18 @@
 /* Asymmetrical Overlap Strategy */
 .travel-pane {
     left: 0;
-    width: 55%;
+    width: 60%;
     z-index: 2;
-    mask-image: linear-gradient(to right, black 80%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+    mask-image: linear-gradient(to right, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 70%, transparent 100%);
 }
 
 .spa-pane {
     right: 0;
-    width: 55%;
+    width: 60%;
     z-index: 3;
-    mask-image: linear-gradient(to left, black 80%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to left, black 80%, transparent 100%);
+    mask-image: linear-gradient(to left, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to left, black 70%, transparent 100%);
 }
 
 .pane-image {
@@ -66,11 +66,11 @@
 }
 
 .travel-pane .pane-image {
-    background-image: url('../assets/images/travel_hero.png');
+    background-image: url('../assets/images/hero/travel_hero.png');
 }
 
 .spa-pane .pane-image {
-    background-image: url('../assets/images/spa_hero.png');
+    background-image: url('../assets/images/hero/spa_hero.png');
 }
 
 /* Texture Overlay from Stitch: Silk/Water feel */
@@ -259,7 +259,7 @@
 
     .hero-btns {
         flex-direction: column;
-        gap: 15px;
+        gap: 20px;
         width: 100%;
         padding: 0 20px;
     }
@@ -270,5 +270,17 @@
 
     .scroll-indicator {
         display: none; /* Prevent overlap with vertical buttons on mobile */
+    }
+}
+
+/* Touch devices: disable hover effects that cause sticky states */
+@media (hover: none) {
+    .btn-primary:hover {
+        transform: none;
+        letter-spacing: 3px;
+    }
+
+    .btn-outline:hover {
+        transform: none;
     }
 }

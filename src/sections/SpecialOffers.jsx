@@ -1,20 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
-import { Calendar, User, Users, Users2, Waves, Sun, Heart, CheckCircle2 } from 'lucide-react';
+import { useLanguage } from '../hooks/useLanguage';
+import { Calendar, User, Users, Users2, Sun, CheckCircle2 } from 'lucide-react';
+import { BUSINESS_INFO } from '../config/constants';
+import OptimizedImage from '../components/common/OptimizedImage';
+import marriottImg from '../assets/images/offers/marriott.png';
+import skyviewImg from '../assets/images/offers/skyview.png';
+import lemonsoulImg from '../assets/images/offers/lemonsoul.png';
+
 import './SpecialOffers.css';
 
 const SpecialOffers = () => {
-    const { t, i18n } = useTranslation();
-    const isRTL = i18n.language === 'ar';
-
-    // Helper to resolve images robustly across dev/prod
-    const resolveOfferImage = (imgName) => {
-      const base = import.meta.env.BASE_URL || "/";
-      const cleanBase = base.endsWith("/") ? base : `${base}/`;
-      const safeName = imgName.replace(/&/g, '%26');
-      return `${cleanBase}offers/${safeName}`;
-    };
+    const { t, language } = useLanguage();
+    const isRTL = language === 'ar';
 
     const offers = [
         {
@@ -22,7 +20,7 @@ const SpecialOffers = () => {
             hotel: "Hurghada Marriott Red Sea Resort",
             type: "Hard All-Inclusive",
             period: "25/04 - 26/05/2026",
-            image: resolveOfferImage("Hurghada_Marriott_Red_Sea_Resort.png"),
+            image: marriottImg,
             prices: [
                 { label: "Single", price: 8200, icon: <User size={18} /> },
                 { label: "Double", price: 8800, icon: <Users size={18} /> },
@@ -42,7 +40,7 @@ const SpecialOffers = () => {
             hotel: "Sky View Hurghada",
             type: "Full Board",
             period: "25/04 - 26/05/2026",
-            image: resolveOfferImage("Sky_View_Hurghada.png"),
+            image: skyviewImg,
             prices: [
                 { label: "Single", price: 4200, icon: <User size={18} /> },
                 { label: "Double", price: 4800, icon: <Users size={18} /> }
@@ -62,7 +60,7 @@ const SpecialOffers = () => {
                 { dates: "27/05 - 01/06", s: 4200, d: 5500 },
                 { dates: "01/06 - 30/06", s: 4050, d: 5300 }
             ],
-            image: resolveOfferImage("Lemon&Soul_Makadi_Garden.png"),
+            image: lemonsoulImg,
             kids: [
                 "1st Child (up to 11.99): FREE",
                 "Max Capacity: 2+1 or 1+2"
@@ -122,7 +120,11 @@ const SpecialOffers = () => {
                         variants={itemVariants}
                     >
                         <div className="offer-image-container">
-                            <img src={offer.image} alt={offer.hotel} className="offer-image" />
+                            <OptimizedImage 
+                                src={offer.image} 
+                                alt={offer.hotel} 
+                                className="offer-image" 
+                            />
                             <div className="offer-overlay"></div>
                             <div className="offer-badge">{offer.badge}</div>
                             <div className="offer-type">
@@ -200,10 +202,11 @@ const SpecialOffers = () => {
                                 className="book-btn"
                                 onClick={() => {
                                     const msg = `Interested in ${offer.hotel} Summer 2026 Offer`;
-                                    window.open(`https://wa.me/201207776033?text=${encodeURIComponent(msg)}`, '_blank');
+                                    window.open(`https://wa.me/${BUSINESS_INFO.contact.whatsapp_clean}?text=${encodeURIComponent(msg)}`, '_blank');
                                 }}
                             >
-                                {t('offers.book_now', 'Secure This Offer')}
+                                <span>{t('offers.book_now', 'Secure This Offer')}</span>
+                                <FaWhatsapp />
                             </button>
                         </div>
                     </motion.div>

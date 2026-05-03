@@ -135,7 +135,7 @@
     color: var(--text-primary);
     font-size: 1rem;
     line-height: 1.8;
-    margin-bottom: 40px;
+    margin-bottom: 0;
     flex-grow: 1;
     opacity: 0.9;
 }
@@ -386,7 +386,7 @@
 }
 
 .hotel-info {
-    padding: 35px 40px 40px;
+    padding: 35px 40px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -511,4 +511,32 @@
 [dir="rtl"] .btn-digital-menu svg {
     transform: rotate(180deg);
 }
-
+
+/* Very small screens: reduce section title minimum */
+@media (max-width: 640px) {
+    .section-title {
+        font-size: clamp(1.8rem, 7vw, 3rem);
+    }
+    
+    .section-header {
+        margin-bottom: 60px;
+    }
+
+    .btn-digital-menu {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Touch devices: disable hover transforms that cause sticky states */
+@media (hover: none) {
+    .service-card.interactive:hover {
+        transform: none;
+    }
+
+    .hotel-card:hover {
+        transform: none;
+    }
+}
