@@ -43,6 +43,7 @@ const INITIAL_OFFERS = [
     ],
     active: true,
     badge: "LUXURY CHOICE",
+    validFrom: "2026-04-25",
     validTo: "2026-05-26"
   },
   {
@@ -60,6 +61,7 @@ const INITIAL_OFFERS = [
     ],
     active: true,
     badge: "BEST VALUE",
+    validFrom: "2026-04-25",
     validTo: "2026-05-26"
   },
   {
@@ -81,6 +83,7 @@ const INITIAL_OFFERS = [
     ],
     active: true,
     badge: "VIBRANT STAY",
+    validFrom: "2026-04-20",
     validTo: "2026-06-30",
     constraints: { maxPax: 3, maxAdults: 2, maxChildren: 2 }
   }
@@ -345,8 +348,8 @@ const InquiryPanel = ({ offer, partnerName, setPartnerName, onSend, onClose }) =
                                                 <input 
                                                     type="date" 
                                                     value={room.checkIn}
-                                                    min={new Date().toISOString().split('T')[0]}
-                                                    max={offer.period.split(" to ")[1]}
+                                                    min={offer.validFrom || new Date().toISOString().split('T')[0]}
+                                                    max={offer.validTo}
                                                     onChange={(e) => updateRoomRow(room.id, 'checkIn', e.target.value)}
                                                 />
                                             </div>
@@ -361,7 +364,7 @@ const InquiryPanel = ({ offer, partnerName, setPartnerName, onSend, onClose }) =
                                                     type="date" 
                                                     value={room.checkOut}
                                                     min={room.checkIn}
-                                                    max={offer.period.split(" to ")[1]}
+                                                    max={offer.validTo}
                                                     onChange={(e) => updateRoomRow(room.id, 'checkOut', e.target.value)}
                                                 />
                                             </div>
@@ -466,7 +469,7 @@ const OfferCard = ({ offer, onInquire, isActive, partnerName, setPartnerName, on
             <div className="promo-details-grid">
                 <div className="detail-item">
                     <Calendar size={14} className="gold" />
-                    <span>{offer.period}</span>
+                    <span>{offer.validFrom} - {offer.validTo}</span>
                 </div>
                 <div className="detail-item">
                     <ShieldCheck size={14} className="gold" />
@@ -499,7 +502,10 @@ const OfferCard = ({ offer, onInquire, isActive, partnerName, setPartnerName, on
             <div className="promo-footer-v2">
                 <div className={`promo-validity-tag ${urgent ? 'urgent' : ''}`}>
                     <Clock size={12} />
-                    <span>{urgent ? t('promo_engine.urgent') : `${t('promo_engine.days_left')}: ${left}`}</span>
+                    <div className="validity-dates-info">
+                        <span className="v-label">{t('promo_engine.valid_from')}: {offer.validFrom}</span>
+                        <span className="v-label">{t('promo_engine.valid_to')}: {offer.validTo}</span>
+                    </div>
                 </div>
 
                 {!isActive && (
@@ -570,14 +576,20 @@ const OfferForm = ({ offer, onSave, onCancel }) => {
     type: "Hard All-Inclusive",
     title: "",
     period: "2026-04-25 to 2026-05-26",
-    image: "",
+    image: resolveOfferImage(HOTELS[0].img),
     prices: { s: 0, d: 0, t: 0 },
     kids: "",
     addons: [],
     active: true,
     badge: "NEW OFFER",
+    validFrom: new Date().toISOString().split('T')[0],
     validTo: ""
   });
+
+  // Reset form when offer prop changes (e.g. from one edit to another)
+  useEffect(() => {
+    if (offer) setForm(offer);
+  }, [offer]);
 
   const addAddon = () => {
     const newAddon = { id: Date.now(), name: "New Addon", price: 0, type: "per_night" };
@@ -614,12 +626,17 @@ const OfferForm = ({ offer, onSave, onCancel }) => {
         <div className="form-scrollable">
             <div className="form-grid">
                 <div className="form-group full">
-                    <label>{language === 'en' ? 'Destination Hotel' : 'الفندق الوجهة'}</label>
+                    <label>{t('promo_engine.dest_hotel')}</label>
                     <select 
                         value={form.hotel} 
                         onChange={e => {
                             const h = HOTELS.find(x => x.id === e.target.value);
-                            setForm({...form, hotel: e.target.value, hotelName: h.name});
+                            setForm({
+                                ...form, 
+                                hotel: e.target.value, 
+                                hotelName: h.name,
+                                image: resolveOfferImage(h.img)
+                            });
                         }}
                     >
                         {HOTELS.map(h => <option key={h.id} value={h.id}>{h.name}</option>)}
@@ -627,28 +644,54 @@ const OfferForm = ({ offer, onSave, onCancel }) => {
                 </div>
 
                 <div className="form-group">
-                    <label>{language === 'en' ? 'Experience Title' : 'عنوان العرض'}</label>
+                    <label>{t('promo_engine.exp_title')}</label>
                     <input type="text" value={form.title} onChange={e => setForm({...form, title: e.target.value})} />
                 </div>
 
                 <div className="form-group">
-                    <label>{language === 'en' ? 'Operational Dates' : 'تواريخ التشغيل'}</label>
+                    <label>{t('promo_engine.op_dates')}</label>
                     <input type="text" value={form.period} onChange={e => setForm({...form, period: e.target.value})} />
                 </div>
 
+                <div className="form-group">
+                    <label>{language === 'en' ? 'Board Type' : 'نوع الإقامة'}</label>
+                    <select value={form.type} onChange={e => setForm({...form, type: e.target.value})}>
+                        <option value="Hard All-Inclusive">Hard All-Inclusive</option>
+                        <option value="Soft All-Inclusive">Soft All-Inclusive</option>
+                        <option value="Full Board">Full Board</option>
+                        <option value="Half Board">Half Board</option>
+                        <option value="Bed & Breakfast">Bed & Breakfast</option>
+                    </select>
+                </div>
+
+                <div className="form-group">
+                    <label>{t('promo_engine.badge_label')}</label>
+                    <input type="text" value={form.badge || ""} onChange={e => setForm({...form, badge: e.target.value})} placeholder="e.g. LUXURY CHOICE" />
+                </div>
+
+                <div className="form-group">
+                    <label>{t('promo_engine.active_status')}</label>
+                    <div className="toggle-field" onClick={() => setForm({...form, active: !form.active})}>
+                        <div className={`toggle-track ${form.active ? 'on' : ''}`}>
+                            <div className="toggle-knob"></div>
+                        </div>
+                        <span>{t('promo_engine.active_label')}</span>
+                    </div>
+                </div>
+
                 <div className="form-group pricing-inputs full">
-                    <label>{language === 'en' ? 'Rates (SGL / DBL / TRP)' : 'الأسعار (فردي / مزدوج / ثلاثي)'}</label>
+                    <label>{t('promo_engine.rates_pax')}</label>
                     <div className="rate-fields">
-                        <div className="r-field"><span className="r-tag">S</span><input type="number" value={form.prices?.s || ""} onChange={e => setForm({...form, prices: {...form.prices, s: parseInt(e.target.value)}})} /></div>
-                        <div className="r-field"><span className="r-tag">D</span><input type="number" value={form.prices?.d || ""} onChange={e => setForm({...form, prices: {...form.prices, d: parseInt(e.target.value)}})} /></div>
-                        <div className="r-field"><span className="r-tag">T</span><input type="number" value={form.prices?.t || ""} onChange={e => setForm({...form, prices: {...form.prices, t: parseInt(e.target.value)}})} /></div>
+                        <div className="r-field"><span className="r-tag">S</span><input type="number" value={form.prices?.s || ""} onChange={e => setForm({...form, prices: {...form.prices, s: parseInt(e.target.value) || 0}})} /></div>
+                        <div className="r-field"><span className="r-tag">D</span><input type="number" value={form.prices?.d || ""} onChange={e => setForm({...form, prices: {...form.prices, d: parseInt(e.target.value) || 0}})} /></div>
+                        <div className="r-field"><span className="r-tag">T</span><input type="number" value={form.prices?.t || ""} onChange={e => setForm({...form, prices: {...form.prices, t: parseInt(e.target.value) || 0}})} /></div>
                     </div>
                 </div>
 
                 <div className="form-group full">
                     <div className="addons-header-form">
                         <label>{t('promo_engine.enhancements')}</label>
-                        <button type="button" className="add-mini-btn" onClick={addAddon}><Plus size={14}/> {language === 'en' ? 'Add Addon' : 'إضافة ملحق'}</button>
+                        <button type="button" className="add-mini-btn" onClick={addAddon}><Plus size={14}/> {t('promo_engine.add_addon')}</button>
                     </div>
                     <div className="addons-edit-list">
                         {form.addons?.map(a => (
@@ -668,13 +711,28 @@ const OfferForm = ({ offer, onSave, onCancel }) => {
                 </div>
 
                 <div className="form-group">
-                    <label>{language === 'en' ? 'Policy Highlight' : 'سياسة الأطفال'}</label>
+                    <label>{t('promo_engine.policy_kids')}</label>
                     <input type="text" value={form.kids} onChange={e => setForm({...form, kids: e.target.value})} />
                 </div>
 
                 <div className="form-group">
-                    <label>{t('promo_engine.valid_until')}</label>
+                    <label>{t('promo_engine.valid_from')}</label>
+                    <input type="date" value={form.validFrom} onChange={e => setForm({...form, validFrom: e.target.value})} />
+                </div>
+
+                <div className="form-group">
+                    <label>{t('promo_engine.valid_to')}</label>
                     <input type="date" value={form.validTo} onChange={e => setForm({...form, validTo: e.target.value})} />
+                </div>
+
+                <div className="form-group">
+                    <label>{t('promo_engine.max_adults')}</label>
+                    <input type="number" value={form.constraints?.maxAdults || 2} onChange={e => setForm({...form, constraints: {...(form.constraints || {}), maxAdults: parseInt(e.target.value)}})} />
+                </div>
+
+                <div className="form-group">
+                    <label>{t('promo_engine.max_kids')}</label>
+                    <input type="number" value={form.constraints?.maxChildren || 2} onChange={e => setForm({...form, constraints: {...(form.constraints || {}), maxChildren: parseInt(e.target.value)}})} />
                 </div>
             </div>
         </div>
@@ -722,8 +780,12 @@ export default function PromotionEngine() {
   }, [partnerName]);
 
   const saveOffer = (offer) => {
-    if (isAdding) setOffers([...offers, offer]);
-    else setOffers(offers.map(o => o.id === offer.id ? offer : o));
+    const syncedOffer = { 
+      ...offer, 
+      period: `${offer.validFrom} to ${offer.validTo}` 
+    };
+    if (isAdding) setOffers([...offers, syncedOffer]);
+    else setOffers(offers.map(o => o.id === offer.id ? syncedOffer : o));
     setEditing(null); setIsAdding(false);
   };
 
@@ -911,10 +973,18 @@ ${roomLines.join("\n\n")}
                   <p>{t('promo_engine.admin_subtitle')}</p>
               </div>
               <div className="admin-master-actions">
+                  <button className="preview-btn-pro" onClick={() => setView("public")}>
+                    <Eye size={18} />
+                    <span>{t('promo_engine.preview_site')}</span>
+                  </button>
                   <button className="reset-btn" onClick={resetToDefaults}>{t('promo_engine.reset')}</button>
                   <button className="add-offer-btn-pro" onClick={() => setIsAdding(true)}>
                     <Plus size={18} />
                     <span>{t('promo_engine.add_new')}</span>
+                  </button>
+                  <button className="exit-btn-pro" onClick={() => { setIsLoggedIn(false); setView("public"); }}>
+                    <LogIn size={18} />
+                    <span>{t('promo_engine.exit_admin')}</span>
                   </button>
               </div>
             </header>
@@ -923,10 +993,16 @@ ${roomLines.join("\n\n")}
               {offers.map(offer => (
                 <motion.div key={offer.id} className="admin-row-item" layout>
                   <div className="row-main">
-                    <img src={offer.image} alt="" className="row-thumb" />
+                    <div className="row-img-container">
+                        <img src={offer.image} alt="" className="row-thumb" />
+                        {!offer.active && <div className="row-inactive-overlay">{t('promo_engine.active_status')} OFF</div>}
+                    </div>
                     <div className="row-details">
-                      <div className="row-hotel">{offer.hotelName}</div>
-                      <div className="row-sub">{offer.title} • {offer.period}</div>
+                      <div className="row-hotel">
+                        {offer.hotelName}
+                        {offer.badge && <span className="row-badge-mini">{offer.badge}</span>}
+                      </div>
+                      <div className="row-sub">{offer.title} • {offer.period} • {offer.type}</div>
                     </div>
                   </div>
                   <div className="row-stats-quick">
@@ -958,6 +1034,7 @@ ${roomLines.join("\n\n")}
       <AnimatePresence>
         {(isAdding || editing) && (
           <OfferForm 
+            key={editing?.id || "new-offer"}
             offer={editing} 
             onSave={saveOffer} 
             onCancel={() => {setEditing(null); setIsAdding(false);}} 
