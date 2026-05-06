@@ -1,0 +1,16 @@
+{
+  "name": "Friends Group | Luxury SPA & Travel",
+  "short_name": "Friends Group",
+  "description": "Premium luxury SPA treatments and bespoke travel services worldwide.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0b0a",
+  "theme_color": "#c6a664",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
