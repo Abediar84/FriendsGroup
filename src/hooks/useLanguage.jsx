@@ -30,10 +30,15 @@ export const LanguageProvider = ({ children }) => {
             }
             return key;
         }
+        if (typeof value !== 'string') {
+            return value;
+        }
         if (options && typeof options === 'object') {
             let valStr = String(value);
             for (const [optKey, optVal] of Object.entries(options)) {
-                valStr = valStr.replace(new RegExp(`{{\\s*${optKey}\\s*}}`, 'g'), optVal);
+                if (optKey !== 'defaultValue' && optKey !== 'returnObjects') {
+                    valStr = valStr.replace(new RegExp(`{{\\s*${optKey}\\s*}}`, 'g'), optVal);
+                }
             }
             return valStr;
         }
