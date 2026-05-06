@@ -28,7 +28,7 @@ import './SpaMenu.css';
 import logo from '../assets/logo.png';
 
 // Import images
-import spaMenuHero from '../assets/images/hero/spa_menu_hero_elite.png';
+import spaMenuHero from '../assets/images/hero/menu_hero_new.png';
 import redSeaImg from '../assets/images/programs/red_sea_spa.png';
 import paradiseImg from '../assets/images/programs/paradise_spa.png';
 import hammamImg from '../assets/images/programs/egyptian_hammam.png';
