@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import ErrorBoundary from './components/ErrorBoundary';
 import LoadingScreen from './components/LoadingScreen';
@@ -26,6 +26,7 @@ function App() {
             <Route path="/promotions" element={<PromotionEngine />} />
             <Route path="/menu" element={<SpaMenu />} />
             <Route path="/roadmap" element={<Roadmap />} />
+            <Route path="/programs/*" element={<Navigate to="/menu" replace />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

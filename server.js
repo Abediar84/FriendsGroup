@@ -56,6 +56,11 @@ app.post('/api/send-email', async (req, res) => {
 // Serve static files from the 'dist' directory
 app.use(express.static(path.join(__dirname, 'dist')));
 
+// 301 Permanent Redirect for legacy external links
+app.use('/programs', (req, res) => {
+    res.redirect(301, '/menu');
+});
+
 // Handle SPA routing - deliver index.html for any unknown routes
 app.use((req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
