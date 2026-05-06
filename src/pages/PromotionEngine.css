@@ -312,6 +312,50 @@
     margin-bottom: 12px;
 }
 
+.promo-badges-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.promo-badge-v2 {
+    background: rgba(198, 166, 100, 0.12);
+    color: var(--primary-gold);
+    font-size: 10px;
+    font-weight: 800;
+    padding: 6px 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid rgba(198, 166, 100, 0.4);
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.promo-type-v2 {
+    background: var(--bg-secondary);
+    color: var(--text-dim);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 6px 14px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid var(--border-glass);
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.promo-badge-v2:hover,
+.promo-type-v2:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
 .promo-hotel {
     font-family: var(--font-headings);
     font-size: 28px;

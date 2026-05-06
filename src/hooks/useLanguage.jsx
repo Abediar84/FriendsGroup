@@ -15,13 +15,29 @@ export const LanguageProvider = ({ children }) => {
         localStorage.setItem('lang', language);
     }, [language]);
 
-    const t = (key) => {
+    const t = (key, options) => {
         const keys = key.split('.');
         let value = translations[language];
         for (const k of keys) {
             value = value?.[k];
         }
-        return value || key;
+        if (value === undefined || value === null) {
+            if (options && typeof options === 'object' && options.defaultValue !== undefined) {
+                return options.defaultValue;
+            }
+            if (typeof options === 'string') {
+                return options;
+            }
+            return key;
+        }
+        if (options && typeof options === 'object') {
+            let valStr = String(value);
+            for (const [optKey, optVal] of Object.entries(options)) {
+                valStr = valStr.replace(new RegExp(`{{\\s*${optKey}\\s*}}`, 'g'), optVal);
+            }
+            return valStr;
+        }
+        return value;
     };
 
     const toggleLanguage = () => {

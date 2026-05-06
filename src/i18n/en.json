@@ -418,8 +418,10 @@
         "badge_summer_2026_exclusive": "Summer 2026 Exclusive",
         "badge_sky_high_serenity": "Sky High Serenity",
         "badge_vibrant_summer_escape": "Vibrant Summer Escape",
+        "badge_eid_offer": "EID OFFER",
         "type_hard_all-inclusive": "Hard All-Inclusive",
         "type_full_board": "Full Board",
+        "type_soft_all-inclusive": "Soft All-Inclusive",
         "exit_admin": "Exit Admin",
         "operator": "Operator"
     }
