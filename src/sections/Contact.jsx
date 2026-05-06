@@ -14,6 +14,19 @@ const Contact = () => {
         message: ''
     });
 
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const subject = formData.subject || 'New Contact Inquiry';
+        const body = `Name: ${formData.name}\n` +
+                     `Email: ${formData.email}\n\n` +
+                     `Message:\n${formData.message}`;
+        window.location.href = `mailto:info@friendsgrp.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    };
+
     const infoItems = [
         { key: 'address', icon: <MapPin className="w-6 h-6" /> },
         { key: 'phone', icon: <Phone className="w-6 h-6" /> },
@@ -76,18 +89,18 @@ const Contact = () => {
                         whileInView="show"
                         viewport={{ once: true }}
                     >
-                        <form className="structured-form">
+                        <form className="structured-form" onSubmit={handleSubmit}>
                             <div className="form-group">
-                                <input type="text" placeholder={t('booking.form.name')} />
+                                <input type="text" name="name" placeholder={t('booking.form.name')} value={formData.name} onChange={handleChange} required />
                             </div>
                             <div className="form-group">
-                                <input type="email" placeholder={t('booking.form.email')} />
+                                <input type="email" name="email" placeholder={t('booking.form.email')} value={formData.email} onChange={handleChange} required />
                             </div>
                             <div className="form-group">
-                                <input type="text" placeholder="Subject" />
+                                <input type="text" name="subject" placeholder="Subject" value={formData.subject} onChange={handleChange} />
                             </div>
                             <div className="form-group">
-                                <textarea placeholder={t('booking.form.message')} rows="5"></textarea>
+                                <textarea name="message" placeholder={t('booking.form.message')} rows="5" value={formData.message} onChange={handleChange} required></textarea>
                             </div>
                             <button type="submit" className="btn btn-primary full-width">
                                 {t('booking.form.submit')}

@@ -78,9 +78,40 @@ const Booking = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validate()) return;
-        setStatus('loading');
-        // Simulate API call
-        setTimeout(() => setStatus('success'), 1500);
+        
+        let details = '';
+        if (bookingType === 'spa') {
+            const categoryLabel = formData.spaCategory === 'SPA' ? t('spa_menu.programs_title') 
+                                : formData.spaCategory === 'Massage' ? t('spa_menu.massages_title') 
+                                : t('spa_menu.sauna.title');
+            
+            details = `Service: SPA & Massage\n` +
+                      `Location: Azur One Eleven\n` +
+                      `Category: ${categoryLabel}\n` +
+                      `Program: ${t(`booking.programs.${formData.spaProgram}`)}\n` +
+                      `Date: ${formData.date}\n` +
+                      `Time: ${formData.timeSlot}`;
+        } else {
+            details = `Service: Hotel Reservation\n` +
+                      `Hotel: ${formData.hotel}\n` +
+                      `Check-in: ${formData.checkIn}\n` +
+                      `Check-out: ${formData.checkOut}\n` +
+                      `Room: ${t(`booking.room_types.${formData.roomType.toLowerCase()}`)}\n` +
+                      `Guests: ${formData.adults} Adults, ${formData.children} Children`;
+        }
+
+        const subject = `New Booking Inquiry - ${formData.name}`;
+        const body = `New Booking Inquiry\n\n` +
+            `Name: ${formData.name}\n` +
+            `Phone: ${formData.phone}\n` +
+            `Email: ${formData.email}\n` +
+            `${details}\n\n` +
+            `Notes: ${formData.notes}`;
+
+        const mailtoLink = `mailto:info@friendsgrp.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailtoLink;
+        
+        setStatus('success');
     };
 
     const handleWhatsApp = () => {
