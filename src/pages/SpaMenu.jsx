@@ -172,6 +172,10 @@ const SpaMenu = () => {
               </div>
               <div className="card-content">
                 <h3>{t(`spa_menu.programs.${program.key}.name`)}</h3>
+                <div className="program-meta">
+                  <span className="meta-item"><Clock size={16} /> {t(`spa_menu.programs.${program.key}.duration`)}</span>
+                  <span className="meta-item"><Gem size={16} /> {t(`spa_menu.programs.${program.key}.price`)}</span>
+                </div>
                 <ul className="program-items">
                   {(t(`spa_menu.programs.${program.key}.items`) || []).map((item, i) => (
                     <li key={i}>
@@ -208,7 +212,13 @@ const SpaMenu = () => {
                     transition={{ delay: i * 0.1 }}
                   >
                     <span className="massage-number">0{i + 1}</span>
-                    <span className="massage-name">{t(`spa_menu.massages.${m}`)}</span>
+                    <div className="massage-details">
+                      <span className="massage-name">{t(`spa_menu.massages.${m}`)}</span>
+                      <div className="massage-meta">
+                        <span className="meta-item"><Clock size={14} /> {t(`spa_menu.massages.${m}_duration`)}</span>
+                        <span className="meta-item"><Gem size={14} /> {t(`spa_menu.massages.${m}_price`)}</span>
+                      </div>
+                    </div>
                   </motion.div>
                 ))}
               </div>
@@ -248,7 +258,13 @@ const SpaMenu = () => {
               {saunaPackages.map((pkg, idx) => (
                 <div key={pkg} className="sauna-pkg-card">
                   <div className="pkg-dot" />
-                  <span className="pkg-name">{t(`spa_menu.sauna.${pkg}`)}</span>
+                  <div className="pkg-details">
+                    <span className="pkg-name">{t(`spa_menu.sauna.${pkg}`)}</span>
+                    <div className="pkg-meta">
+                      <span className="meta-item"><Clock size={14} /> {t(`spa_menu.sauna.${pkg}_duration`)}</span>
+                      <span className="meta-item"><Gem size={14} /> {t(`spa_menu.sauna.${pkg}_price`)}</span>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>

@@ -67,35 +67,55 @@
                 "name": "Giftun Azur Hurghada",
                 "location": "Hurghada, Red Sea",
                 "badge": "Partner Hotel",
-                "features": ["Private Beach", "Coral Reefs", "All-Inclusive"],
+                "features": [
+                    "Private Beach",
+                    "Coral Reefs",
+                    "All-Inclusive"
+                ],
                 "desc": "A legendary Hurghada landmark offering authentic Red Sea hospitality with pristine sandy beaches and turquoise waters."
             },
             "marriott": {
                 "name": "Marriott Hurghada",
                 "location": "Hurghada, Red Sea",
                 "badge": "International Luxury",
-                "features": ["Private Island", "Sea View Rooms", "Elite Service"],
+                "features": [
+                    "Private Island",
+                    "Sea View Rooms",
+                    "Elite Service"
+                ],
                 "desc": "Exceptional five-star luxury featuring a private island, world-class dining, and unparalleled service in the heart of Hurghada."
             },
             "skyview": {
                 "name": "Sky View Hurghada",
                 "location": "Hurghada, Red Sea",
                 "badge": "Modern Comfort",
-                "features": ["Rooftop Pool", "City Center", "Panoramic Views"],
+                "features": [
+                    "Rooftop Pool",
+                    "City Center",
+                    "Panoramic Views"
+                ],
                 "desc": "Modern sophistication meeting Red Sea charm. Enjoy panoramic views from the rooftop and premium city-center convenience."
             },
             "lemon": {
                 "name": "Lemon & Soul Hurghada",
                 "location": "Hurghada, Red Sea",
                 "badge": "Boutique Vibes",
-                "features": ["Vibrant Decor", "Adults Only", "Unique Style"],
+                "features": [
+                    "Vibrant Decor",
+                    "Adults Only",
+                    "Unique Style"
+                ],
                 "desc": "A vibrant boutique experience with a focus on soul and style. Perfect for those seeking a fresh, colorful getaway."
             },
             "azal": {
                 "name": "Azal North Coast",
                 "location": "El Alamein, North Coast",
                 "badge": "Coming Soon",
-                "features": ["Mediterranean Shore", "Luxury Villas", "Exclusive Access"],
+                "features": [
+                    "Mediterranean Shore",
+                    "Luxury Villas",
+                    "Exclusive Access"
+                ],
                 "desc": "A new horizon of Mediterranean luxury. Experience the pristine white sands and crystal-clear waters of the North Coast."
             }
         }
@@ -262,15 +282,34 @@
         "programs": {
             "red_sea": {
                 "name": "Red Sea",
-                "items": ["Charcoal scrub", "Mud mask", "Steam bath", "Sauna", "50 mins massage"]
+                "items": [
+                    "Charcoal scrub",
+                    "Mud mask",
+                    "Steam bath",
+                    "Sauna",
+                    "50 mins massage"
+                ]
             },
             "paradise": {
                 "name": "Paradise",
-                "items": ["Coconut scrub", "Chocolate or rose mask", "Steam bath", "Sauna", "50 mins massage"]
+                "items": [
+                    "Coconut scrub",
+                    "Chocolate or rose mask",
+                    "Steam bath",
+                    "Sauna",
+                    "50 mins massage"
+                ]
             },
             "hammam": {
                 "name": "Egyptian Hammam",
-                "items": ["Egyptian scrub", "Coconut mask", "Peeling", "Steam bath", "Sauna", "50 mins massage"]
+                "items": [
+                    "Egyptian scrub",
+                    "Coconut mask",
+                    "Peeling",
+                    "Steam bath",
+                    "Sauna",
+                    "50 mins massage"
+                ]
             },
             "vip": {
                 "name": "Friends VIP",
@@ -340,7 +379,6 @@
         "badge_label": "Badge Text (Optional)",
         "max_adults": "Max Adults",
         "max_kids": "Max Children",
-        "exit_admin": "Exit Admin",
         "preview_site": "Preview Site",
         "room_s": "Single",
         "room_d": "Double",
