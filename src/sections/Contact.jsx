@@ -18,13 +18,28 @@ const Contact = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const subject = formData.subject || 'New Contact Inquiry';
         const body = `Name: ${formData.name}\n` +
                      `Email: ${formData.email}\n\n` +
                      `Message:\n${formData.message}`;
-        window.location.href = `mailto:info@friendsgrp.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                     
+        try {
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ subject, body })
+            });
+
+            if (!response.ok) throw new Error('Failed to send email');
+            
+            alert('Your message has been sent successfully!');
+            setFormData({ name: '', email: '', subject: '', message: '' });
+        } catch (error) {
+            console.error('Error sending message:', error);
+            alert('Failed to send message. Please try again or contact us via WhatsApp.');
+        }
     };
 
     const infoItems = [

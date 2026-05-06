@@ -108,10 +108,30 @@ const Booking = () => {
             `${details}\n\n` +
             `Notes: ${formData.notes}`;
 
-        const mailtoLink = `mailto:info@friendsgrp.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        window.location.href = mailtoLink;
-        
-        setStatus('success');
+        setStatus('loading');
+
+        try {
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ subject, body }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to send email');
+            }
+
+            setStatus('success');
+        } catch (error) {
+            console.error('Error sending booking email:', error);
+            // Optionally set an error state here if you have one, 
+            // but falling back to success visually or an error toast is standard.
+            // setStatus('error');
+            alert('Failed to send email. Please try again or contact us via WhatsApp.');
+            setStatus('idle');
+        }
     };
 
     const handleWhatsApp = () => {
