@@ -7,9 +7,13 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server.js",
+    "deploy": "npm run build && npm start"
   },
   "dependencies": {
+    "compression": "^1.8.1",
+    "express": "^5.2.1",
     "framer-motion": "^11.11.11",
     "i18next": "^23.16.4",
     "i18next-browser-languagedetector": "^8.0.0",

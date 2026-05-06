@@ -15,9 +15,9 @@ import hammamImg from '../assets/images/programs/egyptian_hammam.png';
 import vipImg from '../assets/images/programs/vip_wellness.png';
 
 import hotelGiftun from '../assets/images/hotels/giftun_azur.png';
-import hotelMarriott from '../assets/images/offers/marriott.png';
-import hotelSkyView from '../assets/images/offers/skyview.png';
-import hotelLemon from '../assets/images/offers/lemonsoul.png';
+import hotelMarriott from '../assets/images/offers/Hurghada_Marriott_Red_Sea_Resort.png';
+import hotelSkyView from '../assets/images/offers/Sky_View_Hurghada.png';
+import hotelLemon from '../assets/images/offers/LemonSoul_Makadi_Garden.png';
 const hotelAzal = 'https://images.unsplash.com/photo-1544124499-58912cbddaad?auto=format&fit=crop&q=80&w=1200'; // High-end North Coast feel
 
 const Services = () => {
