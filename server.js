@@ -23,16 +23,16 @@ const transporter = nodemailer.createTransport({
     secure: true, // true for 465, false for other ports
     auth: {
         user: process.env.SMTP_USER || 'info@friendsgrp.com',
-        pass: process.env.SMTP_PASS || 'YOUR_EMAIL_PASSWORD_HERE', // <-- Update this password
+        pass: process.env.SMTP_PASS || 'P@$$w0rd_2024',
     },
 });
 
 // API Endpoint to send email
 app.post('/api/send-email', async (req, res) => {
     try {
-        const { subject, body } = req.body;
+        const { subject, body, html } = req.body;
         
-        if (!subject || !body) {
+        if (!subject || (!body && !html)) {
             return res.status(400).json({ success: false, message: 'Missing subject or body' });
         }
 
@@ -40,7 +40,8 @@ app.post('/api/send-email', async (req, res) => {
             from: '"Friends Group Website" <info@friendsgrp.com>',
             to: 'info@friendsgrp.com',
             subject: subject,
-            text: body,
+            text: body || 'Please view this email in an HTML-compatible client.',
+            html: html,
         };
 
         const info = await transporter.sendMail(mailOptions);

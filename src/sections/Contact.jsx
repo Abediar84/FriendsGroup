@@ -21,15 +21,37 @@ const Contact = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const subject = formData.subject || 'New Contact Inquiry';
-        const body = `Name: ${formData.name}\n` +
-                     `Email: ${formData.email}\n\n` +
-                     `Message:\n${formData.message}`;
+        
+        // Construct a beautifully formatted HTML email
+        const htmlBody = `
+            <div style="font-family: 'Segoe UI', Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
+                <div style="background-color: #1a1208; padding: 20px; text-align: center; border-bottom: 3px solid #d4af37;">
+                    <h2 style="color: #d4af37; margin: 0; letter-spacing: 1px;">Friends Group - Contact Us</h2>
+                </div>
+                <div style="padding: 30px; background-color: #fcfcfc;">
+                    <h3 style="color: #1a1208; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 0;">Sender Information</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px;">
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; width: 120px;"><strong>Name:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${formData.name}</td></tr>
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Email:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${formData.email}</td></tr>
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Subject:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${subject}</td></tr>
+                    </table>
+
+                    <h3 style="color: #1a1208; border-bottom: 1px solid #eee; padding-bottom: 10px;">Message</h3>
+                    <div style="background-color: #fff; padding: 15px; border: 1px solid #eee; border-radius: 4px; line-height: 1.6;">
+                        ${formData.message.replace(/\n/g, '<br/>')}
+                    </div>
+                </div>
+                <div style="background-color: #f5f5f5; padding: 15px; text-align: center; font-size: 12px; color: #888;">
+                    This message was sent from the Contact form on the Friends Group portal.
+                </div>
+            </div>
+        `;
                      
         try {
             const response = await fetch('/api/send-email', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ subject, body })
+                body: JSON.stringify({ subject, html: htmlBody })
             });
 
             if (!response.ok) throw new Error('Failed to send email');

@@ -101,12 +101,40 @@ const Booking = () => {
         }
 
         const subject = `New Booking Inquiry - ${formData.name}`;
-        const body = `New Booking Inquiry\n\n` +
-            `Name: ${formData.name}\n` +
-            `Phone: ${formData.phone}\n` +
-            `Email: ${formData.email}\n` +
-            `${details}\n\n` +
-            `Notes: ${formData.notes}`;
+        
+        // Construct a beautifully formatted HTML email
+        const htmlBody = `
+            <div style="font-family: 'Segoe UI', Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
+                <div style="background-color: #1a1208; padding: 20px; text-align: center; border-bottom: 3px solid #d4af37;">
+                    <h2 style="color: #d4af37; margin: 0; letter-spacing: 1px;">Friends Group - New Booking</h2>
+                </div>
+                <div style="padding: 30px; background-color: #fcfcfc;">
+                    <h3 style="color: #1a1208; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 0;">Customer Details</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px;">
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; width: 120px;"><strong>Name:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${formData.name}</td></tr>
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Phone:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${formData.phone}</td></tr>
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Email:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${formData.email}</td></tr>
+                    </table>
+
+                    <h3 style="color: #1a1208; border-bottom: 1px solid #eee; padding-bottom: 10px;">Reservation Details</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px;">
+                        ${details.split('\n').map(line => {
+                            const [key, ...rest] = line.split(':');
+                            if (!key) return '';
+                            return `<tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; width: 120px;"><strong>${key}:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${rest.join(':').trim()}</td></tr>`;
+                        }).join('')}
+                    </table>
+
+                    <h3 style="color: #1a1208; border-bottom: 1px solid #eee; padding-bottom: 10px;">Additional Notes</h3>
+                    <div style="background-color: #fff; padding: 15px; border: 1px solid #eee; border-radius: 4px; font-style: italic;">
+                        ${formData.notes || 'None provided.'}
+                    </div>
+                </div>
+                <div style="background-color: #f5f5f5; padding: 15px; text-align: center; font-size: 12px; color: #888;">
+                    This email was automatically generated from the Friends Group Booking Portal.
+                </div>
+            </div>
+        `;
 
         setStatus('loading');
 
@@ -116,7 +144,7 @@ const Booking = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ subject, body }),
+                body: JSON.stringify({ subject, html: htmlBody }),
             });
 
             if (!response.ok) {
