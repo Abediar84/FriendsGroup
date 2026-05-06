@@ -282,6 +282,8 @@
         "programs": {
             "red_sea": {
                 "name": "Red Sea",
+                "price": "4,200 LE",
+                "duration": "120 mins",
                 "items": [
                     "Charcoal scrub",
                     "Mud mask",
@@ -292,6 +294,8 @@
             },
             "paradise": {
                 "name": "Paradise",
+                "price": "4,200 LE",
+                "duration": "120 mins",
                 "items": [
                     "Coconut scrub",
                     "Chocolate or rose mask",
@@ -302,6 +306,8 @@
             },
             "hammam": {
                 "name": "Egyptian Hammam",
+                "price": "4,200 LE",
+                "duration": "120 mins",
                 "items": [
                     "Egyptian scrub",
                     "Coconut mask",
@@ -313,6 +319,8 @@
             },
             "vip": {
                 "name": "Friends VIP",
+                "price": "8,000 LE",
+                "duration": "150 mins",
                 "items": [
                     "Full body sea salt scrub with natural oil",
                     "Natural organic facial scrub & detox drainage massage",
@@ -327,15 +335,29 @@
         "massages": {
             "title": "Massage Therapy",
             "medical": "Medical Massage",
+            "medical_price": "2,800 LE",
+            "medical_duration": "50 mins",
             "sporty": "Sports Massage",
+            "sporty_price": "2,800 LE",
+            "sporty_duration": "50 mins",
             "relaxing": "Swedish Relaxing",
-            "hot_stone": "Hot Stone Therapy"
+            "relaxing_price": "2,800 LE",
+            "relaxing_duration": "50 mins",
+            "hot_stone": "Hot Stone Therapy",
+            "hot_stone_price": "3,500 LE",
+            "hot_stone_duration": "50 mins"
         },
         "sauna": {
             "title": "Sauna & Steam",
             "full": "Sauna & Steam + Jacuzzi",
+            "full_price": "1,800 LE",
+            "full_duration": "60 mins",
             "half": "Sauna & Steam",
-            "single": "Sauna or Steam or Jacuzzi"
+            "half_price": "1,200 LE",
+            "half_duration": "40 mins",
+            "single": "Sauna or Steam or Jacuzzi",
+            "single_price": "600 LE",
+            "single_duration": "20 mins"
         }
     },
     "promo_engine": {
