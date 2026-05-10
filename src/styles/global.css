@@ -126,14 +126,14 @@ ul {
 .container {
     max-width: var(--container-width);
     margin: 0 auto;
-    padding: 0 clamp(24px, 5vw, 60px);
+    padding: 0 clamp(16px, 4vw, 80px);
 }
 
 /* Safe area support for notched devices */
 @supports(padding: max(0px)) {
     .container {
-        padding-left: max(clamp(24px, 5vw, 60px), env(safe-area-inset-left));
-        padding-right: max(clamp(24px, 5vw, 60px), env(safe-area-inset-right));
+        padding-left: max(clamp(16px, 4vw, 80px), env(safe-area-inset-left));
+        padding-right: max(clamp(16px, 4vw, 80px), env(safe-area-inset-right));
     }
 }
 

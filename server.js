@@ -8,11 +8,23 @@ import helmet from 'helmet';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 
+import dotenv from 'dotenv';
+import fs from 'fs';
+import { promises as fsPromises } from 'fs';
+
 // Load environment variables from .env file (if present)
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const DATA_DIR = path.join(__dirname, 'data');
+const PROMOS_FILE = path.join(DATA_DIR, 'promotions.json');
+
+// Ensure data directory exists on startup
+if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -80,6 +92,49 @@ app.post('/api/send-email', apiLimiter, async (req, res) => {
     } catch (error) {
         console.error('Error sending email:', error);
         res.status(500).json({ success: false, message: 'Failed to send email', error: error.message });
+    }
+});
+
+// --- Promotions Persistence Endpoints ---
+
+// Authentication middleware for saving data (Matches admin panel password)
+const authGuard = (req, res, next) => {
+    const token = req.headers['x-auth-token'];
+    if (token !== 'Friends2026') {
+        return res.status(401).json({ success: false, message: 'Unauthorized action.' });
+    }
+    next();
+};
+
+// GET current promotions from server
+app.get('/api/promotions', async (req, res) => {
+    try {
+        if (!fs.existsSync(PROMOS_FILE)) {
+            // Return empty if not exists yet, frontend will seed on first load
+            return res.json({ success: true, data: null });
+        }
+        const data = await fsPromises.readFile(PROMOS_FILE, 'utf8');
+        res.json({ success: true, data: JSON.parse(data) });
+    } catch (error) {
+        console.error('Failed to read promotions:', error);
+        res.status(500).json({ success: false, message: 'Server read error' });
+    }
+});
+
+// POST/Overwrite current promotions to server
+app.post('/api/promotions', authGuard, async (req, res) => {
+    try {
+        const { offers } = req.body;
+        if (!Array.isArray(offers)) {
+            return res.status(400).json({ success: false, message: 'Invalid payload, offers array required.' });
+        }
+        // Atomically (well, safely) overwrite file
+        await fsPromises.writeFile(PROMOS_FILE, JSON.stringify(offers, null, 2), 'utf8');
+        console.log('✅ Promotions stored successfully on server filesystem.');
+        res.json({ success: true, message: 'Promotions saved successfully!' });
+    } catch (error) {
+        console.error('Failed to write promotions:', error);
+        res.status(500).json({ success: false, message: 'Server write failure' });
     }
 });
 

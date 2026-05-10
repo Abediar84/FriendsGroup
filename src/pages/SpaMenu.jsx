@@ -67,7 +67,7 @@ const SpaMenu = () => {
       
       {/* Navigation */}
       <nav className="menu-nav">
-        <div className="menu-nav-content">
+        <div className="container menu-nav-content">
           <Link to="/" className="menu-logo-brand">
             <img src={logo} alt="Friends Group" className="brand-logo-img" />
           </Link>
@@ -147,7 +147,8 @@ const SpaMenu = () => {
 
       {/* Programs Section */}
       <section className="programs-section">
-        <div className="section-header">
+        <div className="container">
+          <div className="section-header">
           <h2>{t('spa_menu.programs_title')}</h2>
           <div className="divider" />
         </div>
@@ -188,6 +189,7 @@ const SpaMenu = () => {
             </motion.div>
           ))}
         </div>
+          </div>
       </section>
 
       {/* Massage Therapy Section */}
@@ -281,7 +283,7 @@ const SpaMenu = () => {
 
       {/* Contact & Location Footer */}
       <footer className="menu-footer">
-        <div className="footer-content">
+        <div className="container footer-content">
           <div className="footer-brand">
             <span className="logo-text">FRIENDS GROUP</span>
             <p>Luxury Spa & Travel Services Since 2003</p>

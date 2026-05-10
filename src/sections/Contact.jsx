@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { motion } from 'framer-motion';
 import { fadeIn } from '../styles/animations';
-import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram, ArrowRight } from 'lucide-react';
 import './Contact.css';
 
 const Contact = () => {
@@ -164,16 +164,26 @@ const Contact = () => {
                                     📲
                                 </a>
                             </div>
-                            <div className="google-actions">
-                                <a
-                                    href="https://www.google.com/search?q=Friends+Group+Spa+%26+Beauty#lrd=0x14bd5414e7a0f67b:0x5e0f0f0f0f0f0f0f,3"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="btn-google-review"
-                                >
-                                    <span className="g-icon">G</span> {t('contact.social.google_review')}
-                                </a>
-                            </div>
+                            <a 
+                                href="https://www.google.com/search?q=Friends+Group+Spa+%26+Beauty#lrd=0x14bd5414e7a0f67b:0x5e0f0f0f0f0f0f0f,3"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="google-trust-card"
+                            >
+                                <div className="trust-icon-box">
+                                    <span className="g-letter">G</span>
+                                </div>
+                                <div className="trust-details">
+                                    <div className="trust-rating-row">
+                                        <div className="stars-row">★★★★★</div>
+                                        <span className="rating-text">Excellent 5.0</span>
+                                    </div>
+                                    <span className="trust-cta">{t('contact.social.google_review')}</span>
+                                </div>
+                                <div className="trust-arrow">
+                                    <ArrowRight size={18} />
+                                </div>
+                            </a>
                         </div>
                     </motion.div>
 

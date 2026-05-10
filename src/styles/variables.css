@@ -32,7 +32,7 @@
   /* Studio Spacing */
   --spacing-xl: clamp(140px, 18vw, 280px);
   --section-padding: var(--spacing-xl) 0;
-  --container-width: 1540px;
+  --container-width: 1640px; /* Wider for studio-quality Ultra-wide desktop */
   --overlap-offset: -10vw;
   --border-radius: 0px; /* Sharp edges for luxury */
   

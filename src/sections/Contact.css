@@ -152,4 +152,116 @@
         min-height: unset;
         position: static;
     }
+}
+
+/* Premium Google Trust Card Redesign */
+.google-trust-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 40px;
+    padding: 25px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: var(--glass-blur);
+    text-decoration: none;
+    transition: all 0.5s var(--transition-studio);
+    position: relative;
+    overflow: hidden;
+}
+
+.google-trust-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(201, 168, 76, 0.05), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.8s var(--transition-studio);
+}
+
+.google-trust-card:hover {
+    border-color: var(--primary-gold);
+    transform: translateY(-5px);
+    box-shadow: var(--glass-shadow);
+}
+
+.google-trust-card:hover::before {
+    transform: translateX(100%);
+}
+
+.trust-icon-box {
+    width: 50px;
+    height: 50px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    flex-shrink: 0;
+}
+
+.g-letter {
+    font-family: 'Product Sans', 'Roboto', Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    background: linear-gradient(45deg, #4285F4, #EA4335, #FBBC05, #34A853);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.trust-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.trust-rating-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stars-row {
+    color: #FBBC05;
+    letter-spacing: 2px;
+    font-size: 14px;
+}
+
+.rating-text {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+.trust-cta {
+    font-family: var(--font-headings);
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.trust-arrow {
+    color: var(--primary-gold);
+    transition: transform 0.3s ease;
+}
+
+.google-trust-card:hover .trust-arrow {
+    transform: translateX(5px);
+}
+
+[dir="rtl"] .google-trust-card:hover .trust-arrow {
+    transform: translateX(-5px) scaleX(-1);
+}
+
+[dir="rtl"] .trust-arrow {
+    transform: scaleX(-1);
 }

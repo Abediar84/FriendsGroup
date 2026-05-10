@@ -764,6 +764,21 @@ export default function PromotionEngine() {
     localStorage.setItem("fg_promos_ver", DATA_VERSION);
   }, [offers]);
 
+  // Cloud Sync Strategy: Hydrate state from server on bootstrap
+  useEffect(() => {
+    fetch('/api/promotions')
+      .then(r => r.json())
+      .then(res => {
+        if (res.success && Array.isArray(res.data) && res.data.length > 0) {
+          setOffers(res.data);
+        } else if (res.success && res.data === null) {
+          // Clean state - Seed the server with defaults for portability
+          syncToServer(offers);
+        }
+      })
+      .catch(e => console.warn("API Offline: Running in Local Cache mode."));
+  }, []);
+
   const [view, setView] = useState("public"); // public | admin | login
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [editing, setEditing] = useState(null);
@@ -771,9 +786,21 @@ export default function PromotionEngine() {
   const [activeInquiryId, setActiveInquiryId] = useState(null);
   const [partnerName, setPartnerName] = useState(localStorage.getItem("fg_partner") || "");
 
-  useEffect(() => {
-    localStorage.setItem("fg_promos", JSON.stringify(offers));
-  }, [offers]);
+  // Low-overhead persistence conduit
+  const syncToServer = async (targetState) => {
+      try {
+          await fetch('/api/promotions', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'x-auth-token': 'Friends2026'
+              },
+              body: JSON.stringify({ offers: targetState })
+          });
+      } catch (e) {
+          console.error("Cloud replication failed.", e);
+      }
+  };
 
   useEffect(() => {
     localStorage.setItem("fg_partner", partnerName);
@@ -784,20 +811,28 @@ export default function PromotionEngine() {
       ...offer, 
       period: `${offer.validFrom} to ${offer.validTo}` 
     };
-    if (isAdding) setOffers([...offers, syncedOffer]);
-    else setOffers(offers.map(o => o.id === offer.id ? syncedOffer : o));
-    setEditing(null); setIsAdding(false);
+    const nextOffers = isAdding 
+        ? [...offers, syncedOffer] 
+        : offers.map(o => o.id === offer.id ? syncedOffer : o);
+    
+    setOffers(nextOffers);
+    syncToServer(nextOffers); // Permanent Write
+    setEditing(null); 
+    setIsAdding(false);
   };
 
   const deleteOffer = (id) => {
     if(window.confirm("Confirm deletion of this record?")) {
-      setOffers(offers.filter(o => o.id !== id));
+      const nextOffers = offers.filter(o => o.id !== id);
+      setOffers(nextOffers);
+      syncToServer(nextOffers); // Permanent Write
     }
   };
 
   const resetToDefaults = () => {
       if(window.confirm("Reset all offers to defaults? This will erase custom changes.")) {
           setOffers(INITIAL_OFFERS);
+          syncToServer(INITIAL_OFFERS); // Permanent Reset
       }
   };
 
