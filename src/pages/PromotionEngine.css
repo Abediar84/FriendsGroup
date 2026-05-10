@@ -404,6 +404,13 @@
     color: var(--primary-gold);
 }
 
+.promo-footer-v2 {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
 .promo-cta-v2 {
     background: transparent;
     border: 1px solid var(--primary-gold);
