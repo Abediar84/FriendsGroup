@@ -260,6 +260,13 @@
     position: relative;
 }
 
+.promo-card-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+}
+
 .promo-card-pro:hover {
     transform: translateY(-10px);
     border-color: var(--primary-gold-dim);
