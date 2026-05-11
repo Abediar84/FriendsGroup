@@ -8,7 +8,6 @@ import helmet from 'helmet';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 
-import dotenv from 'dotenv';
 import fs from 'fs';
 import { promises as fsPromises } from 'fs';
 

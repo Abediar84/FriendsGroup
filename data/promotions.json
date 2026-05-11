@@ -1,0 +1,125 @@
+[
+  {
+    "id": "off-marriott-2026",
+    "hotel": "marriott",
+    "hotelName": "Hurghada Marriott Red Sea Resort",
+    "type": "Hard All-Inclusive",
+    "title": "Summer 2026 Exclusive",
+    "period": "2026-04-25 to 2026-05-26",
+    "image": "/offers/Hurghada_Marriott_Red_Sea_Resort.png",
+    "prices": {
+      "s": 8200,
+      "d": 8800,
+      "t": 11800
+    },
+    "kids": "1st Child (up to 11.99): FREE | 2nd (1.99-11.99): 2800 LE / night",
+    "addons": [
+      {
+        "id": "sea-view",
+        "name": "Sea View Upgrade",
+        "price": 300,
+        "type": "per_night"
+      },
+      {
+        "id": "extra-kid",
+        "name": "2nd Child Supplement",
+        "price": 2800,
+        "type": "per_night"
+      }
+    ],
+    "active": true,
+    "badge": "LUXURY CHOICE",
+    "validFrom": "2026-04-25",
+    "validTo": "2026-05-26"
+  },
+  {
+    "id": "off-skyview-2026",
+    "hotel": "skyview",
+    "hotelName": "Sky View Hurghada",
+    "type": "Full Board",
+    "title": "Sky High Serenity",
+    "period": "2026-04-25 to 2026-05-26",
+    "image": "/offers/Sky_View_Hurghada.png",
+    "prices": {
+      "s": 4200,
+      "d": 4800
+    },
+    "kids": "1st Child (up to 11.99): FREE | 2nd (1.99-11.99): 1200 LE / night",
+    "addons": [
+      {
+        "id": "extra-kid",
+        "name": "2nd Child Supplement",
+        "price": 1200,
+        "type": "per_night"
+      }
+    ],
+    "active": true,
+    "badge": "BEST VALUE",
+    "validFrom": "2026-04-25",
+    "validTo": "2026-05-26"
+  },
+  {
+    "id": "off-lemonsoul-2026",
+    "hotel": "lemonsoul",
+    "hotelName": "Lemon & Soul Makadi Garden",
+    "type": "Hard All-Inclusive",
+    "title": "Vibrant Summer Escape",
+    "period": "2026-04-20 to 2026-06-30",
+    "image": "/offers/LemonSoul_Makadi_Garden.png",
+    "periods": [
+      {
+        "dates": "20/04 - 26/05",
+        "s": 4000,
+        "d": 5200
+      },
+      {
+        "dates": "27/05 - 01/06",
+        "s": 4200,
+        "d": 5500
+      },
+      {
+        "dates": "01/06 - 30/06",
+        "s": 4050,
+        "d": 5300
+      }
+    ],
+    "kids": "1st Child (up to 11.99): FREE | Max 2+1 or 1+2",
+    "addons": [
+      {
+        "id": "transfer",
+        "name": "Airport Transfer",
+        "price": 600,
+        "type": "fixed"
+      }
+    ],
+    "active": true,
+    "badge": "VIBRANT STAY",
+    "validFrom": "2026-04-20",
+    "validTo": "2026-06-30",
+    "constraints": {
+      "maxPax": 3,
+      "maxAdults": 2,
+      "maxChildren": 2
+    }
+  },
+  {
+    "id": "off-1778076204652",
+    "hotel": "marriott",
+    "hotelName": "Hurghada Marriott Red Sea Resort",
+    "type": "Soft All-Inclusive",
+    "title": "Eid Offer",
+    "period": "2026-05-25 to 2026-05-30",
+    "image": "/offers/Hurghada_Marriott_Red_Sea_Resort.png",
+    "prices": {
+      "s": 8000,
+      "d": 9000,
+      "t": 10000
+    },
+    "kids": "",
+    "addons": [],
+    "active": true,
+    "badge": "EID OFFER",
+    "validFrom": "2026-05-25",
+    "validTo": "2026-05-30"
+  }
+]
