@@ -15,7 +15,7 @@ import logo from "../assets/logo.png";
 import OptimizedImage from "../components/common/OptimizedImage";
 import "./PromotionEngine.css";
 
-const DATA_VERSION = "3.2"; // Resetting for path stability
+const DATA_VERSION = "3.3"; // Cache-busting version update
 
 // Helper to resolve images robustly across dev/prod
 const resolveOfferImage = (imgName) => {
@@ -33,9 +33,9 @@ const INITIAL_OFFERS = [
     hotelName: "Hurghada Marriott Red Sea Resort",
     type: "Hard All-Inclusive",
     title: "Summer 2026 Exclusive",
-    period: "2026-04-25 to 2026-05-26",
+    period: "2026-05-01 to 2026-05-25",
     image: resolveOfferImage("Hurghada_Marriott_Red_Sea_Resort.png"),
-    prices: { s: 8200, d: 8800, t: 11800 },
+    prices: { s: 7500, d: 7800, t: 10800 },
     kids: "1st Child (up to 11.99): FREE | 2nd (1.99-11.99): 2800 LE / night",
     addons: [
       { id: "sea-view", name: "Sea View Upgrade", price: 300, type: "per_night" },
@@ -43,8 +43,8 @@ const INITIAL_OFFERS = [
     ],
     active: true,
     badge: "LUXURY CHOICE",
-    validFrom: "2026-04-25",
-    validTo: "2026-05-26"
+    validFrom: "2026-05-01",
+    validTo: "2026-05-25"
   },
   {
     id: "off-skyview-2026",
@@ -86,6 +86,22 @@ const INITIAL_OFFERS = [
     validFrom: "2026-04-20",
     validTo: "2026-06-30",
     constraints: { maxPax: 3, maxAdults: 2, maxChildren: 2 }
+  },
+  {
+    id: "off-1778076204652",
+    hotel: "marriott",
+    hotelName: "Hurghada Marriott Red Sea Resort",
+    type: "Soft All-Inclusive",
+    title: "Eid Offer",
+    period: "2026-05-26 to 2026-05-30",
+    image: resolveOfferImage("Hurghada_Marriott_Red_Sea_Resort.png"),
+    prices: { s: 10800, d: 11400, t: 15000 },
+    kids: "",
+    addons: [],
+    active: true,
+    badge: "EID OFFER",
+    validFrom: "2026-05-26",
+    validTo: "2026-05-30"
   }
 ];
 

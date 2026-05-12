@@ -5,12 +5,12 @@
     "hotelName": "Hurghada Marriott Red Sea Resort",
     "type": "Hard All-Inclusive",
     "title": "Summer 2026 Exclusive",
-    "period": "2026-04-25 to 2026-05-26",
+    "period": "2026-05-01 to 2026-05-25",
     "image": "/offers/Hurghada_Marriott_Red_Sea_Resort.png",
     "prices": {
-      "s": 8200,
-      "d": 8800,
-      "t": 11800
+      "s": 7500,
+      "d": 7800,
+      "t": 10800
     },
     "kids": "1st Child (up to 11.99): FREE | 2nd (1.99-11.99): 2800 LE / night",
     "addons": [
@@ -29,8 +29,8 @@
     ],
     "active": true,
     "badge": "LUXURY CHOICE",
-    "validFrom": "2026-04-25",
-    "validTo": "2026-05-26"
+    "validFrom": "2026-05-01",
+    "validTo": "2026-05-25"
   },
   {
     "id": "off-skyview-2026",
@@ -108,18 +108,18 @@
     "hotelName": "Hurghada Marriott Red Sea Resort",
     "type": "Soft All-Inclusive",
     "title": "Eid Offer",
-    "period": "2026-05-25 to 2026-05-30",
+    "period": "2026-05-26 to 2026-05-30",
     "image": "/offers/Hurghada_Marriott_Red_Sea_Resort.png",
     "prices": {
-      "s": 8000,
-      "d": 9000,
-      "t": 10000
+      "s": 10800,
+      "d": 11400,
+      "t": 15000
     },
     "kids": "",
     "addons": [],
     "active": true,
     "badge": "EID OFFER",
-    "validFrom": "2026-05-25",
+    "validFrom": "2026-05-26",
     "validTo": "2026-05-30"
   }
 ]
