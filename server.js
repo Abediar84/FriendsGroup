@@ -106,7 +106,7 @@ const authGuard = (req, res, next) => {
 };
 
 // GET current promotions from server
-app.get('/api/promotions', async (req, res) => {
+app.get('/backend/promotions', async (req, res) => {
     try {
         if (!fs.existsSync(PROMOS_FILE)) {
             // Return empty if not exists yet, frontend will seed on first load
@@ -121,7 +121,7 @@ app.get('/api/promotions', async (req, res) => {
 });
 
 // POST/Overwrite current promotions to server
-app.post('/api/promotions', authGuard, async (req, res) => {
+app.post('/backend/promotions', authGuard, async (req, res) => {
     try {
         const { offers } = req.body;
         if (!Array.isArray(offers)) {

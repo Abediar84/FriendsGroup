@@ -766,7 +766,7 @@ export default function PromotionEngine() {
 
   // Cloud Sync Strategy: Hydrate state from server on bootstrap
   useEffect(() => {
-    fetch('/api/promotions')
+    fetch('/backend/promotions')
       .then(r => r.json())
       .then(res => {
         if (res.success && Array.isArray(res.data) && res.data.length > 0) {
@@ -789,7 +789,7 @@ export default function PromotionEngine() {
   // Low-overhead persistence conduit
   const syncToServer = async (targetState) => {
       try {
-          await fetch('/api/promotions', {
+          await fetch('/backend/promotions', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
