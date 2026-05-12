@@ -1,0 +1,21 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+# ─── Clean API URLs → PHP scripts ─────────────────────────────────────────────
+RewriteRule ^api/promotions$ /api/promotions.php [L,QSA]
+RewriteRule ^api/status$ /api/status.php [L,QSA]
+# Also support /backend/ prefix for backward compatibility
+RewriteRule ^backend/promotions$ /api/promotions.php [L,QSA]
+RewriteRule ^backend/status$ /api/status.php [L,QSA]
+
+# ─── SPA Fallback: Serve index.html for React Router ──────────────────────────
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+</IfModule>
+
+# ─── Legacy redirects ─────────────────────────────────────────────────────────
+Redirect 301 /programs /menu
+Redirect 301 /programs/ /menu
