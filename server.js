@@ -105,8 +105,13 @@ const authGuard = (req, res, next) => {
     next();
 };
 
+// Diagnostic health check endpoint to verify live reload
+app.get(['/backend/status', '/api/status', '/status'], (req, res) => {
+    res.json({ success: true, status: 'online', timestamp: Date.now() });
+});
+
 // GET current promotions from server
-app.get('/backend/promotions', async (req, res) => {
+app.get(['/backend/promotions', '/api/promotions', '/promotions'], async (req, res) => {
     try {
         if (!fs.existsSync(PROMOS_FILE)) {
             // Return empty if not exists yet, frontend will seed on first load
@@ -121,7 +126,7 @@ app.get('/backend/promotions', async (req, res) => {
 });
 
 // POST/Overwrite current promotions to server
-app.post('/backend/promotions', authGuard, async (req, res) => {
+app.post(['/backend/promotions', '/api/promotions', '/promotions'], authGuard, async (req, res) => {
     try {
         const { offers } = req.body;
         if (!Array.isArray(offers)) {
