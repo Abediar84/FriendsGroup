@@ -46,6 +46,20 @@ app.use(compression());
 // Enable JSON body parsing for API requests
 app.use(express.json());
 
+// ===== TEMPORARY DEBUG LOGGER (remove after diagnosis) =====
+const DEBUG_LOG = path.join(__dirname, 'debug.log');
+app.use((req, res, next) => {
+    const line = `${new Date().toISOString()} | ${req.method} ${req.url} | orig: ${req.originalUrl} | path: ${req.path} | base: ${req.baseUrl}\n`;
+    try { fs.appendFileSync(DEBUG_LOG, line); } catch(e) {}
+    next();
+});
+
+// Simplest possible test route
+app.get('/ping', (req, res) => {
+    res.type('text').send('pong v3.3 ' + Date.now());
+});
+// ===== END DEBUG =====
+
 // API Rate Limiting to prevent spam (Max 5 requests per 15 minutes per IP)
 const apiLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -152,6 +166,7 @@ app.use('/programs', (req, res) => {
 
 // Handle SPA routing - deliver index.html for any unknown routes
 app.use((req, res) => {
+    try { fs.appendFileSync(DEBUG_LOG, `CATCH-ALL HIT: ${req.method} ${req.url} | orig: ${req.originalUrl}\n`); } catch(e) {}
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
