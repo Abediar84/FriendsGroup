@@ -43,6 +43,14 @@ app.use(cors({
 // Enable compression
 app.use(compression());
 
+// Consolidate the public site on one HTTPS, non-www canonical host.
+app.use((req, res, next) => {
+    if (process.env.NODE_ENV === 'production' && req.hostname === 'www.friendsgrp.com') {
+        return res.redirect(301, `https://friendsgrp.com${req.originalUrl}`);
+    }
+    next();
+});
+
 // Enable JSON body parsing for API requests
 app.use(express.json());
 
@@ -156,13 +164,22 @@ app.post(['/backend/promotions', '/api/promotions', '/promotions'], authGuard, a
     }
 });
 
+// Permanent redirects for obsolete indexed and printed URLs.
+const permanentRedirects = new Map([
+    ['/reservation', '/menu/'],
+    ['/spa-reservation', '/menu/'],
+    ['/hotel-reservation', '/#booking'],
+    ['/programs', '/menu/']
+]);
+app.use((req, res, next) => {
+    const cleanPath = req.path.length > 1 ? req.path.replace(/\/+$/, '') : req.path;
+    if (permanentRedirects.has(cleanPath)) return res.redirect(301, permanentRedirects.get(cleanPath));
+    if (cleanPath.startsWith('/programs/')) return res.redirect(301, '/menu/');
+    next();
+});
+
 // Serve static files from the 'dist' directory
 app.use(express.static(path.join(__dirname, 'dist')));
-
-// 301 Permanent Redirect for legacy external links
-app.use('/programs', (req, res) => {
-    res.redirect(301, '/menu');
-});
 
 // Handle SPA routing - deliver index.html for any unknown routes
 app.use((req, res) => {

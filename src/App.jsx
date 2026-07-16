@@ -5,6 +5,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import LoadingScreen from './components/LoadingScreen';
 import CustomCursor from './components/CustomCursor';
 import { ThemeProvider } from './hooks/useTheme';
+import SeoManager from './seo/SeoManager';
 import './styles/global.css';
 
 // Lazy load non-critical routes for smaller initial bundle
@@ -16,6 +17,7 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 function App() {
   return (
     <ThemeProvider>
+      <SeoManager />
       <ErrorBoundary>
         <div className="app-root">
         <CustomCursor />
